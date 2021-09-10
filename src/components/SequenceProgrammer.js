@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as d3 from 'd3'
 import { Grid } from '@material-ui/core'
+import DeviceProfile from './DeviceProfile'
+import Song from './Song'
 
 const sequenceLength = 20
 const boxSize = 50
@@ -33,11 +35,11 @@ export default function SequenceProgrammer (props) {
   speedValuesTemporary[0] = 1000
   speedValuesTemporary[4] = 50
 
-  sequenceValues[0] = 1
-  sequenceValues[4] = 1
-  sequenceValues[8] = 1
-  sequenceValues[12] = 1
-  sequenceValues[16] = 1
+  // sequenceValues[0] = 1
+  // sequenceValues[4] = 1
+  // sequenceValues[8] = 1
+  // sequenceValues[12] = 1
+  // sequenceValues[16] = 1
 
   const ref = React.createRef()
   let refSelection = null
@@ -60,8 +62,8 @@ export default function SequenceProgrammer (props) {
     console.log('stepped current step', currentStep)
     assignSpeedValue()
     console.log('do step current speed value', currentSpeedValue)
-    clearTimeout(window.t)
-    window.t = setTimeout(doStep, currentSpeedValue)
+    // clearTimeout(window.t)
+    // window.t = setTimeout(doStep, currentSpeedValue)
   }
 
   return (
@@ -104,7 +106,7 @@ export default function SequenceProgrammer (props) {
           </svg>
         </Grid>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-          <Grid item xs={12}>Length (ms)</Grid>
+          <Grid item xs={12}>Time (ms)</Grid>
         </Grid>
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1003 25`}
@@ -155,7 +157,7 @@ export default function SequenceProgrammer (props) {
             return (
               <Grid container item xs={12} style={{outline: '0px solid red'}}>
                 <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-                  <Grid item alignItems='center' xs={12}>Channel {channelIdx+1}</Grid>
+                  <Grid item alignItems='center' xs={12}>Channel {channelIdx}</Grid>
                 </Grid>
                 <Grid item xs={11}>
                   <svg viewBox={`0 0 1001 ${boxSize}`}
@@ -191,6 +193,8 @@ export default function SequenceProgrammer (props) {
           })
         }
     </Grid>
+    <DeviceProfile/>
+    <Song/>
     </Grid>
   )
 }

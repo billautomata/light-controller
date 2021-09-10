@@ -1,14 +1,13 @@
 import './App.css';
-import SequenceProgrammer from './components/SequenceProgrammer'
+import { Provider } from "react-redux"
+import store from "./js/store/index"
+import BaseApp from './js/components/App'
 
 function App() {
-
-  const trees = new Array(7).fill(0)
-
   return (
-    <div className="App">
-      <SequenceProgrammer/>
-    </div>
+    <Provider store={store}>
+      <BaseApp/>
+    </Provider>  
   );
 }
 
