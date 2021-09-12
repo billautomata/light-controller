@@ -1,6 +1,7 @@
 import {
   SET_CURRENT_STEP,
   SET_NUMBER_OF_CHANNELS,
+  SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_STEP,
   SET_STEP_VALUE,
@@ -32,6 +33,10 @@ function rootReducer(state = initialState, action) {
     case SET_NUMBER_OF_CHANNELS: 
       console.log('setting number of channels', action.payload)
       window.socket.emit('SET_NUMBER_OF_CHANNELS', action.payload)
+      return state
+    case SET_NUMBER_OF_STEPS: 
+      console.log('setting number of steps', action.payload)
+      window.socket.emit('SET_NUMBER_OF_STEPS', action.payload)
       return state
     case SET_PATTERNS:
       return Object.assign({}, state, { patterns: action.payload.value, dataLoaded: true })

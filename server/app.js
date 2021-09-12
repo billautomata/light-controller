@@ -39,6 +39,7 @@ let currentPattern = 0
 
 const patterns = [
   { 
+    id: '0',
     name: 'Basic Pattern',
     patternLength: 10,
     patternStart: 0,
@@ -93,9 +94,85 @@ const patterns = [
         ]
       }      
     ]
-  }
+  },
+  { 
+    id: '4',
+    name: 'Longer Pattern',
+    patternLength: 20,
+    patternStart: 0,
+    patternEnd: 20,
+    channels: [
+      { 
+        id: 'TIME_CHANNEL',
+        name: 'TIME_CHANNEL', 
+        steps: [
+          { value: 500 },
+          { value: -1 },
+          { value: -1 },
+          { value: -1 },
+          { value: -1 },
+          { value: 50 },
+          { value: -1 },
+          { value: -1 },
+          { value: -1 },
+          { value: -1 }
+        ]
+      },
+      { 
+        id: 0,
+        name: 'Center Tree', 
+        steps: [
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 },
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 },
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 },
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 },          
+        ]
+      },
+      { 
+        id: 1,
+        name: '2nd Floor Tree', 
+        steps: [
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 },
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 },
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 },
+          { value: 1 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 0 },
+          { value: 1 }, 
+        ]
+      }      
+    ]
+  }  
 ]
-
 
 function doPulse (socket) {
   clearTimeout(pulse)
@@ -179,6 +256,39 @@ io.on('connection', (socket)=>{
           steps: new Array(patterns[currentPattern].patternLength).fill({ value: 0 })
         })
       }
+    }
+    socket.send('patterns', { value: patterns })
+  })
+
+  socket.on('SET_NUMBER_OF_STEPS', payload => {
+    payload.value = Number(payload.value)
+    console.log('setting number of steps', payload)
+    const current = patterns[currentPattern]
+    console.log(current.patternLength)
+    if (current.patternLength === payload.value) {
+      // do nothing
+      console.log('payload value matches pattern length, doing nothing')
+      return
+    } else if (current.patternLength < payload.value) {
+      console.log('payload value is greater than current length')      
+      const delta = payload.value - current.patternLength
+      current.patternLength = payload.value
+      current.channels.forEach((channel,channelIdx)=>{
+        for(let i = 0; i < delta; i++) {
+          if(channelIdx === 0) {
+            channel.steps.push({ value: -1 })
+          } else {
+            channel.steps.push({ value: 0 })
+          }
+        }
+      })
+    } else if (current.patternLength > payload.value) {
+      currentStep = 0
+      current.patternLength = payload.value
+      console.log('payload value is less than current length')
+      current.channels.forEach(channel=>{
+        channel.steps.length = payload.value
+      })
     }
     socket.send('patterns', { value: patterns })
   })

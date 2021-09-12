@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { setTimeValue } from '../../actions/index'
 
 const boxSize = 50
@@ -21,7 +21,7 @@ function Time ({ timePattern, setTimeValue }) {
   return (
     <Grid container item xs={12}>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-          <Grid item xs={12}>Time (ms)</Grid>
+          <Grid item xs={12}><Typography variant='body2'>Time (ms)</Typography></Grid>
         </Grid>
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1003 25`}

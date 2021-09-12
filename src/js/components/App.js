@@ -1,6 +1,11 @@
+import { ThemeProvider } from '@material-ui/core'
 import { setStep, setPatterns } from '../actions/index'
 import { connect } from "react-redux"
-import CurrentPattern from './CurrentPattern'
+import CurrentPattern from './CurrentPattern/CurrentPatternBase'
+import { Grid, Paper } from '@material-ui/core'
+import LoadPatterns from './LoadPatterns'
+import SongMode from './SongMode/SongModeBase'
+import createTheme from './createTheme.js'
 
 import { io } from "socket.io-client"
 
@@ -16,6 +21,8 @@ function mapDispatchToProps(dispatch) {
     setStep: payload => dispatch(setStep(payload)),    
   }
 }
+
+const sectionStyle = { marginBottom: 24, paddingTop: 8, paddingBottom: 24 }
 
 const ConnectedApp = function ({ dataLoaded, setPatterns, setStep }) {
 
@@ -39,11 +46,27 @@ const ConnectedApp = function ({ dataLoaded, setPatterns, setStep }) {
   }
 
   return (
-    <div style={{marginTop: 20}}>
-      {
-        dataLoaded ? <CurrentPattern/> : null
-      }      
-    </div>
+    <ThemeProvider theme={createTheme()}>
+      <div style={{margin: 10}}>
+        {
+          dataLoaded ? 
+          <Grid container justifyContent='center'>
+            <Grid container item xs={12}>        
+              <Paper square outlined elevation={2} style={sectionStyle}>              
+                <CurrentPattern/>    
+              </Paper>              
+              <Paper square outlined elevation={2} style={sectionStyle}>              
+                <SongMode/>
+              </Paper>                
+              <Paper square outlined elevation={2} style={sectionStyle}>              
+                <LoadPatterns/>
+                </Paper>
+            </Grid>
+          </Grid>
+          : null
+        }      
+      </div>
+    </ThemeProvider>
   )
 }
 

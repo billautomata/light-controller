@@ -24,51 +24,15 @@ function PatternName ({ numberOfChannels, numberOfSteps, patternName, setNumberO
   let nSteps = numberOfSteps
   return (
     <Grid container item xs={12} alignItems='center'>
-      <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-        <Grid item xs={12}>
-          <Typography variant='body2'>Name</Typography>
-        </Grid>
+      <Grid item xs={1} align='center'>
+        <Typography variant='body2'>Name</Typography>        
       </Grid>
       <Grid item xs={6}>
-        <Typography variant='h3'>{patternName}</Typography>                
+        <Typography variant='h3'>Simple Song
+        </Typography>                
       </Grid>
-      <Transport/>
-      <Grid container item xs={2} spacing={1}>
-        <Grid item xs={6}>
-          <TextField 
-            variant='outlined' size='small' 
-            type='text' label="Steps" 
-            defaultValue={numberOfSteps}
-            onChange={(event)=>{
-              console.log('on change steps', event.target.value)
-              nSteps = event.target.value
-            }}
-            onKeyPress={(event)=>{
-              console.log(event.key)
-              if(event.key === 'Enter') {
-                setNumberOfSteps({ value: nSteps })
-              }
-            }}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField 
-            variant='outlined' size='small' 
-            type='text' label="Channels" 
-            defaultValue={numberOfChannels}
-            onChange={(event)=>{
-              console.log('on change channels', event.target.value)
-              nChannels = event.target.value
-            }}
-            onKeyPress={(event)=>{
-              console.log(event.key)
-              if(event.key === 'Enter') {
-                setNumberOfChannels({ value: nChannels })
-              }
-            }}
-          />
-        </Grid>
-      </Grid>      
+      <Transport mode='song'/>
+      <Grid container item xs={2}/>
       <Grid container item xs={2} justifyContent='space-around'>  
         <Grid item>
           <Button variant='contained' color='primary' size='medium'>Save</Button>
