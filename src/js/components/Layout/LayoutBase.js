@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 
 const nTrees = 8
 const trees = new Array(nTrees).fill(0)
-console.log('trees', trees)
+// console.log('trees', trees)
 
 const scaleAngle = d3.scaleLinear().domain([0,nTrees]).range([0,Math.PI*2])
 const radius = 160

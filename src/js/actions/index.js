@@ -2,6 +2,7 @@ import {
   INITIALIZE_DATA,
   LOAD_PATTERN,
   SAVE_EDITS,
+  SAVE_PATTERN,
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
@@ -24,6 +25,10 @@ export function loadPattern (payload) {
 
 export function saveEdits (payload) {
   return { type: SAVE_EDITS, payload }
+}
+
+export function savePattern (payload) {
+  return { type: SAVE_PATTERN, payload }
 }
 
 export function setConfig (payload) {

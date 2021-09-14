@@ -6,7 +6,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     patternLength: state.config.activePattern.patternLength,
     timePattern: state.config.activePattern.channels[0],
-    channels: state.config.activePattern.channels
+    channels: state.config.activePattern.channels,
+    activePatternId: state.config.activePatternId
   }
 }
 
@@ -16,10 +17,9 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function Time ({ channels, timePattern, setTimeValue, patternLength }) {
+function Time ({ activePatternId, channels, timePattern, setTimeValue, patternLength }) {
   const boxSize = 1000 / patternLength
   const boxHeight = Math.min(24, boxSize)  
-  console.log('boxSize', boxSize)
   return (
     <Grid container item xs={12}>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
@@ -38,7 +38,7 @@ function Time ({ channels, timePattern, setTimeValue, patternLength }) {
               new Array(patternLength).fill(0).map((value, idx) => {
                 const valueForStep = timePattern.steps.filter(o=>{return o.idx === idx})[0]
                 return (
-                  <g key={`speedvalue_${idx}`} transform={`translate(${(boxSize*idx)+1} 0)`}>
+                  <g key={`pattern_${activePatternId}_speedvalue_${idx}`} transform={`translate(${(boxSize*idx)+1} 0)`}>
                     <foreignObject width={boxSize} height={boxHeight}>
                       <input type='text'                         
                         // defaultValue={100}

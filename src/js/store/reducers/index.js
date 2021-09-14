@@ -2,6 +2,7 @@ import {
   INITIALIZE_DATA,
   LOAD_PATTERN,
   SAVE_EDITS,
+  SAVE_PATTERN,
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
@@ -31,7 +32,7 @@ function rootReducer(state = initialState, action) {
   // console.log('action', action)
   switch(action.type) {
     case INITIALIZE_DATA: 
-      console.log('initialize data', action.payload)
+      console.log('REDUCER - '+INITIALIZE_DATA, action.payload)
       return Object.assign({}, state, 
         { 
           config: action.payload.value.config,
@@ -46,23 +47,30 @@ function rootReducer(state = initialState, action) {
           }
         })
     case LOAD_PATTERN:
-      console.log('loading pattern', action.payload)
+      console.log('REDUCER - '+LOAD_PATTERN, action.payload)
       window.socket.emit('CONFIG_LOAD_PATTERN', action.payload)
       return state
     case SAVE_EDITS:
-        window.socket.emit('PATTERN_SET_STEPS', { value: state.uiState.nSteps })
-        window.socket.emit('PATTERN_SET_NAME', { value: state.uiState.name })
-        state.uiState.editMode = false
-        return Object.assign({}, state, { uiState: state.uiState })
+      console.log('REDUCER - '+SAVE_EDITS, action.payload)
+      window.socket.emit('PATTERN_SET_STEPS', { value: state.uiState.nSteps })
+      window.socket.emit('PATTERN_SET_NAME', { value: state.uiState.name })
+      state.uiState.editMode = false
+      return Object.assign({}, state, { uiState: state.uiState })
+    case SAVE_PATTERN:
+      console.log('REDUCER - '+SAVE_PATTERN, action.payload)
+      console.log('emitting a save pattern')
+      window.socket.emit('PATTERN_SAVE_PATTERN', { value: true })
+      return state
     case SET_CONFIG: 
       console.log('setting config in state', action.payload)
-      state.uiState = Object.assign({}, state.uiState, 
+      state.uiState = Object.assign(
+        {}, 
+        state.uiState, 
         { 
           name: action.payload.value.activePattern.name ,
           nSteps: action.payload.value.activePattern.patternLength
-        })
-      // state.uiState.name = action.payload.value.activePattern.name
-      // state.uiState.nSteps = action.payload.value.activePattern.patternLength
+        }
+      )
       return Object.assign({}, state, { config: action.payload.value, uiState: state.uiState })
     // case SET_CURRENT_STEP:
     //   console.log('setting current step', action.payload)
@@ -80,17 +88,21 @@ function rootReducer(state = initialState, action) {
       console.log('setting pattern name')
       state.uiState.name = action.payload.value
       return Object.assign({}, state, { uiState: state.uiState })
-    // case SET_PATTERNS:
-    //   return Object.assign({}, state, { patterns: action.payload.value, dataLoaded: true })
+    case SET_PATTERNS:
+      console.log('REDUCER - '+SET_PATTERNS, action.payload)
+      state.patterns = Object.assign([], state.patterns, action.payload.value )
+      console.log('patterns', state.patterns)
+      return Object.assign({}, state, { patterns: state.patterns })
     // case SET_STEP:
     //   return Object.assign({}, state, { currentStep: action.payload.value })
-    // case SET_STEP_VALUE: 
-    //   window.socket.emit('PATTERN_VALUE', action.payload )
-    //   return state
-    // case SET_TIME_VALUE:
-    //   console.log('setting time value', action.payload)
-    //   window.socket.emit('SET_TIME_VALUE', action.payload)      
-    //   return state
+    case SET_STEP_VALUE: 
+      console.log('REDUCER - '+SET_STEP_VALUE, action.payload)
+      window.socket.emit('PATTERN_SET_VALUE_STEP', action.payload )
+      return state
+    case SET_TIME_VALUE:
+      console.log('setting time value', action.payload)
+      window.socket.emit('PATTERN_SET_VALUE_TIME', action.payload)      
+      return state
     default:      
       return state
   }

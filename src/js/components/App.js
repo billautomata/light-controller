@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@material-ui/core'
-import { initializeData, setConfig } from '../actions/index'
+import { initializeData, setConfig, setPatterns } from '../actions/index'
 import { connect } from "react-redux"
 import CurrentPattern from './CurrentPattern/CurrentPatternBase'
 import { Grid, Paper } from '@material-ui/core'
@@ -19,7 +19,8 @@ const mapStateToProps = (state, ownProps) => {
 function mapDispatchToProps(dispatch) {
   return {
     initializeData: payload => dispatch(initializeData(payload)),
-    setConfig: payload => dispatch(setConfig(payload))
+    setConfig: payload => dispatch(setConfig(payload)),
+    setPatterns: payload => dispatch(setPatterns(payload))
   }
 }
 
@@ -30,7 +31,7 @@ const sectionStyle = {
   borderBottom: '1px solid #AAA' 
 }
 
-const ConnectedApp = function ({ dataLoaded, initializeData, setConfig }) {
+const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig }) {
 
   if(window.socket === undefined) {
     window.socket = io.connect("/")
@@ -42,6 +43,8 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setConfig }) {
       switch(name) {
         case 'config':
           return setConfig({ value })
+        case 'patterns':
+          return setPatterns({ value })
         case 'state-machine':
           return initializeData({ value })        
         default:

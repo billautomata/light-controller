@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
-import { saveEdits, setEditMode, setNumberOfChannels, setNumberOfSteps, setPatternName } from '../../actions/index'
+import { saveEdits, savePattern, setEditMode, setNumberOfChannels, setNumberOfSteps, setPatternName } from '../../actions/index'
 import Transport from '../subcomponents/Transport'
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,14 +15,15 @@ const mapStateToProps = (state, ownProps) => {
 function mapDispatchToProps(dispatch) {
   return {
     saveEdits: payload => dispatch(saveEdits(payload)),
+    savePattern: payload => dispatch(savePattern(payload)),
     setEditMode: payload => dispatch(setEditMode(payload)),
     setNumberOfChannels: payload => dispatch(setNumberOfChannels(payload)),
-    setNumberOfSteps: payload => dispatch(setNumberOfSteps(payload)),
+    setNumberOfSteps: payload => dispatch(setNumberOfSteps(payload)),    
     setPatternName: payload => dispatch(setPatternName(payload))
   }
 }
 
-function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, saveEdits, setEditMode, setNumberOfChannels, setNumberOfSteps, setPatternName }) {
+function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, saveEdits, savePattern, setEditMode, setNumberOfChannels, setNumberOfSteps, setPatternName }) {
   let nChannels = numberOfChannels
   let nSteps = numberOfSteps
   let name = patternName
@@ -47,11 +48,10 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
           <>
             <Typography variant='h6'>{patternName}</Typography>                
           </>
-        }
-        
+        }        
       </Grid>      
       <Grid container item xs={3} 
-        justifyContent='space-between' alignItems='center' 
+        justifyContent='flex-start' alignItems='center' 
         style={{outline: '1px solid transparent'}}>
         {
           editMode ? <>
@@ -79,7 +79,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
                   color='primary' 
                   size='medium' 
                   onClick={()=>{ saveEdits({}); setEditMode({value: false}) }}>
-                    Save
+                    Done
                   </Button>
               </Grid>              
               <Grid item>
@@ -112,7 +112,9 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
           editMode ? <></> :
           <>
             <Grid item>
-              <Button variant='contained' color='primary' size='medium'>Save</Button>
+              <Button variant='contained' color='primary' size='medium'
+                onClick={()=>{console.log('saving pattern'); savePattern({})}}
+              >Save</Button>
             </Grid>        
             <Grid item>
               <Button variant='contained' color='default' size='medium'>Revert</Button>

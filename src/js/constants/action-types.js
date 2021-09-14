@@ -1,6 +1,7 @@
 export const INITIALIZE_DATA = 'INITIALIZE_DATA'
 export const LOAD_PATTERN = 'LOAD_PATTERN'
 export const SAVE_EDITS = 'SAVE_EDITS'
+export const SAVE_PATTERN = 'SAVE_PATTERN'
 export const SET_CONFIG = 'SET_CONFIG'
 export const SET_CURRENT_STEP = 'SET_CURRENT_STEP'
 export const SET_EDIT_MODE = 'SET_EDIT_MODE'

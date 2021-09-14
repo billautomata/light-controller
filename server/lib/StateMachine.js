@@ -64,6 +64,14 @@ module.exports = function createStateMachine() {
     //
   }
 
+  function getPattern (id) {
+    return patterns.filter(o=>o.id === id)[0]
+  }
+
+  function getPatternIndex (id) {
+    return patterns.findIndex(o=>o.id === id)
+  }
+
   function loadPattern (id) {
     // loads a pattern into the active pattern
     config.activePatternId = id
@@ -88,6 +96,8 @@ module.exports = function createStateMachine() {
     patterns,
     songs,
     playlists,
+    getPattern,
+    getPatternIndex,
     loadPattern,
     registerSockets,
     onConnect
