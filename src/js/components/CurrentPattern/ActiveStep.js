@@ -2,12 +2,12 @@ import { connect } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
 import { setCurrentStep } from '../../actions/index'
 
-const boxSize = 50
+// const boxSize = 50
 
 const mapStateToProps = (state, ownProps) => {
   return {
     currentStep: state.currentStep,
-    patternLength: state.patterns[state.currentPattern].patternLength
+    patternLength: state.config.activePattern.patternLength,
   }
 }
 
@@ -18,6 +18,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function ActiveStep ({ currentStep, patternLength, setCurrentStep }) {
+  const boxSize = 1000 / patternLength 
+  const boxHeight = Math.min(24, boxSize)  
   return (
     <Grid container item xs={12}>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
@@ -28,7 +30,7 @@ function ActiveStep ({ currentStep, patternLength, setCurrentStep }) {
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1003 25`}
                 style={{
-                  backgroundColor: '#DDD', 
+                  backgroundColor: '#FFF', 
                   width: '99%', 
                   margin: 'auto',
                   marginTop: 10,
@@ -41,7 +43,7 @@ function ActiveStep ({ currentStep, patternLength, setCurrentStep }) {
                       transform={`translate(${(boxSize*index)+1} 2)`}
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
-                      <rect x='0' y='0' width={boxSize-2} height={21} fill={ currentStep === index ? 'steelblue' : '#EEE' }/>
+                      <rect x='0' y='0' width={boxSize-2} height={24} fill={ currentStep === index ? 'steelblue' : '#EEE' }/>
                     </g>
                   )
                 })

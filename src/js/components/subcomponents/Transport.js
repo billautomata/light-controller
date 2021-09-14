@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 
 export default function Transport (props) {
   return (
-    <Grid container item xs={ props.mode === 'song' ? 1 : 1 } spacing={1} justifyContent='left' alignItems='center' style={{fontSize: 32, color: 'steelblue'}}>
+    <Grid container item xs={12} spacing={1} justifyContent='center' alignItems='center' style={{fontSize: 32, color: 'steelblue'}}>
       <Grid className='transport-button' item style={{ 
           borderBottom: '4px solid steelblue', 
           // background: '#EEE'

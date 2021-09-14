@@ -1,27 +1,31 @@
 import { connect } from 'react-redux'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
-import { setNumberOfChannels, setNumberOfSteps } from '../../actions/index'
+import { saveEdits, setEditMode, setNumberOfChannels, setNumberOfSteps, setPatternName } from '../../actions/index'
 import Transport from '../subcomponents/Transport'
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('state', state)
   return {
-    patternName: state.patterns[state.currentPattern].name,
-    numberOfSteps: Number(state.patterns[state.currentPattern].patternLength),
-    numberOfChannels: state.patterns[state.currentPattern].channels.length - 1
+    numberOfChannels: state.config.activePattern.channels.length -1,
+    numberOfSteps: state.config.activePattern.patternLength,    
+    patternName: state.config.activePattern.name,
+    editMode: state.editMode
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    saveEdits: payload => dispatch(saveEdits(payload)),
+    setEditMode: payload => dispatch(setEditMode(payload)),
     setNumberOfChannels: payload => dispatch(setNumberOfChannels(payload)),
-    setNumberOfSteps: payload => dispatch(setNumberOfSteps(payload))
+    setNumberOfSteps: payload => dispatch(setNumberOfSteps(payload)),
+    setPatternName: payload => dispatch(setPatternName(payload))
   }
 }
 
-function PatternName ({ numberOfChannels, numberOfSteps, patternName, setNumberOfChannels, setNumberOfSteps }) {
+function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, saveEdits, setEditMode, setNumberOfChannels, setNumberOfSteps, setPatternName }) {
   let nChannels = numberOfChannels
   let nSteps = numberOfSteps
+  let name = patternName
   return (
     <Grid container item xs={12} alignItems='center'>
       <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
@@ -29,57 +33,96 @@ function PatternName ({ numberOfChannels, numberOfSteps, patternName, setNumberO
           <Typography variant='body2'>Name</Typography>
         </Grid>
       </Grid>
-      <Grid item xs={6}>
-        <Typography variant='h3'>{patternName}</Typography>                
+      <Grid item xs={3}>
+        {
+          editMode ? 
+          <>
+            <TextField defaultValue={name} size='x-large'
+              onChange = { (event) => { 
+                name = event.target.value 
+                setPatternName({ value: event.target.value })
+              }}
+            />
+          </> : 
+          <>
+            <Typography variant='h6'>{patternName}</Typography>                
+          </>
+        }
+        
+      </Grid>      
+      <Grid container item xs={3} 
+        justifyContent='space-between' alignItems='center' 
+        style={{outline: '1px solid transparent'}}>
+        {
+          editMode ? <>
+              <Grid item xs={3}>
+                <TextField 
+                  variant='outlined' size='small' 
+                  type='text' label="Steps" 
+                  defaultValue={numberOfSteps}
+                  onChange={(event)=>{
+                    console.log('on change steps', event.target.value)
+                    nSteps = event.target.value
+                    setNumberOfSteps({ value: nSteps })
+                  }}
+                  onKeyPress={(event)=>{
+                    console.log(event.key)
+                    if(event.key === 'Enter') {
+                      setNumberOfSteps({ value: nSteps })
+                    }
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <Button 
+                  variant='contained' 
+                  color='primary' 
+                  size='medium' 
+                  onClick={()=>{ saveEdits({}); setEditMode({value: false}) }}>
+                    Save
+                  </Button>
+              </Grid>              
+              <Grid item>
+                <Button 
+                  variant='default' 
+                  color='default' 
+                  size='medium' 
+                  onClick={()=>{console.log('set edit mdoe click'); setEditMode({value: false})}}>
+                    &#10005;
+                  </Button>
+              </Grid>
+            </> :
+            <>
+              <Grid container xs={3}>
+                <Grid item xs={12}><Typography variant='body2'>Steps</Typography></Grid>
+                <Grid item xs={12}>{numberOfSteps}</Grid>
+              </Grid>
+              <Grid item>
+                <Button variant='default' color='default' size='small' onClick={()=>{console.log('set edit mdoe click'); setEditMode({value: true})}}>Edit</Button>
+              </Grid>        
+            </> 
+        }
+
       </Grid>
-      <Transport/>
-      <Grid container item xs={2} spacing={1}>
-        <Grid item xs={6}>
-          <TextField 
-            variant='outlined' size='small' 
-            type='text' label="Steps" 
-            defaultValue={numberOfSteps}
-            onChange={(event)=>{
-              console.log('on change steps', event.target.value)
-              nSteps = event.target.value
-            }}
-            onKeyPress={(event)=>{
-              console.log(event.key)
-              if(event.key === 'Enter') {
-                setNumberOfSteps({ value: nSteps })
-              }
-            }}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField 
-            variant='outlined' size='small' 
-            type='text' label="Channels" 
-            defaultValue={numberOfChannels}
-            onChange={(event)=>{
-              console.log('on change channels', event.target.value)
-              nChannels = event.target.value
-            }}
-            onKeyPress={(event)=>{
-              console.log(event.key)
-              if(event.key === 'Enter') {
-                setNumberOfChannels({ value: nChannels })
-              }
-            }}
-          />
-        </Grid>
-      </Grid>      
-      <Grid container item xs={2} justifyContent='space-around'>  
-        <Grid item>
-          <Button variant='contained' color='primary' size='medium'>Save</Button>
-        </Grid>        
-        <Grid item>
-          <Button variant='contained' color='default' size='medium'>Clear</Button>
-        </Grid>
-        <Grid item>
-          <Button variant='outlined' color='default' size='medium'>Edit</Button>
-        </Grid>
-      </Grid>      
+      <Grid container item xs={2} justifyContent='center'>
+        <Transport/>
+      </Grid>
+      <Grid container item xs={3} justifyContent='flex-end' spacing={1}>  
+        {
+          editMode ? <></> :
+          <>
+            <Grid item>
+              <Button variant='contained' color='primary' size='medium'>Save</Button>
+            </Grid>        
+            <Grid item>
+              <Button variant='contained' color='default' size='medium'>Revert</Button>
+            </Grid>
+            <Grid item>
+              <Button variant='contained' color='default' size='medium'>Clear</Button>
+            </Grid>
+          </>
+        }  
+      </Grid>    
     </Grid>
   )
 }

@@ -2,12 +2,11 @@ import { connect } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
 import { setTimeValue } from '../../actions/index'
 
-const boxSize = 50
-const patternLength = 10
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    timePattern: state.patterns[0].channels[0]
+    patternLength: state.config.activePattern.patternLength,
+    timePattern: state.config.activePattern.channels[0],
+    channels: state.config.activePattern.channels
   }
 }
 
@@ -17,7 +16,10 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function Time ({ timePattern, setTimeValue }) {
+function Time ({ channels, timePattern, setTimeValue, patternLength }) {
+  const boxSize = 1000 / patternLength
+  const boxHeight = Math.min(24, boxSize)  
+  console.log('boxSize', boxSize)
   return (
     <Grid container item xs={12}>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
@@ -26,23 +28,28 @@ function Time ({ timePattern, setTimeValue }) {
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1003 25`}
             style={{
-              backgroundColor: '#DDD', 
+              backgroundColor: '#FFF', 
               width: '99%', 
               margin: 'auto',
               marginTop: 0,
               marginBottom: 0
             }}>    
             {            
-              timePattern.steps.map((value, valueIndex) => {
+              new Array(patternLength).fill(0).map((value, idx) => {
+                const valueForStep = timePattern.steps.filter(o=>{return o.idx === idx})[0]
                 return (
-                  <g key={`speedvalue_${valueIndex}`} transform={`translate(${(boxSize*valueIndex)+1} 2)`}>
-                    <foreignObject width={boxSize-2} height='20'>
-                      <input type='text' 
-                        defaultValue={value.value === -1 ? null : value.value}
+                  <g key={`speedvalue_${idx}`} transform={`translate(${(boxSize*idx)+1} 0)`}>
+                    <foreignObject width={boxSize} height={boxHeight}>
+                      <input type='text'                         
+                        // defaultValue={100}
+                        defaultValue={ valueForStep === undefined ? null : valueForStep.value }
                         style={{ 
                           // backgroundColor: 
                           //   speedValues[valueIndex] === null && speedValuesTemporary[valueIndex] === null ? '#FFF' : speedValuesTemporary[valueIndex] === speedValues[valueIndex] ? colorsFn(1) : colorsFn(3),
                           border: 'none', 
+                          border: '1px solid #DDD',
+                          height: boxHeight-4,
+                          width: boxSize-8,
                           outline: 'none', 
                         }}
                         onChange={(event)=>{
@@ -51,8 +58,7 @@ function Time ({ timePattern, setTimeValue }) {
                         onKeyDown={(event)=>{
                           console.log(event.key, event.target.value)
                           if (event.key === 'Enter' || event.key === 'Tab') {
-                            setTimeValue({ step: valueIndex, value: Number(event.target.value) })
-                            // window.socket.emit('TIME_VALUE', { step: valueIndex, value: event.target.value })
+                            setTimeValue({ step: idx, value: Number(event.target.value) })                            
                           }                        
                         }}/>
                     </foreignObject>

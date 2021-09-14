@@ -27,13 +27,13 @@ function PatternName ({ numberOfChannels, numberOfSteps, patternName, setNumberO
       <Grid item xs={1} align='center'>
         <Typography variant='body2'>Name</Typography>        
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={5}>
         <Typography variant='h3'>Simple Song
         </Typography>                
       </Grid>
       <Transport mode='song'/>
       <Grid container item xs={2}/>
-      <Grid container item xs={2} justifyContent='space-around'>  
+      <Grid container item xs={3} justifyContent='center' spacing={1}>  
         <Grid item>
           <Button variant='contained' color='primary' size='medium'>Save</Button>
         </Grid>        

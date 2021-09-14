@@ -1,11 +1,12 @@
 import { ThemeProvider } from '@material-ui/core'
-import { setStep, setPatterns } from '../actions/index'
+import { initializeData, setConfig } from '../actions/index'
 import { connect } from "react-redux"
 import CurrentPattern from './CurrentPattern/CurrentPatternBase'
 import { Grid, Paper } from '@material-ui/core'
 import LoadPatterns from './LoadPatterns'
 import SongMode from './SongMode/SongModeBase'
 import createTheme from './createTheme.js'
+import LayoutBase from './Layout/LayoutBase'
 
 import { io } from "socket.io-client"
 
@@ -17,29 +18,34 @@ const mapStateToProps = (state, ownProps) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setPatterns: payload => dispatch(setPatterns(payload)),
-    setStep: payload => dispatch(setStep(payload)),    
+    initializeData: payload => dispatch(initializeData(payload)),
+    setConfig: payload => dispatch(setConfig(payload))
   }
 }
 
-const sectionStyle = { marginBottom: 24, paddingTop: 8, paddingBottom: 24 }
+const sectionStyle = { 
+  marginBottom: 8, 
+  paddingTop: 8, 
+  paddingBottom: 16, 
+  borderBottom: '1px solid #AAA' 
+}
 
-const ConnectedApp = function ({ dataLoaded, setPatterns, setStep }) {
+const ConnectedApp = function ({ dataLoaded, initializeData, setConfig }) {
 
   if(window.socket === undefined) {
     window.socket = io.connect("/")
     window.socket.on('connect', () => {
       console.log('connect')
     })
-    window.socket.onAny((event, name, payload)=>{      
+    window.socket.onAny((name, value)=>{      
+      console.log('event:', name, 'value:', value)
       switch(name) {
-        case 'patterns': 
-        console.log(event, name, payload)
-          return setPatterns({ value: payload.value })
-        case 'step':
-          return setStep({ value: payload.step })
-        default: 
-          return {};
+        case 'config':
+          return setConfig({ value })
+        case 'state-machine':
+          return initializeData({ value })        
+        default:
+          return {}
       }
     })
     console.log(window.socket)
@@ -47,20 +53,22 @@ const ConnectedApp = function ({ dataLoaded, setPatterns, setStep }) {
 
   return (
     <ThemeProvider theme={createTheme()}>
-      <div style={{margin: 10}}>
+      <div style={{margin: 12 }}>
         {
           dataLoaded ? 
           <Grid container justifyContent='center'>
-            <Grid container item xs={12}>        
-              <Paper square outlined elevation={2} style={sectionStyle}>              
+            <Grid container item xs={12}>
+              <Grid item xs={12}>        
+                <Paper square outlined elevation={0} style={sectionStyle}>
+                  {/* <LayoutBase/> */}
+                </Paper>
+              </Grid>
+              <Paper square outlined elevation={0} style={sectionStyle}>              
                 <CurrentPattern/>    
               </Paper>              
-              <Paper square outlined elevation={2} style={sectionStyle}>              
-                <SongMode/>
+              <Paper square outlined elevation={0} style={sectionStyle}>              
+                {/* <SongMode/> */}
               </Paper>                
-              <Paper square outlined elevation={2} style={sectionStyle}>              
-                <LoadPatterns/>
-                </Paper>
             </Grid>
           </Grid>
           : null

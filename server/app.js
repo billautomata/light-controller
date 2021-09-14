@@ -1,3 +1,5 @@
+const createStateMachine = require('./lib/StateMachine.js')
+const socketRoutes = require('./lib/socketRoutes.js')
 var restify = require('restify')
 
 const server = restify.createServer({
@@ -25,6 +27,11 @@ const io = require("socket.io")({
 
 // either
 const socketServer = require("http").createServer()
+
+const sockets = {}
+
+const stateMachine = createStateMachine()
+stateMachine.registerSockets(sockets)
 
 io.attach(f, {
   pingInterval: 10000,
@@ -174,40 +181,50 @@ const patterns = [
   }  
 ]
 
-function doPulse (socket) {
-  clearTimeout(pulse)
-  pulse = setTimeout(()=>{
-    currentStep += 1
-    currentStep = currentStep % patterns[currentPattern].patternLength
-    // console.log('current step', currentStep)
-    if (patterns[currentPattern].channels[0].steps[currentStep].value !== -1) {
-      currentSpeed = patterns[currentPattern].channels[0].steps[currentStep].value
-      // console.log('setting current speed to', currentSpeed)
-    } else {
-      // go back and find the previous step speed
-      let matchFound = false
-      let checkStep = currentStep
-      while(matchFound === false) {
-        if(checkStep < 0) {
-          checkStep = patterns[currentPattern].patternLength + checkStep
-        }
-        if(patterns[currentPattern].channels[0].steps[checkStep].value !== -1) {
-          matchFound = true
-          currentSpeed = patterns[currentPattern].channels[0].steps[checkStep].value
-          // console.log('setting current speed to', currentSpeed, currentStep, checkStep, patterns[currentPattern].channels[0].steps[checkStep])
-        }
-        checkStep -= 1
-      }
-    }
-    socket.send('step', { step: currentStep })
-    doPulse(socket)
-  }, currentSpeed)
-}
+// function doPulse (socket) {
+//   clearTimeout(pulse)
+//   pulse = setTimeout(()=>{
+//     currentStep += 1
+//     currentStep = currentStep % patterns[currentPattern].patternLength
+//     // console.log('current step', currentStep)
+//     if (patterns[currentPattern].channels[0].steps[currentStep].value !== -1) {
+//       currentSpeed = patterns[currentPattern].channels[0].steps[currentStep].value
+//       // console.log('setting current speed to', currentSpeed)
+//     } else {
+//       // go back and find the previous step speed
+//       let matchFound = false
+//       let checkStep = currentStep
+//       while(matchFound === false) {
+//         if(checkStep < 0) {
+//           checkStep = patterns[currentPattern].patternLength + checkStep
+//         }
+//         if(patterns[currentPattern].channels[0].steps[checkStep].value !== -1) {
+//           matchFound = true
+//           currentSpeed = patterns[currentPattern].channels[0].steps[checkStep].value
+//           // console.log('setting current speed to', currentSpeed, currentStep, checkStep, patterns[currentPattern].channels[0].steps[checkStep])
+//         }
+//         checkStep -= 1
+//       }
+//     }
+//     socket.send('step', { step: currentStep })
+//     doPulse(socket)
+//   }, currentSpeed)
+// }
 
 io.on('connection', (socket)=>{
-  console.log(socket)
-  socket.send('patterns', { value: patterns })
-  doPulse(socket)
+  console.log('socket-id', socket.id)
+  sockets[socket.id] = socket
+
+  stateMachine.onConnect(socket.id)
+
+  socket.on('disconnect', ()=>{
+    console.log('disconnect', socket.id)
+    sockets[socket.id] === null
+  })
+
+  socketRoutes(socket, stateMachine)
+
+  return
 
   socket.on('TIME_VALUE', payload => {
     console.log(payload, Number(payload.value))

@@ -1,0 +1,260 @@
+{
+  "config": {
+    "uiMode": "pattern",
+    "isPlaying": false,
+    "activePattern": {},
+    "activePatternId": "b5147688-3b1b-4575-a6ca-c29971da91c5",
+    "activeSong": {},
+    "activeSongId": "572e289b-6ba5-4e88-8a8f-849aa75495ef",
+    "activePlaylist": {},
+    "activePlaylistId": "8521cc43-c677-4519-a167-b0f0fc73486b"
+  },
+  "patterns": [
+    {
+      "name": "Basic Pattern",
+      "id": "b5147688-3b1b-4575-a6ca-c29971da91c5",
+      "patternLength": 6,
+      "channels": [
+        {
+          "name": "time-channel",
+          "id": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 500
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-1",
+          "id": 1,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-2",
+          "id": 2,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-3",
+          "id": 3,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-4",
+          "id": 4,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-5",
+          "id": 5,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-6",
+          "id": 6,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-7",
+          "id": 7,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Longer Pattern",
+      "id": "6909a4a2-4247-4997-be3c-d06eef39174b",
+      "patternLength": 32,
+      "channels": [
+        {
+          "name": "time-channel",
+          "id": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 500
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "songs": [
+    {
+      "name": "Basic Song",
+      "id": "572e289b-6ba5-4e88-8a8f-849aa75495ef",
+      "steps": [
+        {
+          "id": "b5147688-3b1b-4575-a6ca-c29971da91c5",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "6909a4a2-4247-4997-be3c-d06eef39174b",
+          "repeat": 1,
+          "speed": 1
+        }
+      ]
+    },
+    {
+      "name": "Other Song",
+      "id": "6746c099-b3f4-4e0e-9267-6ece2f1ae19d",
+      "steps": [
+        {
+          "id": "6909a4a2-4247-4997-be3c-d06eef39174b",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "b5147688-3b1b-4575-a6ca-c29971da91c5",
+          "repeat": 1,
+          "speed": 1
+        }
+      ]
+    }
+  ],
+  "playlists": [
+    {
+      "name": "Playlist",
+      "id": "8521cc43-c677-4519-a167-b0f0fc73486b",
+      "steps": [
+        {
+          "id": "572e289b-6ba5-4e88-8a8f-849aa75495ef",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "6746c099-b3f4-4e0e-9267-6ece2f1ae19d",
+          "repeat": 1,
+          "speed": 1
+        }
+      ]
+    }
+  ]
+}
