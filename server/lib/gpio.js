@@ -40,6 +40,7 @@ function _gpio () {
       const channelIdx = pinIdx + 1
       const channel = pattern.channels[channelIdx]
       if(channel === undefined) {
+        console.log('undefined channel' + channelIdx)
         return
       }
       const valueIndex = channel.steps.findIndex(o=>o.idx === step)
