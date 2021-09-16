@@ -32,6 +32,7 @@ const sockets = {}
 
 const stateMachine = createStateMachine()
 stateMachine.registerSockets(sockets)
+stateMachine.start()
 
 io.attach(f, {
   pingInterval: 10000,
@@ -44,142 +45,142 @@ let currentStep = 0
 let currentSpeed = 300
 let currentPattern = 0
 
-const patterns = [
-  { 
-    id: '0',
-    name: 'Basic Pattern',
-    patternLength: 10,
-    patternStart: 0,
-    patternEnd: 10,
-    channels: [
-      { 
-        id: 'TIME_CHANNEL',
-        name: 'TIME_CHANNEL', 
-        steps: [
-          { value: 500 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: 50 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 }
-        ]
-      },
-      { 
-        id: 0,
-        name: 'Center Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 }
-        ]
-      },
-      { 
-        id: 1,
-        name: '2nd Floor Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 }
-        ]
-      }      
-    ]
-  },
-  { 
-    id: '4',
-    name: 'Longer Pattern',
-    patternLength: 20,
-    patternStart: 0,
-    patternEnd: 20,
-    channels: [
-      { 
-        id: 'TIME_CHANNEL',
-        name: 'TIME_CHANNEL', 
-        steps: [
-          { value: 500 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: 50 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 }
-        ]
-      },
-      { 
-        id: 0,
-        name: 'Center Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },          
-        ]
-      },
-      { 
-        id: 1,
-        name: '2nd Floor Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 }, 
-        ]
-      }      
-    ]
-  }  
-]
+// const patterns = [
+//   { 
+//     id: '0',
+//     name: 'Basic Pattern',
+//     patternLength: 10,
+//     patternStart: 0,
+//     patternEnd: 10,
+//     channels: [
+//       { 
+//         id: 'TIME_CHANNEL',
+//         name: 'TIME_CHANNEL', 
+//         steps: [
+//           { value: 500 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: 50 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 }
+//         ]
+//       },
+//       { 
+//         id: 0,
+//         name: 'Center Tree', 
+//         steps: [
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 }
+//         ]
+//       },
+//       { 
+//         id: 1,
+//         name: '2nd Floor Tree', 
+//         steps: [
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 }
+//         ]
+//       }      
+//     ]
+//   },
+//   { 
+//     id: '4',
+//     name: 'Longer Pattern',
+//     patternLength: 20,
+//     patternStart: 0,
+//     patternEnd: 20,
+//     channels: [
+//       { 
+//         id: 'TIME_CHANNEL',
+//         name: 'TIME_CHANNEL', 
+//         steps: [
+//           { value: 500 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: 50 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 },
+//           { value: -1 }
+//         ]
+//       },
+//       { 
+//         id: 0,
+//         name: 'Center Tree', 
+//         steps: [
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },          
+//         ]
+//       },
+//       { 
+//         id: 1,
+//         name: '2nd Floor Tree', 
+//         steps: [
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 },
+//           { value: 1 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 0 },
+//           { value: 1 }, 
+//         ]
+//       }      
+//     ]
+//   }  
+// ]
 
 // function doPulse (socket) {
 //   clearTimeout(pulse)

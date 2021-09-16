@@ -1,31 +1,48 @@
 const gpio = require('rpi-gpio')
 
-const pins = [6,11,26,21,22,23,24,25]
+const pins = [11,21,22,23,24]
 let error = false
+let setupComplete = false
 
 function _gpio () {
   function init () {
+    console.log('initializing pins')
     pins.forEach((pin,pinIdx)=>{
       gpio.setup(pin, gpio.DIR_OUT, (err)=>{
-        if(err) { error = true; console.log(`error setting up channel ${pinIdx} pin ${pin}`)}
+        console.log('setting up pin: ' + pinIdx)
+        if(err) { 
+          error = true; 
+          console.log(`error setting up channel ${pinIdx} pin ${pin}`)
+        } else {
+          if(pinIdx === pins.length-1) {
+
+            setupComplete = true
+          }
+        }
       })
     })
   }
   function doPins (pattern, step) {
-    if (error) { return }
-    pattern.channels.map((channel,channelIdx)=>{
-      if (channelIdx === 0) {
+    // console.log('pattern id', pattern.id, pattern.channels[0])
+    // console.log('setup complete', setupComplete)
+    if (error || setupComplete === false) { return }
+
+    pins.forEach((pin,pinIdx) => {
+      const channelIdx = pinIdx + 1
+      const channel = pattern.channels[channelIdx]
+      if(channel === undefined) {
         return
       }
       const valueIndex = channel.steps.findIndex(o=>o.idx === step)
       gpio.write(
-        pins[channelIdx-1], 
-        valueIndex === undefined ? false : true, 
+        pin, 
+        valueIndex === undefined ? false : true,
         err=>{
           if(err) {
             console.log(`error writing to channel ${channelIdx-1} which is pin ${pins[channelIdx-1]}`)
           }          
-        })
+        }
+      )
     })
   }
   

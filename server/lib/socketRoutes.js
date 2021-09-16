@@ -20,6 +20,7 @@ module.exports = function socketRoutes (socket, stateMachine) {
  
   socket.on('PATTERN_COPY', payload => {
     console.log('PATTERN_COPY', payload)
+    
   })
 
   socket.on('PATTERN_SET_STEPS', (payload) => {

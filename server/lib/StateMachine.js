@@ -127,6 +127,7 @@ module.exports = function createStateMachine() {
 
   function loadPattern (id) {
     // loads a pattern into the active pattern
+    console.log('loading pattern', id)
     sequencer.currentStep = -1
     sequencer.currentSpeed = 500
 
