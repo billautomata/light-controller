@@ -24,8 +24,6 @@ function _gpio () {
     })
   }
   function doPins (pattern, step) {
-    // console.log('pattern id', pattern.id, pattern.channels[0])
-    // console.log('setup complete', setupComplete)
     if (error || setupComplete === false) { return }
 
     pins.forEach((pin,pinIdx) => {
@@ -40,7 +38,7 @@ function _gpio () {
         valueIndex === undefined ? false : true,
         err=>{
           if(err) {
-            console.log(`error writing to channel ${channelIdx-1} which is pin ${pins[channelIdx-1]}`)
+            console.log(`error writing to channel ${channelIdx} which is pin ${pin}`)
           }          
         }
       )

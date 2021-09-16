@@ -20,7 +20,13 @@ export default function createTheme () {
     overrides: {
       MuiButton: {
         root: {
-          borderRadius: '24px'
+          borderRadius: '24px',
+        },
+        label: {
+          fontWeight: '900',
+          letterSpacing: '-.5px',
+          position: 'relative',
+          top: '1px'
         }
       }
     }
