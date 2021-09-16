@@ -14,11 +14,12 @@ function _gpio () {
           error = true; 
           console.log(`error setting up channel ${pinIdx} pin ${pin}`)
         } else {
-          if(pinIdx === pins.length-1) {
-
-            setupComplete = true
-          }
         }
+        if(pinIdx === pins.length-1) {
+          console.log('attempt to set up pins complete')
+          setupComplete = true
+        }
+
       })
     })
   }
