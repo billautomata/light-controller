@@ -104,9 +104,9 @@ module.exports = function createStateMachine() {
 
     const channelValues = config.activePattern.channels
       .filter((o,i)=>i>0)
-      .map(o=>o.steps.filter(o=>o.idx === sequencer.currentStep)[0])
+      .map(o=>{ return o.steps.filter(o=>o.idx === sequencer.currentStep)[0] === undefined ? 0 : o.steps.filter(o=>o.idx === sequencer.currentStep)[0].value })
 
-    console.log('current step',sequencer.currentStep. channelValues)
+    console.log(['current step', sequencer.currentStep, channelValues.toString()].join('\t'))
 
     // emit
     // current step
