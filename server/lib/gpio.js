@@ -4,24 +4,30 @@ const pins = [11,21,22,23,24]
 let error = false
 let setupComplete = false
 
+const pinStats = pins.map(pinNumber=>{
+  return {
+    doneSetup: false,
+    error: false,
+    pinNumber
+  }
+})
+
 function _gpio () {
   function init () {
     console.log('initializing pins')
     pins.forEach((pin,pinIdx)=>{
-      gpio.setup(pin, gpio.DIR_OUT, (err)=>{
-        console.log('setting up pin: ' + pinIdx)
+      console.log('setting up pin: ' + pinIdx)
+      gpio.setup(pin, gpio.DIR_OUT, (err)=>{      
+        pinStats[pinIdx].doneSetup = true
         if(err) { 
-          error = true; 
           console.log(`error setting up channel ${pinIdx} pin ${pin}`)
-        } else {
+          error = true;
+          pinStats[pinIdx].error = true
         }
-        if(pinIdx === pins.length-1) {
-          if(error) {
-            console.log('FAILED - attempt to set up pins complete with errors')
-          } else {
-            console.log('SUCCESS - attempt to set up pins complete')
-          }
-          
+        if(pinStats.filter(o=>o.doneSetup).length === pinStats.length) {
+          console.log('pins done being setup')
+          console.log('errors on '+pinStats.filter(o=>o.doneSetup).length+' pins')
+          console.log(pinStats.map(pin=>{ return `channel ${pinIdx} - pin ${pin.pinNumber} - error? ${pin.error}` }).join('\n'))
           setupComplete = true
         }
       })
