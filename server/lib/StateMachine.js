@@ -1,6 +1,6 @@
 const fs = require('fs')
 const { v4: uuid } = require('uuid')
-const gpio = require('./gpio-rpio.js')
+const gpio = require('./gpio.js')
 
 module.exports = function createStateMachine() {
   let sockets = {}
