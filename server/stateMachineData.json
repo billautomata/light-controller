@@ -1,48 +1,44 @@
 {
   "config": {
     "uiMode": "pattern",
-    "isPlaying": true,
+    "isPlaying": false,
     "activePattern": {
-      "name": "game",
-      "id": "f98d029b-e8d7-43c4-b725-a283be67cbf1",
-      "patternLength": 16,
+      "name": "Longer Pattern",
+      "id": "6909a4a2-4247-4997-be3c-d06eef39174b",
+      "patternLength": 24,
       "channels": [
         {
-          "id": "time-channel",
           "name": "time-channel",
+          "id": "time-channel",
           "steps": [
             {
               "idx": 0,
-              "value": 500
+              "value": 50
             },
             {
-              "idx": 8,
-              "value": 100
+              "idx": 16,
+              "value": 30
             },
             {
-              "idx": 5,
-              "value": 240
+              "idx": 20,
+              "value": 120
             }
           ]
         },
         {
-          "id": "channel-0",
-          "name": "Channel 0",
+          "name": "channel-0",
+          "id": 0,
           "steps": [
-            {
-              "idx": 0,
-              "value": 1
-            },
             {
               "idx": 5,
               "value": 1
             },
             {
-              "idx": 7,
+              "idx": 0,
               "value": 1
             },
             {
-              "idx": 6,
+              "idx": 14,
               "value": 1
             },
             {
@@ -50,21 +46,33 @@
               "value": 1
             },
             {
-              "idx": 10,
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 23,
               "value": 1
             }
           ]
         },
         {
-          "id": "channel-1",
-          "name": "Channel 1",
+          "name": "channel-0",
+          "id": 0,
           "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
             {
               "idx": 1,
               "value": 1
             },
             {
-              "idx": 4,
+              "idx": 13,
               "value": 1
             },
             {
@@ -72,21 +80,71 @@
               "value": 1
             },
             {
-              "idx": 10,
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 11,
               "value": 1
             },
             {
               "idx": 15,
               "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
             }
           ]
         },
         {
-          "id": "channel-2",
-          "name": "Channel 2",
+          "name": "channel-0",
+          "id": 0,
           "steps": [
             {
-              "idx": 1,
+              "idx": 5,
               "value": 1
             },
             {
@@ -98,29 +156,29 @@
               "value": 1
             },
             {
-              "idx": 10,
+              "idx": 9,
               "value": 1
             },
             {
-              "idx": 12,
+              "idx": 18,
               "value": 1
             },
             {
-              "idx": 15,
+              "idx": 20,
               "value": 1
             },
             {
-              "idx": 6,
+              "idx": 21,
               "value": 1
             }
           ]
         },
         {
-          "id": "channel-3",
-          "name": "Channel 3",
+          "name": "channel-0",
+          "id": 0,
           "steps": [
             {
-              "idx": 1,
+              "idx": 5,
               "value": 1
             },
             {
@@ -128,7 +186,7 @@
               "value": 1
             },
             {
-              "idx": 8,
+              "idx": 4,
               "value": 1
             },
             {
@@ -144,29 +202,33 @@
               "value": 1
             },
             {
-              "idx": 7,
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 21,
               "value": 1
             }
           ]
         },
         {
-          "id": "channel-4",
-          "name": "Channel 4",
+          "name": "channel-0",
+          "id": 0,
           "steps": [
             {
-              "idx": 1,
+              "idx": 5,
               "value": 1
             },
             {
-              "idx": 3,
+              "idx": 2,
               "value": 1
             },
             {
-              "idx": 8,
-              "value": 1
-            },
-            {
-              "idx": 10,
+              "idx": 6,
               "value": 1
             },
             {
@@ -174,19 +236,35 @@
               "value": 1
             },
             {
-              "idx": 15,
+              "idx": 14,
               "value": 1
             },
             {
-              "idx": 6,
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 22,
               "value": 1
             }
           ]
         },
         {
-          "id": "channel-5",
-          "name": "Channel 5",
+          "name": "channel-0",
+          "id": 0,
           "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
             {
               "idx": 1,
               "value": 1
@@ -196,36 +274,6 @@
               "value": 1
             },
             {
-              "idx": 8,
-              "value": 1
-            },
-            {
-              "idx": 10,
-              "value": 1
-            },
-            {
-              "idx": 15,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "id": "channel-6",
-          "name": "Channel 6",
-          "steps": [
-            {
-              "idx": 0,
-              "value": 1
-            },
-            {
-              "idx": 5,
-              "value": 1
-            },
-            {
-              "idx": 6,
-              "value": 1
-            },
-            {
               "idx": 7,
               "value": 1
             },
@@ -234,14 +282,80 @@
               "value": 1
             },
             {
-              "idx": 10,
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 23,
               "value": 1
             }
           ]
         }
       ]
     },
-    "activePatternId": "f98d029b-e8d7-43c4-b725-a283be67cbf1",
+    "activePatternId": "6909a4a2-4247-4997-be3c-d06eef39174b",
     "activeSong": {},
     "activeSongId": "572e289b-6ba5-4e88-8a8f-849aa75495ef",
     "activePlaylist": {},
@@ -387,7 +501,7 @@
     {
       "name": "Longer Pattern",
       "id": "6909a4a2-4247-4997-be3c-d06eef39174b",
-      "patternLength": 32,
+      "patternLength": 24,
       "channels": [
         {
           "name": "time-channel",
@@ -400,6 +514,10 @@
             {
               "idx": 16,
               "value": 30
+            },
+            {
+              "idx": 20,
+              "value": 120
             }
           ]
         },
@@ -421,6 +539,18 @@
             },
             {
               "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 23,
               "value": 1
             }
           ]
@@ -447,6 +577,18 @@
             },
             {
               "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 23,
               "value": 1
             }
           ]
@@ -478,6 +620,18 @@
             {
               "idx": 15,
               "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
             }
           ]
         },
@@ -499,6 +653,18 @@
             },
             {
               "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 21,
               "value": 1
             }
           ]
@@ -530,6 +696,18 @@
             {
               "idx": 14,
               "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
             }
           ]
         },
@@ -559,6 +737,18 @@
             },
             {
               "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 22,
               "value": 1
             }
           ]
@@ -598,6 +788,18 @@
             {
               "idx": 15,
               "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
             }
           ]
         },
@@ -631,6 +833,18 @@
             },
             {
               "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 23,
               "value": 1
             }
           ]
@@ -780,6 +994,10 @@
             },
             {
               "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 9,
               "value": 1
             }
           ]
