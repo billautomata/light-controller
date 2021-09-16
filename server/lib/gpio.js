@@ -1,6 +1,6 @@
 const gpio = require('rpi-gpio')
 
-const pins = [22]
+const pins = [6] // 22, 25
 let error = false
 let setupComplete = false
 
