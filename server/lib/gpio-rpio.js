@@ -30,10 +30,10 @@ function _gpio () {
         return
       }
       const valueIndex = channel.steps.findIndex(o=>o.idx === step) === -1
-      console.log('writing : ', valueIndex === undefined)
+      console.log('writing : ', valueIndex === true)
       gpio.write(
         pin, 
-        valueIndex === undefined ? gpio.LOW : gpio.HIGH
+        valueIndex === true ? gpio.LOW : gpio.HIGH
       )
     })
   }
