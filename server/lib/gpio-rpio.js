@@ -1,6 +1,6 @@
 const gpio = require('rpio')
 
-const pins = [22,26,32,29,31,33] // 35, 37
+const pins = [22,26,32,29,31,33,35,37]
 let error = false
 let setupComplete = false
 
@@ -16,7 +16,7 @@ function _gpio () {
   function init () {
     console.log('initializing pins')
     pins.forEach((pin,pinIdx)=>{
-      console.log('setting up pin: ' + pinIdx)
+      console.log('setting up pin: ' + pinIdx + ' ' + pin)
       gpio.open(pin, gpio.OUTPUT)
     })
   }
@@ -30,7 +30,6 @@ function _gpio () {
         return
       }
       const valueIndex = channel.steps.findIndex(o=>o.idx === step) === -1
-      console.log('writing : ', valueIndex === true)
       gpio.write(
         pin, 
         valueIndex === true ? gpio.LOW : gpio.HIGH
