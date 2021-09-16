@@ -29,7 +29,7 @@ function _gpio () {
         console.log('undefined channel' + channelIdx)
         return
       }
-      const valueIndex = channel.steps.findIndex(o=>o.idx === step)
+      const valueIndex = channel.steps.findIndex(o=>o.idx === step) === -1
       console.log('writing : ', valueIndex === undefined)
       gpio.write(
         pin, 
