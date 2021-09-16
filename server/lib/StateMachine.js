@@ -56,6 +56,7 @@ module.exports = function createStateMachine() {
   }
 
   function tick () {
+
     clearTimeout(pulseTimeout)
 
     if(Date.now() > sequencer.nextActionTime) {
@@ -101,7 +102,11 @@ module.exports = function createStateMachine() {
 
     sequencer.nextActionTime = Date.now() + sequencer.currentSpeed
 
-    console.log('current step',sequencer.currentStep)
+    const channelValues = config.activePattern.channels
+      .filter((o,i)=>i>0)
+      .map(o=>o.steps.filter(o=>o.idx === sequencer.currentStep)[0])
+
+    console.log('current step',sequencer.currentStep. channelValues)
 
     // emit
     // current step
@@ -111,6 +116,8 @@ module.exports = function createStateMachine() {
       }
       socket.emit('set-step', { value: sequencer.currentStep })      
     })
+
+    
 
     // set pins
     //
