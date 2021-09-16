@@ -16,10 +16,14 @@ function _gpio () {
         } else {
         }
         if(pinIdx === pins.length-1) {
-          console.log('attempt to set up pins complete')
+          if(error) {
+            console.log('FAILED - attempt to set up pins complete with errors')
+          } else {
+            console.log('SUCCESS - attempt to set up pins complete')
+          }
+          
           setupComplete = true
         }
-
       })
     })
   }
