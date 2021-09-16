@@ -3,10 +3,23 @@ module.exports = function socketRoutes (socket, stateMachine) {
   socket.on('PATTERN_SAVE_PATTERN', (payload) => {
     console.log('saving pattern')
     let patternIndex = stateMachine.getPatternIndex(stateMachine.config.activePatternId)
-    stateMachine.patterns[patternIndex] = JSON.parse(JSON.stringify(stateMachine.config.activePattern))
+    stateMachine.getPatterns()[patternIndex] = JSON.parse(JSON.stringify(stateMachine.config.activePattern))
     console.log(stateMachine.patterns[patternIndex].name)
     socket.emit('config', stateMachine.config)
-    socket.emit('patterns', stateMachine.patterns)
+    socket.emit('patterns', stateMachine.getPatterns())
+    stateMachine.saveToDisk()
+  })
+
+  socket.on('PATTERN_CLEAR', (payload) => {
+    stateMachine.config.activePattern.channels.forEach(channel=>{
+      channel.steps = []
+    })
+    stateMachine.config.activePattern.channels[0].steps.push({idx: 0, value: 500})
+    socket.emit('config', stateMachine.config)
+  })
+ 
+  socket.on('PATTERN_COPY', payload => {
+    console.log('PATTERN_COPY', payload)
   })
 
   socket.on('PATTERN_SET_STEPS', (payload) => {
@@ -27,16 +40,24 @@ module.exports = function socketRoutes (socket, stateMachine) {
     if(existingIndex === -1) {
       console.log('adding new value to steps')
       stateMachine.config.activePattern.channels[0].steps.push({ idx: payload.step, value: payload.value })
+    } else {
+      if(payload.value === 0) {
+        console.log('splicing', existingIndex)
+        stateMachine.config.activePattern.channels[0].steps = 
+          stateMachine.config.activePattern.channels[0].steps.filter((o,i)=>i!==existingIndex)
+      } else {
+        stateMachine.config.activePattern.channels[0].steps[existingIndex].value = payload.value
+      }      
     }
-    
+    socket.emit('config', stateMachine.config)
   })
 
   socket.on('PATTERN_SET_VALUE_STEP', payload => {
-    console.log(payload)
     const existingIndex = stateMachine.config.activePattern.channels[payload.channel].steps.findIndex(o=>o.idx === payload.step)
+    console.log(payload, existingIndex)
     if (payload.value === true) {
       if (existingIndex === -1) {
-        // stateMachine.config.activePattern.channels[payload.channel].steps.push({ idx: payload.step, value: 1 })
+        stateMachine.config.activePattern.channels[payload.channel].steps.push({ idx: payload.step, value: 1 })
       } else {
         // do nothing
       }
@@ -66,4 +87,25 @@ module.exports = function socketRoutes (socket, stateMachine) {
     socket.emit('config', stateMachine.config)
   })
 
+  socket.on('START_SEQUENCER', payload => {
+    stateMachine.start()
+    socket.emit('config', stateMachine.config)
+  })
+
+  socket.on('STOP_SEQUENCER', payload => {
+    stateMachine.stop()
+    socket.emit('config', stateMachine.config)
+  })
+
+  socket.on('PATTERN_CREATE', payload => {
+    console.log('create pattern called')
+    stateMachine.createPattern()
+    socket.emit('patterns', stateMachine.getPatterns())
+  })
+
+  socket.on('PATTERN_DELETE', payload => {
+    console.log('delete pattern called', payload)
+    stateMachine.deletePattern(payload)
+    socket.emit('patterns', stateMachine.getPatterns())
+  })
 }

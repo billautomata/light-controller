@@ -1,5 +1,6 @@
 const fs = require('fs')
 const { v4: uuid } = require('uuid')
+const gpio = require('./gpio.js')
 
 module.exports = function createStateMachine() {
   let sockets = {}
@@ -8,7 +9,7 @@ module.exports = function createStateMachine() {
   let pulseTimeout = {}
 
   const sequencer = {
-    currentStep: 0,
+    currentStep: -1,
     currentSpeed: 300,
     nextActionTime: 0
   }
@@ -16,40 +17,91 @@ module.exports = function createStateMachine() {
   const fileData = JSON.parse(fs.readFileSync('./stateMachineData.json'))
 
   let config = fileData.config
+  config.isPlaying = false
   let patterns = fileData.patterns
   let songs = fileData.songs
   let playlists = fileData.playlists
+  const pins = gpio()
 
   loadPattern(config.activePatternId)
   init()
 
+  function createPattern () {
+    const defaultPattern = {
+      name: 'New Pattern (' + patterns.length + ')',
+      id: uuid(),
+      patternLength: 16,
+      channels: [
+        { id: 'time-channel', name: 'time-channel', steps: [{idx:0, value: 500}]},        
+      ].concat(new Array(7).fill(0).map((o,i)=>{
+        return {
+          id: 'channel-'+i,
+          name: 'Channel '+i,
+          steps: []
+        }
+      }))
+    }
+    patterns.push(defaultPattern)
+    console.log('patterns length', patterns.length)
+    saveToDisk()
+  }
+
+  function deletePattern (id) {
+    patterns = patterns.filter(o=>o.id !== id)
+    saveToDisk()
+  }
+
+  function getPatterns () {
+    return patterns
+  }
+
   function tick () {
     clearTimeout(pulseTimeout)
 
-    if(Date.now() > nextActionTime) {
+    if(Date.now() > sequencer.nextActionTime) {
       // do the action
       // set the next action time
       process()
     }
 
-    if(isPlaying) {
+    if(config.isPlaying) {
       pulseTimeout = setTimeout(tick, 0)
     }    
   }
 
   function start () {
+    console.log('starting sequencer')
     config.isPlaying = true
     tick()
   }
   function stop () {
+    sequencer.currentStep = -1
+    Object.values(sockets).forEach(socket=>{
+      if(socket === null) {
+        return
+      }
+      socket.emit('set-step', { value: sequencer.currentStep })      
+    })
     config.isPlaying = false
     clearTimeout(pulseTimeout)
   }
 
   function process () {
     // step
-    currentStep += 1
-    currentStep %= activePattern.patternLength
+    sequencer.currentStep += 1
+    sequencer.currentStep = sequencer.currentStep % config.activePattern.patternLength
+
+    const timeValue = config.activePattern.channels[0].steps.filter(o=>o.idx === sequencer.currentStep)[0]
+    if(timeValue === undefined) {
+      // do nothing
+    } else {
+      sequencer.currentSpeed = timeValue.value
+      // console.log(sequencer.currentSpeed, '\n',Date.now())
+    }
+
+    sequencer.nextActionTime = Date.now() + sequencer.currentSpeed
+
+    console.log('current step',sequencer.currentStep)
 
     // emit
     // current step
@@ -57,11 +109,12 @@ module.exports = function createStateMachine() {
       if(socket === null) {
         return
       }
-      socket.emit('CURRENT_STEP', { value: currentStep })      
+      socket.emit('set-step', { value: sequencer.currentStep })      
     })
 
     // set pins
     //
+    pins.doPins(config.activePattern, sequencer.currentStep)
   }
 
   function getPattern (id) {
@@ -74,6 +127,9 @@ module.exports = function createStateMachine() {
 
   function loadPattern (id) {
     // loads a pattern into the active pattern
+    sequencer.currentStep = -1
+    sequencer.currentSpeed = 500
+
     config.activePatternId = id
     config.activePattern = JSON.parse(JSON.stringify(patterns.filter(o=>o.id===config.activePatternId)[0]))
   }
@@ -89,6 +145,11 @@ module.exports = function createStateMachine() {
   function init () {
     nextActionTime = Date.now()    
     currentStep = -1    
+    pins.init()
+  }
+
+  function saveToDisk () {
+    fs.writeFileSync('./stateMachineData.json', JSON.stringify({ config, patterns, songs, playlists },null,2))
   }
 
   return {
@@ -96,149 +157,16 @@ module.exports = function createStateMachine() {
     patterns,
     songs,
     playlists,
+    createPattern,
+    deletePattern,
     getPattern,
+    getPatterns,
     getPatternIndex,
     loadPattern,
     registerSockets,
+    start,
+    stop,
+    saveToDisk,
     onConnect
   }
 }
-
-
-
-const patterns = [
-  { 
-    id: '0',
-    name: 'Basic Pattern',
-    patternLength: 10,
-    patternStart: 0,
-    patternEnd: 10,
-    channels: [
-      { 
-        id: 'TIME_CHANNEL',
-        name: 'TIME_CHANNEL', 
-        steps: [
-          { value: 500 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: 50 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 }
-        ]
-      },
-      { 
-        id: 0,
-        name: 'Center Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 }
-        ]
-      },
-      { 
-        id: 1,
-        name: '2nd Floor Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 }
-        ]
-      }      
-    ]
-  },
-  { 
-    id: '4',
-    name: 'Longer Pattern',
-    patternLength: 20,
-    patternStart: 0,
-    patternEnd: 20,
-    channels: [
-      { 
-        id: 'TIME_CHANNEL',
-        name: 'TIME_CHANNEL', 
-        steps: [
-          { value: 500 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: 50 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 },
-          { value: -1 }
-        ]
-      },
-      { 
-        id: 0,
-        name: 'Center Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },          
-        ]
-      },
-      { 
-        id: 1,
-        name: '2nd Floor Tree', 
-        steps: [
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 },
-          { value: 1 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 0 },
-          { value: 1 }, 
-        ]
-      }      
-    ]
-  }  
-]

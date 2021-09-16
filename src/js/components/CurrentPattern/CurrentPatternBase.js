@@ -23,7 +23,7 @@ function CurrentPattern ({ }) {
         <Time/>
         <Channels/>            
       </Grid>
-      <Grid container item xs={2} alignItems='flex-start' style={{border:'1px solid #AAA'}}>
+      <Grid container item xs={2}>
         <LoadPatterns/>
       </Grid>
     </Grid>

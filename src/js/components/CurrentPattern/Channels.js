@@ -27,15 +27,15 @@ function Time ({ channels, pattern, setStepValue }) {
           return (
             <Grid container item xs={12} style={{outline: '0px solid red'}}>
               <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-                <Grid item alignItems='center' xs={12}>
+                <Grid item align='center' xs={12}>
                   <Typography variant='body2'>Channel {channelIdx}</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={11}>
-                <svg viewBox={`0 0 1001 ${boxHeight}`}
+                <svg viewBox={`-1 0 1001 ${boxHeight}`}
                 style={{
                   backgroundColor: '#DDD', 
-                  width: '99%', 
+                  width: '100%', 
                   margin: 'auto',
                 }}>
                   {
@@ -43,7 +43,7 @@ function Time ({ channels, pattern, setStepValue }) {
                       const value = channel.steps.filter(o=>{return o.idx === idx})[0] !== undefined
                       return (
                         <g key={`sequenceValues_${idx}`} transform={`translate(${idx*boxSize} 0)`}>
-                          <rect x='1' y='1' 
+                          <rect x='0' y='1' 
                             width={boxSize-1} height={Math.min(24, boxHeight-2)} 
                             fill={ value ? 'steelblue' : '#FFF' }
                             style={{

@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "restify": "^8.5.1",
+    "rpi-gpio": "^2.1.7",
     "socket.io": "^4.2.0",
     "uuid": "^3.4.0"
   }

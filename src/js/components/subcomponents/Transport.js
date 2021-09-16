@@ -1,19 +1,37 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Grid } from '@material-ui/core'
+import { startSequencer, stopSequencer } from '../../actions/index'
 
-export default function Transport (props) {
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isPlaying: state.config.isPlaying
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    startSequencer: payload => dispatch(startSequencer(payload)),
+    stopSequencer: payload => dispatch(stopSequencer(payload))
+  }
+}
+
+
+function Transport (props) {
   return (
     <Grid container item xs={12} spacing={1} justifyContent='center' alignItems='center' style={{fontSize: 32, color: 'steelblue'}}>
-      <Grid className='transport-button' item style={{ 
-          borderBottom: '4px solid steelblue', 
-          // background: '#EEE'
-          // background: 'linear-gradient(#FFF, #FFF 80%, steelblue)' 
-        }}>
+      <Grid className='transport-button' item 
+        style={{ borderBottom: props.isPlaying ? '4px solid steelblue' : '4px solid transparent' }}
+        onClick={()=>{ props.startSequencer() }}
+      >
         <svg width='18' height='18' style={{ border: '0px solid black' }}>
           <polygon fill='steelblue' points='0 0 18 9 0 18'/>            
         </svg>
       </Grid>
-      <Grid className='transport-button' item style={{borderBottom: '4px solid transparent'}}>
+      <Grid className='transport-button' item 
+        style={{borderBottom: '4px solid transparent'}}
+        onClick={()=>{ props.stopSequencer() }}
+      >      
         <svg width='18' height='18' style={{ border: '0px solid black' }}>
           <polygon fill='steelblue' points='0 0 18 0 18 18 0 18'/>
         </svg>
@@ -31,3 +49,6 @@ export default function Transport (props) {
     </Grid>    
   )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Transport)
+

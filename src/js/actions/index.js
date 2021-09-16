@@ -1,6 +1,10 @@
 import {
   INITIALIZE_DATA,
+  COPY_PATTERN,
+  CREATE_PATTERN,
+  DELETE_PATTERN,
   LOAD_PATTERN,
+  PATTERN_CLEAR,
   SAVE_EDITS,
   SAVE_PATTERN,
   SET_CONFIG,
@@ -12,15 +16,34 @@ import {
   SET_PATTERN_NAME,
   SET_STEP,
   SET_STEP_VALUE,  
-  SET_TIME_VALUE
+  SET_TIME_VALUE,
+  SET_TIME_VALUE_TEMPORARY,
+  START_SEQUENCER,
+  STOP_SEQUENCER
 } from '../constants/action-types'
 
 export function initializeData (payload) {
   return { type: INITIALIZE_DATA, payload }
 }
 
+export function createPattern (payload) {
+  return { type: CREATE_PATTERN, payload }
+}
+
+export function copyPattern (payload) {
+  return { type: COPY_PATTERN, payload }
+}
+
+export function deletePattern (payload) {
+  return { type: DELETE_PATTERN, payload }
+}
+
 export function loadPattern (payload) {
   return { type: LOAD_PATTERN, payload }
+}
+
+export function patternClear (payload) {
+  return { type: PATTERN_CLEAR, payload }
 }
 
 export function saveEdits (payload) {
@@ -69,4 +92,16 @@ export function setStepValue (payload) {
 
 export function setTimeValue (payload) {
   return { type: SET_TIME_VALUE, payload }
+}
+
+export function setTimeValueTemporary (payload) {
+  return { type: SET_TIME_VALUE_TEMPORARY, payload }
+}
+
+export function startSequencer (payload) {
+  return { type: START_SEQUENCER, payload }
+}
+
+export function stopSequencer (payload) {
+  return { type: STOP_SEQUENCER, payload }
 }

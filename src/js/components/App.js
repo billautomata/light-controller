@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@material-ui/core'
-import { initializeData, setConfig, setPatterns } from '../actions/index'
+import { initializeData, setConfig, setStep, setPatterns } from '../actions/index'
 import { connect } from "react-redux"
 import CurrentPattern from './CurrentPattern/CurrentPatternBase'
 import { Grid, Paper } from '@material-ui/core'
@@ -20,7 +20,8 @@ function mapDispatchToProps(dispatch) {
   return {
     initializeData: payload => dispatch(initializeData(payload)),
     setConfig: payload => dispatch(setConfig(payload)),
-    setPatterns: payload => dispatch(setPatterns(payload))
+    setPatterns: payload => dispatch(setPatterns(payload)),
+    setStep: payload => dispatch(setStep(payload))
   }
 }
 
@@ -28,10 +29,10 @@ const sectionStyle = {
   marginBottom: 8, 
   paddingTop: 8, 
   paddingBottom: 16, 
-  borderBottom: '1px solid #AAA' 
+  borderBottom: '1px solid #FFF' 
 }
 
-const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig }) {
+const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setStep }) {
 
   if(window.socket === undefined) {
     window.socket = io.connect("/")
@@ -39,10 +40,12 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
       console.log('connect')
     })
     window.socket.onAny((name, value)=>{      
-      console.log('event:', name, 'value:', value)
+      // console.log('event:', name, 'value:', value)
       switch(name) {
         case 'config':
           return setConfig({ value })
+        case 'set-step':
+          return setStep({ value: value})
         case 'patterns':
           return setPatterns({ value })
         case 'state-machine':
@@ -52,6 +55,7 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
       }
     })
     console.log(window.socket)
+    console.log = ()=>{}
   }
 
   return (
@@ -62,14 +66,14 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
           <Grid container justifyContent='center'>
             <Grid container item xs={12}>
               <Grid item xs={12}>        
-                <Paper square outlined elevation={0} style={sectionStyle}>
+                <Paper square elevation={0} style={sectionStyle}>
                   {/* <LayoutBase/> */}
                 </Paper>
               </Grid>
-              <Paper square outlined elevation={0} style={sectionStyle}>              
+              <Paper square elevation={0} style={sectionStyle}>              
                 <CurrentPattern/>    
               </Paper>              
-              <Paper square outlined elevation={0} style={sectionStyle}>              
+              <Paper square elevation={0} style={sectionStyle}>              
                 {/* <SongMode/> */}
               </Paper>                
             </Grid>

@@ -1,9 +1,9 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme as materialTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 
 export default function createTheme () {
-  return createMuiTheme({
+  return materialTheme({
     palette: {
       primary: {
         main: '#4682B4',
@@ -16,6 +16,13 @@ export default function createTheme () {
       body2: {
         fontSize: '12px'
       }
-    }    
+    },
+    overrides: {
+      MuiButton: {
+        root: {
+          borderRadius: '24px'
+        }
+      }
+    }
   })
 }

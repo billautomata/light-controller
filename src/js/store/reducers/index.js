@@ -1,6 +1,10 @@
 import {
   INITIALIZE_DATA,
+  CREATE_PATTERN,
+  COPY_PATTERN,
+  DELETE_PATTERN,
   LOAD_PATTERN,
+  PATTERN_CLEAR,
   SAVE_EDITS,
   SAVE_PATTERN,
   SET_CONFIG,
@@ -13,15 +17,20 @@ import {
   SET_STEP,
   SET_STEP_VALUE,
   SET_TIME_VALUE,
+  SET_TIME_VALUE_TEMPORARY,
+  START_SEQUENCER,
+  STOP_SEQUENCER
 } from '../../constants/action-types'
 
 const initialState = {  
   config: {},
+  currentStep: 10,
   dataLoaded: false,
   uiState: {
     editMode: true,
     nSteps: -1,
-    name: ''
+    name: '',
+    confirmedTimeSteps: []
   },
   patterns: [],
   songs: [],
@@ -43,12 +52,26 @@ function rootReducer(state = initialState, action) {
           uiState: {
             editMode: true,
             nSteps: action.payload.value.config.activePattern.patternLength,
-            name: action.payload.value.config.activePattern.name
+            name: action.payload.value.config.activePattern.name,
+            confirmedTimeSteps: action.payload.value.config.activePattern.channels[0].steps.map(o=>{return { idx: o.idx }})
           }
         })
+    
+    case CREATE_PATTERN:
+      console.log('REDUCER - '+CREATE_PATTERN)
+      window.socket.emit('PATTERN_CREATE', action.payload)
+      return state
+    case DELETE_PATTERN:
+      console.log('REDUCER -'+DELETE_PATTERN)
+      window.socket.emit('PATTERN_DELETE', action.payload)
+      return state
     case LOAD_PATTERN:
       console.log('REDUCER - '+LOAD_PATTERN, action.payload)
       window.socket.emit('CONFIG_LOAD_PATTERN', action.payload)
+      return state
+    case PATTERN_CLEAR:
+      console.log('REDUCER = '+PATTERN_CLEAR)
+      window.socket.emit('PATTERN_CLEAR', action.payload)
       return state
     case SAVE_EDITS:
       console.log('REDUCER - '+SAVE_EDITS, action.payload)
@@ -68,14 +91,18 @@ function rootReducer(state = initialState, action) {
         state.uiState, 
         { 
           name: action.payload.value.activePattern.name ,
-          nSteps: action.payload.value.activePattern.patternLength
+          nSteps: action.payload.value.activePattern.patternLength,
+          confirmedTimeSteps: action.payload.value.activePattern.channels[0].steps.map(o=>{ return { idx: o.idx }})
         }
       )
-      return Object.assign({}, state, { config: action.payload.value, uiState: state.uiState })
-    // case SET_CURRENT_STEP:
-    //   console.log('setting current step', action.payload)
-    //   window.socket.emit('SET_CURRENT_STEP', action.payload)      
-    //   return state  
+      return Object.assign({}, state, { config: action.payload.value, uiState: state.uiState })    
+    case COPY_PATTERN:
+      window.socket.emit('PATTERN_COPY', action.payload)
+      return state
+    case SET_CURRENT_STEP:
+      console.log('setting current step', action.payload)
+      window.socket.emit('SET_CURRENT_STEP', action.payload)      
+      return state  
     case SET_EDIT_MODE:
       console.log('setting edit mode')
       return Object.assign({}, state, { editMode: action.payload.value })
@@ -90,18 +117,38 @@ function rootReducer(state = initialState, action) {
       return Object.assign({}, state, { uiState: state.uiState })
     case SET_PATTERNS:
       console.log('REDUCER - '+SET_PATTERNS, action.payload)
-      state.patterns = Object.assign([], state.patterns, action.payload.value )
+      state.patterns = Object.assign([], [], action.payload.value )
       console.log('patterns', state.patterns)
       return Object.assign({}, state, { patterns: state.patterns })
-    // case SET_STEP:
-    //   return Object.assign({}, state, { currentStep: action.payload.value })
+    case SET_STEP:
+      console.log('REDUCER - '+SET_STEP, action.payload)
+      return Object.assign({}, state, { currentStep: action.payload.value.value })
     case SET_STEP_VALUE: 
       console.log('REDUCER - '+SET_STEP_VALUE, action.payload)
       window.socket.emit('PATTERN_SET_VALUE_STEP', action.payload )
       return state
+    case SET_TIME_VALUE_TEMPORARY:
+      // remove the payload from the confirmedTimeSteps
+      state.uiState.confirmedTimeSteps = state.uiState.confirmedTimeSteps.filter(o=>o.idx !== action.payload.step)
+      state.uiState = Object.assign({}, state.uiState, { uiState: state.uiState })      
+      return Object.assign({}, state, state)
     case SET_TIME_VALUE:
+      if (action.payload.value === 0) {
+        state.uiState.confirmedTimeSteps = state.uiState.confirmedTimeSteps.filter(o=>o.idx !== action.payload.step)  
+      } else {
+        state.uiState.confirmedTimeSteps.push({idx: action.payload.step})
+      }
+      state.uiState = Object.assign({}, state.uiState, { uiState: state.uiState })      
       console.log('setting time value', action.payload)
       window.socket.emit('PATTERN_SET_VALUE_TIME', action.payload)      
+      return Object.assign({}, state, state)
+    case START_SEQUENCER:
+      console.log('REDUCER - '+START_SEQUENCER) 
+      window.socket.emit('START_SEQUENCER', action.paylaod)
+      return state
+    case STOP_SEQUENCER:
+      console.log('REDUCER - '+START_SEQUENCER) 
+      window.socket.emit('STOP_SEQUENCER', action.paylaod)
       return state
     default:      
       return state

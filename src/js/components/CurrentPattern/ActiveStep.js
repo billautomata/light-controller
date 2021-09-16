@@ -28,10 +28,10 @@ function ActiveStep ({ currentStep, patternLength, setCurrentStep }) {
           </Grid>
         </Grid>
         <Grid item xs={11}>
-          <svg viewBox={`-1 0 1003 25`}
+          <svg viewBox={`-1 0 1001 25`}
                 style={{
                   backgroundColor: '#FFF', 
-                  width: '99%', 
+                  width: '100%', 
                   margin: 'auto',
                   marginTop: 10,
                   marginBottom: 0
@@ -40,10 +40,11 @@ function ActiveStep ({ currentStep, patternLength, setCurrentStep }) {
                 new Array(patternLength).fill(0).map((o, index) => {
                   return (
                     <g key={`stepIndicator_${index}`} 
-                      transform={`translate(${(boxSize*index)+1} 2)`}
+                      transform={`translate(${(boxSize*index)} 0)`}
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
-                      <rect x='0' y='0' width={boxSize-2} height={24} fill={ currentStep === index ? 'steelblue' : '#EEE' }/>
+                      <rect x='1' y='0' width={boxSize-1} height={25} 
+                        fill={ currentStep === index ? 'steelblue' : '#CCC' }/>
                     </g>
                   )
                 })
