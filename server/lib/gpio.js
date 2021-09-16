@@ -46,7 +46,7 @@ function _gpio () {
       const valueIndex = channel.steps.findIndex(o=>o.idx === step)
       gpio.write(
         pin, 
-        valueIndex === undefined ? false : true,
+        valueIndex === undefined ? 0 : 1,
         err=>{
           if(err) {
             console.log(`error writing to channel ${channelIdx} which is pin ${pin}`)
