@@ -26,7 +26,7 @@ function _gpio () {
         }
         if(pinStats.filter(o=>o.doneSetup).length === pinStats.length) {
           console.log('pins done being setup')
-          console.log('errors on '+pinStats.filter(o=>o.doneSetup).length+' pins')
+          console.log('errors on '+pinStats.filter(o=>o.error).length+' pins')
           console.log(pinStats.map(pin=>{ return `channel ${pinIdx} - pin ${pin.pinNumber} - error? ${pin.error}` }).join('\n'))
           setupComplete = true
         }
