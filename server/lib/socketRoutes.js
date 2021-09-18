@@ -78,6 +78,20 @@ module.exports = function socketRoutes (socket, stateMachine) {
 
   socket.on('CONFIG_LOAD_PATTERN', payload => {
     console.log('payload', payload)
+    switch (payload.mode) {
+      case 'pattern':
+        stateMachine.loadPattern(payload.id)
+        break;
+      case 'song': 
+        stateMachine.loadSong(payload.id)
+        break;
+      case 'playlist':
+        break;
+      default:
+        break;
+    }
+    socket.emit('config', stateMachine.config)
+    return
     const matchingPattern = stateMachine.patterns.filter(o=>o.id === payload.id)    
     console.log('matching pattern')
     console.log(matchingPattern)
@@ -99,14 +113,45 @@ module.exports = function socketRoutes (socket, stateMachine) {
   })
 
   socket.on('PATTERN_CREATE', payload => {
-    console.log('create pattern called')
-    stateMachine.createPattern()
-    socket.emit('patterns', stateMachine.getPatterns())
+    console.log('create pattern called', payload)
+    switch (payload.mode) {
+      case 'pattern':
+        stateMachine.createPattern()
+        socket.emit('patterns', stateMachine.getPatterns())
+        break;
+      case 'song': 
+        stateMachine.createSong()
+        socket.emit('songs', stateMachine.getSongs())
+        break;
+      case 'playlist':
+        stateMachine.createPlaylist()
+        socket.emit('playlists', stateMachine.getPlaylists())
+        break;
+      default:
+        break;
+    }    
+    return
+    
+    
   })
 
   socket.on('PATTERN_DELETE', payload => {
-    console.log('delete pattern called', payload)
-    stateMachine.deletePattern(payload)
-    socket.emit('patterns', stateMachine.getPatterns())
+    console.log('delete called', payload)    
+    switch (payload.mode) {
+      case 'pattern':
+        stateMachine.deletePattern(payload.id)
+        socket.emit('patterns', stateMachine.getPatterns())
+        break;
+      case 'song': 
+        stateMachine.deleteSong(payload.id)
+        socket.emit('songs', stateMachine.getSongs())
+        break;
+      case 'playlist':
+        // stateMachine.createPlaylist()
+        socket.emit('playlists', stateMachine.getPlaylists())
+        break;
+      default:
+        break;
+    }        
   })
 }

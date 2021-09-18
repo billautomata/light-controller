@@ -3,6 +3,7 @@ import {
   COPY_PATTERN,
   CREATE_PATTERN,
   DELETE_PATTERN,
+  DELETE_SONG,
   LOAD_PATTERN,
   PATTERN_CLEAR,
   SAVE_EDITS,
@@ -16,6 +17,7 @@ import {
   SET_PATTERN_NAME,
   SET_STEP,
   SET_STEP_VALUE,  
+  SET_SONGS,
   SET_TIME_VALUE,
   SET_TIME_VALUE_TEMPORARY,
   START_SEQUENCER,
@@ -36,6 +38,10 @@ export function copyPattern (payload) {
 
 export function deletePattern (payload) {
   return { type: DELETE_PATTERN, payload }
+}
+
+export function deleteSong (payload) {
+  return { type: DELETE_SONG, payload }
 }
 
 export function loadPattern (payload) {
@@ -84,6 +90,10 @@ export function setPatterns (payload) {
 
 export function setPatternName (payload) {
   return {  type: SET_PATTERN_NAME, payload }
+}
+
+export function setSongs (payload) {
+  return { type: SET_SONGS, payload }
 }
 
 export function setStepValue (payload) {

@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const lines = fs.readFileSync('./file.dat', 'utf-8').split('\n')
-console.log(lines.length)
+console.log('High res fft file length', lines.length)
 
 const nChannels = 2048
 
@@ -46,20 +46,21 @@ function reduce (channels) {
   while(currentLine < endLine) {
     let sum = 0
     for(let i = 0; i < reduction; i++) {
-      sum += Number(lines[currentLine].split(' ')[2])
+      const v = Number(lines[currentLine].split(' ')[2])
+      // console.log(v)
+      sum += v
       currentLine += 1
     }
-    sum /= reduction
+    // console.log('sum before', sum)
+    sum = sum / reduction
+    // console.log('sum after', sum)
     newChannels[currentChannel].push(sum)
     currentChannel += 1
     currentChannel = currentChannel % nChannels
-
   }
 
-  console.log('new channels', newChannels[0].join(' '))
+  // console.log('new channels', newChannels[0].join(' '))
   console.log('length', newChannels[0].length)
-  console.log('length seconds per sample', 465.293 / newChannels[0].length)
-
+  console.log('length seconds per sample', 465.293061 / newChannels[0].length)
   fs.writeFileSync('./reducedData.json', JSON.stringify(newChannels))
-
 }

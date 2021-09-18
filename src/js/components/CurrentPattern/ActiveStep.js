@@ -2,8 +2,6 @@ import { connect } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
 import { setCurrentStep } from '../../actions/index'
 
-// const boxSize = 50
-
 const mapStateToProps = (state, ownProps) => {
   return {
     currentStep: state.currentStep,

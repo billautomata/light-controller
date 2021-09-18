@@ -2,6 +2,7 @@
 
 /server/node_modules
 /server/file.dat
+file.dat
 
 # dependencies
 /node_modules

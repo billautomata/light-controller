@@ -6,43 +6,54 @@ import Transport from '../subcomponents/Transport'
 const mapStateToProps = (state, ownProps) => {
   // console.log('state', state)
   return {
-    patternName: state.patterns[state.currentPattern].name,
-    numberOfSteps: Number(state.patterns[state.currentPattern].patternLength),
-    numberOfChannels: state.patterns[state.currentPattern].channels.length - 1
+    name: state.config.activeSong.name,
+    editMode: state.uiState.editModeSong
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setNumberOfChannels: payload => dispatch(setNumberOfChannels(payload)),
-    setNumberOfSteps: payload => dispatch(setNumberOfSteps(payload))
   }
 }
 
-function PatternName ({ numberOfChannels, numberOfSteps, patternName, setNumberOfChannels, setNumberOfSteps }) {
-  let nChannels = numberOfChannels
-  let nSteps = numberOfSteps
+function PatternName ({ editMode, name }) {
   return (
-    <Grid container item xs={12} alignItems='center'>
+    <Grid container item xs={12} alignItems='center' spacing={1}>
       <Grid item xs={1} align='center'>
         <Typography variant='body2'>Name</Typography>        
       </Grid>
-      <Grid item xs={5}>
-        <Typography variant='h3'>Simple Song
-        </Typography>                
+      <Grid container item xs={3} justifyContent='flex-start'>
+        <Grid item>
+          {
+          editMode ? 
+          <>
+            <TextField defaultValue={name} style={{width: 280}}/>
+          </> :
+          <><Typography variant='h6'>{name}</Typography></>
+          }
+        </Grid>
       </Grid>
-      <Transport mode='song'/>
-      <Grid container item xs={2}/>
-      <Grid container item xs={3} justifyContent='center' spacing={1}>  
+      <Grid item xs={2} align='center'>
+        {
+          editMode ? 
+          <>
+            <Grid container xs={12} justifyContent='space-around'>
+              <Grid item><Button variant='contained' color='primary' size='small'>Done</Button></Grid>
+              <Grid item><Button size='small'>&#10005;</Button></Grid>
+            </Grid>
+          </> :
+          <>
+            <Button variant='outlined' size='small'>Edit</Button>
+          </>
+        }        
+      </Grid>    
+      <Grid item xs={4} justifyConent='center'>
+        <Transport mode='song'/>
+      </Grid>      
+      <Grid container item xs={2} justifyContent='flex-end' spacing={1}>  
         <Grid item>
           <Button variant='contained' color='primary' size='medium'>Save</Button>
         </Grid>        
-        <Grid item>
-          <Button variant='contained' color='default' size='medium'>Clear</Button>
-        </Grid>
-        <Grid item>
-          <Button variant='outlined' color='default' size='medium'>Edit</Button>
-        </Grid>
       </Grid>      
     </Grid>
   )

@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     numberOfChannels: state.config.activePattern.channels.length -1,
     numberOfSteps: state.config.activePattern.patternLength,    
     patternName: state.config.activePattern.name,
-    editMode: state.editMode,
+    editMode: state.uiState.editModePattern,
     showSave: JSON.stringify(state.config.activePattern) !== JSON.stringify(state.patterns[activePatternIdx])
   }
 }

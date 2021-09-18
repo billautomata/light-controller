@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import * as d3 from 'd3'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import SectionHeader from '../subcomponents/SectionHeader'
-import SongName from './SongName'
+import SongName from './PlaylistName'
 import LoadPatterns from '../LoadPatterns'
 
 // const song = []
@@ -41,7 +41,7 @@ function SongModeBase ({ patterns, song }) {
     .range([0, 100])
 
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={12} justifyContent='flex-start'>
       {/* <SectionHeader title={'Configure Song'}/> */}
       <Grid container item xs={10}>
         <SongName/>
@@ -106,24 +106,7 @@ function SongModeBase ({ patterns, song }) {
                         </svg>
                       </Grid>
                       {/* <Grid itme xs={1}>{idx}</Grid> */}
-                      <Grid item xs={10} md={5} align='left'>
-                        {
-                          indexesEditActive.indexOf(idx) === -1 ? 
-                          <>o.name</> :
-                          <>
-                            <select style={{width: '100%'}}>
-                              {
-                                patterns.map(pattern=>{
-                                  return (
-                                    <option>{pattern.name}</option>
-                                  )
-                                })
-                              }
-                            </select>
-                          </>
-                        
-                        }
-                      </Grid>
+                      <Grid item xs={10} md={5} align='left'>{o.name}</Grid>
                       <Grid container item xs={3} md={3} lg={4} alignItems='center'>
                         <Grid item xs={3}>{o.patternLength}</Grid>
                         <Grid item xs={3} align='center'>
@@ -210,7 +193,7 @@ function SongModeBase ({ patterns, song }) {
         </Grid>        
       </Grid>
       <Grid container item xs={2} alignItems='flex-start' spacing={2}>
-        <LoadPatterns mode='song'/>
+        <LoadPatterns mode='playlist'/>
       </Grid>
     </Grid>
   )

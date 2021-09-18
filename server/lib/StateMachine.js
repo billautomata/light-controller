@@ -24,6 +24,8 @@ module.exports = function createStateMachine() {
   const pins = gpio()
 
   loadPattern(config.activePatternId)
+  loadSong(config.activeSongId)
+
   init()
 
   function createPattern () {
@@ -33,7 +35,7 @@ module.exports = function createStateMachine() {
       patternLength: 16,
       channels: [
         { id: 'time-channel', name: 'time-channel', steps: [{idx:0, value: 500}]},        
-      ].concat(new Array(7).fill(0).map((o,i)=>{
+      ].concat(new Array(8).fill(0).map((o,i)=>{
         return {
           id: 'channel-'+i,
           name: 'Channel '+i,
@@ -46,15 +48,32 @@ module.exports = function createStateMachine() {
     saveToDisk()
   }
 
+  function createSong () {
+    const defaultSong = {
+      name: 'New Song (' + songs.length + ')',
+      id: uuid(),
+      steps: []
+    }
+    songs.push(defaultSong)
+    console.log('songs length', songs.length)
+    saveToDisk()
+  }  
+
   function deletePattern (id) {
     patterns = patterns.filter(o=>o.id !== id)
     saveToDisk()
   }
 
-  function getPatterns () {
-    return patterns
+  function deleteSong(id) {
+    songs = songs.filter(o=>o.id !== id)
+    console.log('songs.length', songs.length)
+    saveToDisk()
   }
 
+  function getPatterns () { return patterns }
+  function getPlaylists () { return playlists }
+  function getSongs () { return songs }
+  
   function tick () {
 
     clearTimeout(pulseTimeout)
@@ -75,6 +94,7 @@ module.exports = function createStateMachine() {
     config.isPlaying = true
     tick()
   }
+
   function stop () {
     sequencer.currentStep = -1
     Object.values(sockets).forEach(socket=>{
@@ -117,8 +137,6 @@ module.exports = function createStateMachine() {
       socket.emit('set-step', { value: sequencer.currentStep })      
     })
 
-    
-
     // set pins
     //
     pins.doPins(config.activePattern, sequencer.currentStep)
@@ -140,6 +158,15 @@ module.exports = function createStateMachine() {
 
     config.activePatternId = id
     config.activePattern = JSON.parse(JSON.stringify(patterns.filter(o=>o.id===config.activePatternId)[0]))
+  }
+
+  function loadSong (id) {
+    console.log('loading song', id)
+    sequencer.currentStep = -1
+    sequencer.currentSpeed = 500
+
+    config.activeSongId = id
+    config.activeSong = JSON.parse(JSON.stringify(songs.filter(o=>o.id===config.activeSongId)[0]))
   }
 
   function registerSockets (_sockets) {
@@ -166,11 +193,16 @@ module.exports = function createStateMachine() {
     songs,
     playlists,
     createPattern,
+    createSong,
     deletePattern,
+    deleteSong,
     getPattern,
     getPatterns,
     getPatternIndex,
+    getPlaylists,
+    getSongs,
     loadPattern,
+    loadSong,
     registerSockets,
     start,
     stop,

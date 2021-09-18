@@ -3,6 +3,7 @@ import {
   CREATE_PATTERN,
   COPY_PATTERN,
   DELETE_PATTERN,
+  DELETE_SONG,
   LOAD_PATTERN,
   PATTERN_CLEAR,
   SAVE_EDITS,
@@ -14,6 +15,7 @@ import {
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
+  SET_SONGS,
   SET_STEP,
   SET_STEP_VALUE,
   SET_TIME_VALUE,
@@ -27,7 +29,8 @@ const initialState = {
   currentStep: 10,
   dataLoaded: false,
   uiState: {
-    editMode: true,
+    editModePattern: null,
+    editModeSong: null,
     nSteps: -1,
     name: '',
     confirmedTimeSteps: []
@@ -50,21 +53,25 @@ function rootReducer(state = initialState, action) {
           playlists: action.payload.value.playlists,
           dataLoaded: true,
           uiState: {
-            editMode: true,
+            editModePattern: false,
+            editModeSong: true,
+            editModePlaylist: true,
             nSteps: action.payload.value.config.activePattern.patternLength,
             name: action.payload.value.config.activePattern.name,
             confirmedTimeSteps: action.payload.value.config.activePattern.channels[0].steps.map(o=>{return { idx: o.idx }})
-          }
-        })
-    
+        }
+      })    
     case CREATE_PATTERN:
       console.log('REDUCER - '+CREATE_PATTERN)
       window.socket.emit('PATTERN_CREATE', action.payload)
       return state
     case DELETE_PATTERN:
-      console.log('REDUCER -'+DELETE_PATTERN)
+      console.log('REDUCER - ' + DELETE_PATTERN)
       window.socket.emit('PATTERN_DELETE', action.payload)
       return state
+    case DELETE_SONG:
+      console.log('REDUCER - ' + DELETE_SONG)
+      window.socket.emit('SONG_DELETE', action.payload)
     case LOAD_PATTERN:
       console.log('REDUCER - '+LOAD_PATTERN, action.payload)
       window.socket.emit('CONFIG_LOAD_PATTERN', action.payload)
@@ -105,7 +112,8 @@ function rootReducer(state = initialState, action) {
       return state  
     case SET_EDIT_MODE:
       console.log('setting edit mode')
-      return Object.assign({}, state, { editMode: action.payload.value })
+      const uiState = Object.assign({}, state.uiState, { editModePattern: action.payload.value })
+      return Object.assign({}, state, { uiState })
     case SET_NUMBER_OF_STEPS: 
       console.log('setting number of steps', action.payload)
       // window.socket.emit('PATTERN_SET_STEPS', action.payload)      
@@ -120,6 +128,9 @@ function rootReducer(state = initialState, action) {
       state.patterns = Object.assign([], [], action.payload.value )
       console.log('patterns', state.patterns)
       return Object.assign({}, state, { patterns: state.patterns })
+    case SET_SONGS:
+      console.log('REDUCER - '+SET_SONGS, action.payload)
+      return Object.assign({}, state, { songs: action.payload.value })
     case SET_STEP:
       console.log('REDUCER - '+SET_STEP, action.payload)
       return Object.assign({}, state, { currentStep: action.payload.value.value })
