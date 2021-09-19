@@ -1,6 +1,6 @@
 module.exports = function socketRoutes (socket, stateMachine) {
 
-  socket.on('PATTERN_SAVE_PATTERN', (payload) => {
+  socket.on('PATTERN_SAVE', (payload) => {
     console.log('saving pattern')
     let patternIndex = stateMachine.getPatternIndex(stateMachine.config.activePatternId)
     stateMachine.getPatterns()[patternIndex] = JSON.parse(JSON.stringify(stateMachine.config.activePattern))
@@ -34,6 +34,21 @@ module.exports = function socketRoutes (socket, stateMachine) {
     stateMachine.config.activePattern.name = payload.value
     socket.emit('config', stateMachine.config)
   })
+
+  socket.on('SONG_SET_NAME', (payload) => {
+    console.log('SONG_SET_NAME', payload)
+    stateMachine.config.activeSong.name = payload.value
+    socket.emit('config', stateMachine.config)
+  })
+
+  socket.on('SONG_SAVE', (payload) => {
+    console.log('saving song')
+    stateMachine.saveSong()
+    socket.emit('config', stateMachine.config)
+    socket.emit('songs', stateMachine.getSongs())
+    stateMachine.saveToDisk()
+  })
+
 
   socket.on('PATTERN_SET_VALUE_TIME', payload => {
     console.log(payload)

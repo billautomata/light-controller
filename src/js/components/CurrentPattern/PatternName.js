@@ -45,7 +45,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternClear,
               <TextField defaultValue={name} size='x-large'
                 onChange = { (event) => { 
                   name = event.target.value 
-                  setPatternName({ value: event.target.value })
+                  setPatternName({ mode: 'pattern', value: event.target.value })
                 }}
               />
             </Grid>
@@ -67,19 +67,19 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternClear,
                 }}
               />
             </Grid>
-            <Grid item xs={3} align='right'>
+            <Grid item xs={3} align='right'  style={{outline: '1px solid black'}}>
               <Button 
                 variant='contained' 
                 color='primary' 
-                size='medium' 
-                onClick={()=>{ saveEdits({}); setEditMode({value: false}) }}>
+                size='small' 
+                onClick={()=>{ saveEdits({ mode: 'pattern' }); setEditMode({mode: 'pattern', value: false}) }}>
                   Done
               </Button>
               <Button 
                 variant='default' 
                 color='default' 
-                size='medium' 
-                onClick={()=>{console.log('set edit mdoe click'); setEditMode({value: false})}}>
+                size='small' 
+                onClick={()=>{console.log('set edit mdoe click'); setEditMode({mode: 'pattern', value: false})}}>
                   &#10005;
               </Button>
             </Grid>                   
@@ -93,7 +93,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternClear,
               <Grid item xs={12}>{numberOfSteps}</Grid>
             </Grid>
             <Grid item xs={1}>
-              <Button variant='outlined' color='default' size='small' onClick={()=>{console.log('set edit mdoe click'); setEditMode({value: true})}}>Edit</Button>
+              <Button variant='outlined' color='default' size='small' onClick={()=>{console.log('set edit mdoe click'); setEditMode({mode: 'pattern', value: true})}}>Edit</Button>
             </Grid>             
           </>
         }        
@@ -113,14 +113,6 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternClear,
                 >Save</Button>
               </Grid> : <></>
             }
-            {/* <Grid item>
-              <Button variant='contained' color='default' size='medium'>Revert</Button>
-            </Grid>
-            <Grid item>
-              <Button variant='contained' color='default' size='medium'
-                onClick={()=>{patternClear({})}}
-              >Clear</Button>
-            </Grid> */}
           </>
         }  
       </Grid>    

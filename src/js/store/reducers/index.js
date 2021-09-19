@@ -8,6 +8,8 @@ import {
   PATTERN_CLEAR,
   SAVE_EDITS,
   SAVE_PATTERN,
+  SAVE_PLAYLIST,
+  SAVE_SONG,
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
@@ -33,6 +35,7 @@ const initialState = {
     editModeSong: null,
     nSteps: -1,
     name: '',
+    nameSong: '',
     confirmedTimeSteps: []
   },
   patterns: [],
@@ -54,10 +57,11 @@ function rootReducer(state = initialState, action) {
           dataLoaded: true,
           uiState: {
             editModePattern: false,
-            editModeSong: true,
+            editModeSong: false,
             editModePlaylist: true,
             nSteps: action.payload.value.config.activePattern.patternLength,
             name: action.payload.value.config.activePattern.name,
+            nameSong: action.payload.value.config.activeSong.name,
             confirmedTimeSteps: action.payload.value.config.activePattern.channels[0].steps.map(o=>{return { idx: o.idx }})
         }
       })    
@@ -82,14 +86,32 @@ function rootReducer(state = initialState, action) {
       return state
     case SAVE_EDITS:
       console.log('REDUCER - '+SAVE_EDITS, action.payload)
-      window.socket.emit('PATTERN_SET_STEPS', { value: state.uiState.nSteps })
-      window.socket.emit('PATTERN_SET_NAME', { value: state.uiState.name })
-      state.uiState.editMode = false
-      return Object.assign({}, state, { uiState: state.uiState })
+      switch (action.payload.mode) {
+        case 'pattern':
+          window.socket.emit('PATTERN_SET_STEPS', { value: state.uiState.nSteps })
+          window.socket.emit('PATTERN_SET_NAME', { value: state.uiState.name })
+          break;
+        case 'song':
+          window.socket.emit('SONG_SET_NAME', { value: state.uiState.nameSong })
+          break;
+        default: 
+          break;
+      }
+      return state
     case SAVE_PATTERN:
       console.log('REDUCER - '+SAVE_PATTERN, action.payload)
       console.log('emitting a save pattern')
-      window.socket.emit('PATTERN_SAVE_PATTERN', { value: true })
+      window.socket.emit('PATTERN_SAVE', { value: true })
+      return state
+    case SAVE_PLAYLIST:
+        console.log('REDUCER - '+SAVE_PLAYLIST, action.payload)
+        console.log('emitting a save playlist')
+        window.socket.emit('PLAYLIST_SAVE', { value: true })
+        return state      
+    case SAVE_SONG:
+      console.log('REDUCER - '+SAVE_SONG, action.payload)
+      console.log('emitting a save song')
+      window.socket.emit('SONG_SAVE', { value: true })
       return state
     case SET_CONFIG: 
       console.log('setting config in state', action.payload)
@@ -112,6 +134,14 @@ function rootReducer(state = initialState, action) {
       return state  
     case SET_EDIT_MODE:
       console.log('setting edit mode')
+      switch (action.payload.mode) {
+        case 'pattern': 
+          return Object.assign({}, state, { uiState: Object.assign({}, state.uiState, { editModePattern: action.payload.value }) })
+        case 'song': 
+          return Object.assign({}, state, { uiState: Object.assign({}, state.uiState, { editModeSong: action.payload.value }) })
+        default:
+          return state          
+      }
       const uiState = Object.assign({}, state.uiState, { editModePattern: action.payload.value })
       return Object.assign({}, state, { uiState })
     case SET_NUMBER_OF_STEPS: 
@@ -120,9 +150,17 @@ function rootReducer(state = initialState, action) {
       state.uiState.nSteps = action.payload.value
       return Object.assign({}, state, { uiState: state.uiState })
     case SET_PATTERN_NAME:
-      console.log('setting pattern name')
-      state.uiState.name = action.payload.value
-      return Object.assign({}, state, { uiState: state.uiState })
+      console.log('REDUCER - '+SET_PATTERN_NAME)
+      switch (action.payload.mode) {
+        case 'pattern':
+          state.uiState.name = action.payload.value
+          return Object.assign({}, state, { uiState: state.uiState })
+        case 'song':
+          state.uiState.nameSong = action.payload.value
+          return Object.assign({}, state, { uiState: state.uiState })    
+        default:
+          return state
+      }
     case SET_PATTERNS:
       console.log('REDUCER - '+SET_PATTERNS, action.payload)
       state.patterns = Object.assign([], [], action.payload.value )

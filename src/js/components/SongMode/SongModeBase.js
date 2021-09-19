@@ -18,7 +18,7 @@ import LoadPatterns from '../LoadPatterns'
 
 // const songName = 'Simple Song'
 function moveUp () {}
-const indexesEditActive = [0]
+const indexesEditActive = []
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -109,7 +109,7 @@ function SongModeBase ({ patterns, song }) {
                       <Grid item xs={10} md={5} align='left'>
                         {
                           indexesEditActive.indexOf(idx) === -1 ? 
-                          <>o.name</> :
+                          <>{ o.name }</> :
                           <>
                             <select style={{width: '100%'}}>
                               {

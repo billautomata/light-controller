@@ -8,6 +8,8 @@ import {
   PATTERN_CLEAR,
   SAVE_EDITS,
   SAVE_PATTERN,
+  SAVE_PLAYLIST,
+  SAVE_SONG,
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
@@ -58,6 +60,14 @@ export function saveEdits (payload) {
 
 export function savePattern (payload) {
   return { type: SAVE_PATTERN, payload }
+}
+
+export function savePlaylist (payload) {
+  return { type: SAVE_PLAYLIST, payload }
+}
+
+export function saveSong (payload) {
+  return { type: SAVE_SONG, payload }
 }
 
 export function setConfig (payload) {

@@ -187,6 +187,12 @@ module.exports = function createStateMachine() {
     fs.writeFileSync('./stateMachineData.json', JSON.stringify({ config, patterns, songs, playlists },null,2))
   }
 
+  function saveSong () {
+    console.log('saving song')
+    const songIndex = songs.findIndex(o=>o.id === config.activeSongId)
+    songs[songIndex] = JSON.parse(JSON.stringify(config.activeSong))
+  }
+
   return {
     config,
     patterns,
@@ -205,8 +211,9 @@ module.exports = function createStateMachine() {
     loadSong,
     registerSockets,
     start,
-    stop,
+    stop,    
     saveToDisk,
+    saveSong,
     onConnect
   }
 }
