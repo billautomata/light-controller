@@ -25,8 +25,8 @@ const output = {
       patternLength: 12,
       channels: [
         { name: 'time-channel', id: 'time-channel', steps: [{idx: 0, value: 500}] },        
-      ].concat(new Array(8).fill(0).map((o,n)=> {         
-        return { name: 'channel-'+n, id: n, steps: [{idx:5, value: 1}]}
+      ].concat(new Array(16).fill(0).map((n,i)=> {         
+        return { name: 'channel-'+i, id: i, steps: [{idx:5, value: 1}]}
       }))
     },
     {
@@ -35,8 +35,8 @@ const output = {
       patternLength: 32,
       channels: [
         { name: 'time-channel', id: 'time-channel', steps: [{idx: 0, value: 500}] },        
-      ].concat(new Array(8).fill(0).map(n=> {         
-        return { name: 'channel-'+n, id: n, steps: [{idx:5, value: 1}]}
+      ].concat(new Array(16).fill(0).map((n,i)=> {         
+        return { name: 'channel-'+i, id: i, steps: [{idx:5, value: 1}]}
       }))
     }    
   ],

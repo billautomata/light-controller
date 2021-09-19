@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './SongName'
+import SongVisualized from './SongVisualized'
 import LoadPatterns from '../LoadPatterns'
 import { songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue } from '../../actions'
 
@@ -28,7 +29,7 @@ function mapDispatchToProps(dispatch) {
 function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue }) {
   const songPatterns = song.steps
   const totalLength = 64
-  const [ indexesEditActive, setEditActive ] = useState([1,2])
+  const [ indexesEditActive, setEditActive ] = useState([])
 
   console.log('total length', totalLength)
 
@@ -38,46 +39,15 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
 
   return (
     <Grid container item xs={12}>
-      {/* <SectionHeader title={'Configure Song'}/> */}
       <Grid container item xs={10}>
         <SongName/>
         <Grid container item xs={12} style={{ margin: '24px 0px 18px 0px' }}>
-          <Grid item xs={1}/>
-          <Grid container item xs={10}>
-            <svg width="100%" height='38px' style={{backgroundColor:'#DDD', marginBottom: 0}}>
-              {
-                song.steps.map((pattern,idx)=>{
-                  return (
-                    <></>
-                  )
-                  const width = scaleXPattern(patterns.filter(o=>{return o.id === pattern.id})[0].patternLength * pattern.multiple)
-                  const x = d3.sum(songPatterns.filter((o,i)=>{return i < idx}), (d,i) => {  return d.patternLength * song[i].multiple })
-                  return (
-                    // <g transform={`translate(${scaleXPattern(x)}% 0)`}>
-                    <>
-                      <rect x={String(scaleXPattern(x))+'%'} y='0' height='38px' width={width+'%'}
-                        fill='steelblue'
-                        stroke='white'
-                        />
-                      <text 
-                        x={String(scaleXPattern(x)+(width*0.5))+'%'} y='19' dy='0.33em' 
-                        fill='#FFF'
-                        fontSize='14px' fontWeight='700' 
-                        textAnchor='middle'>
-                          {idx}
-                      </text>
-                    </>
-                    // </g>
-                  )              
-                })
-              }
-            </svg>
-          </Grid>
+          <SongVisualized/>
         </Grid>      
         <Grid container item xs={12} justifyContent='center'>
           <Grid container item xs={12} sm={12} md={10} justifyContent='space-around' style={{marginTop: 8}}>
-            <Grid item xs={12} style={{ fontSize: 12, fontWeight: 800, textTransform: 'uppercase', marginBottom: 2, padding: 8}}>
-              <Grid container align='center'>
+            <Grid container item xs={12} style={{ fontSize: 12, fontWeight: 800, textTransform: 'uppercase', marginBottom: 2, padding: 8}}>
+              <Grid container item align='center' style={{ display: song.steps.length === 0 ? 'none' : null }}>
                 <Grid item xs={1}>&nbsp;</Grid>
                 <Grid item xs={10} md={5} align='left'>Pattern Name</Grid>
                 <Grid container item xs={3} md={4} lg={6}>
@@ -87,6 +57,7 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
               </Grid>
             </Grid>
             {
+              song.steps.length === 0 ? <></> :
               song.steps.map((pattern,idx)=>{
                 const o = patterns.filter(o=>{return o.id === pattern.id})[0]
                 return (              

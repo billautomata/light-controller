@@ -6,7 +6,8 @@ export default function createTheme () {
   return materialTheme({
     palette: {
       primary: {
-        main: '#4682B4',
+        // main: '#4682B4',
+        main: '#1f77b4'
       },
       secondary: {
         main: green[500],

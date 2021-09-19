@@ -3,121 +3,76 @@
     "uiMode": "pattern",
     "isPlaying": false,
     "activePattern": {
-      "name": "basic pattern",
-      "id": "971017b2-32c0-461e-a97a-f691228d3db8",
-      "patternLength": 8,
+      "name": "New Pattern (2)",
+      "id": "5932e55f-f144-4b75-9aeb-f3273495d83f",
+      "patternLength": 16,
       "channels": [
         {
-          "name": "time-channel",
           "id": "time-channel",
+          "name": "time-channel",
           "steps": [
             {
               "idx": 0,
-              "value": 200
+              "value": 500
             }
           ]
         },
         {
-          "name": "channel-0",
-          "id": 0,
-          "steps": [
-            {
-              "idx": 0,
-              "value": 1
-            }
-          ]
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": []
         },
         {
-          "name": "channel-1",
-          "id": 1,
-          "steps": [
-            {
-              "idx": 1,
-              "value": 1
-            }
-          ]
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": []
         },
         {
-          "name": "channel-2",
-          "id": 2,
-          "steps": [
-            {
-              "idx": 2,
-              "value": 1
-            }
-          ]
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": []
         },
         {
-          "name": "channel-3",
-          "id": 3,
-          "steps": [
-            {
-              "idx": 3,
-              "value": 1
-            }
-          ]
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": []
         },
         {
-          "name": "channel-4",
-          "id": 4,
-          "steps": [
-            {
-              "idx": 4,
-              "value": 1
-            }
-          ]
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": []
         },
         {
-          "name": "channel-5",
-          "id": 5,
-          "steps": [
-            {
-              "idx": 5,
-              "value": 1
-            }
-          ]
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": []
         },
         {
-          "name": "channel-6",
-          "id": 6,
-          "steps": [
-            {
-              "idx": 6,
-              "value": 1
-            }
-          ]
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": []
         },
         {
-          "name": "channel-7",
-          "id": 7,
-          "steps": [
-            {
-              "idx": 7,
-              "value": 1
-            }
-          ]
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": []
         }
       ]
     },
-    "activePatternId": "971017b2-32c0-461e-a97a-f691228d3db8",
+    "activePatternId": "5932e55f-f144-4b75-9aeb-f3273495d83f",
     "activeSong": {
       "name": "jingle bells verse",
       "id": "df72b3e3-cd11-41af-b583-fbb3f4771d43",
       "steps": [
         {
-          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         },
         {
-          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
-          "repeat": 12,
-          "speed": 4
-        },
-        {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
-          "repeat": 1,
-          "speed": 2
+          "repeat": 4,
+          "speed": 1
         },
         {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
@@ -126,19 +81,71 @@
         },
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
-          "repeat": 14,
-          "speed": 4
+          "repeat": 2,
+          "speed": 1
         },
         {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
+        },
+        {
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 2,
+          "speed": 1
+        }
+      ],
+      "songPattern": [
+        {
+          "msLength": 1600,
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 1600,
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 1600,
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         }
       ]
     },
     "activeSongId": "df72b3e3-cd11-41af-b583-fbb3f4771d43",
     "activePlaylist": {},
-    "activePlaylistId": "eebd0669-6842-480d-8b03-06ab12ed0a69"
+    "activePlaylistId": "eebd0669-6842-480d-8b03-06ab12ed0a69",
+    "playingMode": "pattern"
   },
   "patterns": [
     {
@@ -241,7 +248,7 @@
     {
       "name": "longer pattern",
       "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
-      "patternLength": 32,
+      "patternLength": 16,
       "channels": [
         {
           "name": "time-channel",
@@ -342,19 +349,14 @@
       "id": "df72b3e3-cd11-41af-b583-fbb3f4771d43",
       "steps": [
         {
-          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         },
         {
-          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
-          "repeat": 12,
-          "speed": 4
-        },
-        {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
-          "repeat": 1,
-          "speed": 2
+          "repeat": 4,
+          "speed": 1
         },
         {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
@@ -363,18 +365,69 @@
         },
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
-          "repeat": 14,
-          "speed": 4
+          "repeat": 2,
+          "speed": 1
         },
         {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
+        },
+        {
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 2,
+          "speed": 1
+        }
+      ],
+      "songPattern": [
+        {
+          "msLength": 1600,
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 1600,
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 1600,
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 8000,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         }
       ]
     },
     {
-      "name": "other song",
+      "name": "jingle bells chorus",
       "id": "840dac66-0d37-4d3b-baf9-b5b4a115937a",
       "steps": [
         {
@@ -383,7 +436,17 @@
           "speed": 1
         },
         {
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 4,
+          "speed": 4
+        },
+        {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
           "repeat": 1,
           "speed": 1
         }

@@ -18,6 +18,7 @@ module.exports = function createStateMachine() {
 
   let config = fileData.config
   config.isPlaying = false
+  config.activeSong.songPattern = []
   let patterns = fileData.patterns
   let songs = fileData.songs
   let playlists = fileData.playlists
@@ -104,6 +105,7 @@ module.exports = function createStateMachine() {
 
     config.activeSongId = id
     config.activeSong = JSON.parse(JSON.stringify(songs.filter(o=>o.id===config.activeSongId)[0]))
+    songFillSteps()
   }
 
   function onConnect(socketId) {
@@ -144,27 +146,13 @@ module.exports = function createStateMachine() {
     //
     pins.doPins(config.activePattern, sequencer.currentStep)
   }
-  
-  function tick () {
-
-    clearTimeout(pulseTimeout)
-
-    if(Date.now() > sequencer.nextActionTime) {
-      // do the action
-      // set the next action time
-      process()
-    }
-
-    if(config.isPlaying) {
-      pulseTimeout = setTimeout(tick, 0)
-    }    
-  }
 
   function registerSockets (_sockets) {
     sockets = _sockets
   }
 
   function saveToDisk () {
+    songFillSteps()
     fs.writeFileSync('./stateMachineData.json', JSON.stringify({ config, patterns, songs, playlists },null,2))
   }
 
@@ -176,6 +164,33 @@ module.exports = function createStateMachine() {
 
   function songAddStep (payload) {
     console.log('song add step', payload)
+  }
+
+  function songFillSteps () {
+    const songPattern = []
+
+    config.activeSong.steps.forEach(step=>{
+      const pattern = patterns.filter(o=>o.id === step.id)[0]      
+      let sum_ms = 0
+      let currentSpeed = 0
+
+      for(let i = 0; i < pattern.patternLength; i++) {
+        const timeForThisStepIdx = pattern.channels[0].steps.findIndex(o=>Number(o.idx)===Number(i))
+        if (timeForThisStepIdx !== -1) {
+          currentSpeed = pattern.channels[0].steps[timeForThisStepIdx].value
+        }
+        sum_ms += currentSpeed
+      }
+      console.log('sum_ms', sum_ms)
+
+      for(let i = 0; i < step.repeat; i++) {
+        songPattern.push({
+          msLength: sum_ms,
+          id: pattern.id,          
+        })
+      }
+    })
+    config.activeSong.songPattern = songPattern
   }
 
   function songChangeStepOrder (payload) {
@@ -191,15 +206,17 @@ module.exports = function createStateMachine() {
     config.activeSong.steps[Number(payload.idx)] = JSON.parse(JSON.stringify(a))
   }
 
-  function songDeleteStep (payload) {
-    console.log('song deleting step', payload)
-    config.activeSong.steps = config.activeSong.steps.filter((o,idx)=>idx !== payload.idx)
-  }
-
   function songCopyStep (payload) {
     console.log('song copy step', payload)
     const stepToCopy = config.activeSong.steps[payload.idx]
     config.activeSong.steps.push(JSON.parse(JSON.stringify(stepToCopy)))
+    songFillSteps()
+  }
+
+  function songDeleteStep (payload) {
+    console.log('song deleting step', payload)
+    config.activeSong.steps = config.activeSong.steps.filter((o,idx)=>idx !== payload.idx)
+    songFillSteps()
   }
 
   function start (payload) {
@@ -220,6 +237,21 @@ module.exports = function createStateMachine() {
     })
     config.isPlaying = false
     clearTimeout(pulseTimeout)
+  }
+
+  function tick () {
+
+    clearTimeout(pulseTimeout)
+
+    if(Date.now() > sequencer.nextActionTime) {
+      // do the action
+      // set the next action time
+      process()
+    }
+
+    if(config.isPlaying) {
+      pulseTimeout = setTimeout(tick, 0)
+    }    
   }
 
   return {
@@ -244,8 +276,9 @@ module.exports = function createStateMachine() {
     saveSong,
     songAddStep,
     songChangeStepOrder,
-    songCopyStep,
+    songCopyStep,    
     songDeleteStep,    
+    songFillSteps,
     start,
     stop,        
   }

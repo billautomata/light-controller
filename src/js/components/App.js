@@ -64,7 +64,7 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
 
   return (
     <ThemeProvider theme={createTheme()}>
-      <div style={{ margin: 'auto', marginTop: 12, width: 1280, outline: '1px solid #AAA' }}>
+      <div style={{ margin: 'auto', marginTop: 12, width: 1280, outline: '1px solid #FFF' }}>
         {
           dataLoaded ? 
           <Grid container justifyContent='center'>
@@ -77,9 +77,9 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
               <Paper square elevation={0} style={sectionStyle}>              
                 <CurrentPattern/>    
               </Paper>              
-              <Paper square elevation={0} style={sectionStyle}>              
+              {/* <Paper square elevation={0} style={sectionStyle}>              
                 <SongMode/>
-              </Paper>                
+              </Paper>                 */}
               {/* <Paper square elevation={0} style={sectionStyle}>              
                 <PlaylistMode/>
               </Paper>                 */}
