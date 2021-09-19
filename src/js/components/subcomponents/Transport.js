@@ -5,7 +5,7 @@ import { startSequencer, stopSequencer } from '../../actions/index'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isPlaying: state.config.isPlaying
+    isPlaying: state.config.isPlaying && (state.config.playingMode === ownProps.mode)
   }
 }
 
@@ -16,13 +16,12 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-
 function Transport (props) {
   return (
     <Grid container item xs={12} spacing={1} justifyContent='center' alignItems='center' style={{fontSize: 32, color: 'steelblue'}}>
       <Grid className='transport-button' item 
-        style={{ borderBottom: props.isPlaying ? '4px solid steelblue' : '4px solid transparent' }}
-        onClick={()=>{ props.startSequencer() }}
+        style={{ borderBottom: props.isPlaying  ? '4px solid steelblue' : '4px solid transparent' }}
+        onClick={()=>{ props.startSequencer({mode: props.mode}) }}
       >
         <svg width='18' height='18' style={{ border: '0px solid black' }}>
           <polygon fill='steelblue' points='0 0 18 9 0 18'/>            

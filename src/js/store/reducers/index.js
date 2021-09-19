@@ -22,6 +22,9 @@ import {
   SET_STEP_VALUE,
   SET_TIME_VALUE,
   SET_TIME_VALUE_TEMPORARY,
+  SONG_CHANGE_STEP_ORDER,
+  SONG_COPY_STEP,
+  SONG_DELETE_STEP,
   START_SEQUENCER,
   STOP_SEQUENCER
 } from '../../constants/action-types'
@@ -191,9 +194,19 @@ function rootReducer(state = initialState, action) {
       console.log('setting time value', action.payload)
       window.socket.emit('PATTERN_SET_VALUE_TIME', action.payload)      
       return Object.assign({}, state, state)
+    case SONG_CHANGE_STEP_ORDER:
+      window.socket.emit('SONG_STEPS_CHANGE_ORDER', action.payload)
+      return state  
+    case SONG_COPY_STEP:
+      window.socket.emit('SONG_COPY_STEP', action.payload)
+      return state
+    case SONG_DELETE_STEP:
+      window.socket.emit('SONG_DELETE_STEP', action.payload)
+      return state
     case START_SEQUENCER:
       console.log('REDUCER - '+START_SEQUENCER) 
-      window.socket.emit('START_SEQUENCER', action.paylaod)
+      console.log(action.payload)
+      window.socket.emit('START_SEQUENCER', action.payload)
       return state
     case STOP_SEQUENCER:
       console.log('REDUCER - '+START_SEQUENCER) 

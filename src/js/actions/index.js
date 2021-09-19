@@ -21,7 +21,10 @@ import {
   SET_STEP_VALUE,  
   SET_SONGS,
   SET_TIME_VALUE,
-  SET_TIME_VALUE_TEMPORARY,
+  SET_TIME_VALUE_TEMPORARY,  
+  SONG_CHANGE_STEP_ORDER,
+  SONG_COPY_STEP,
+  SONG_DELETE_STEP,
   START_SEQUENCER,
   STOP_SEQUENCER
 } from '../constants/action-types'
@@ -116,6 +119,18 @@ export function setTimeValue (payload) {
 
 export function setTimeValueTemporary (payload) {
   return { type: SET_TIME_VALUE_TEMPORARY, payload }
+}
+
+export function songChangeStepOrder (payload) {
+  return { type: SONG_CHANGE_STEP_ORDER ,payload }
+}
+
+export function songCopyStep (payload) {
+  return { type: SONG_COPY_STEP, payload }
+}
+
+export function songDeleteStep (payload) {
+  return { type: SONG_DELETE_STEP, payload }
 }
 
 export function startSequencer (payload) {

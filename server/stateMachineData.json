@@ -105,12 +105,22 @@
       "id": "df72b3e3-cd11-41af-b583-fbb3f4771d43",
       "steps": [
         {
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         },
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         }
@@ -322,12 +332,22 @@
       "id": "df72b3e3-cd11-41af-b583-fbb3f4771d43",
       "steps": [
         {
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         },
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         }

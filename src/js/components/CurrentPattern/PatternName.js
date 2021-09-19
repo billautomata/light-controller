@@ -99,7 +99,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternClear,
         }        
       </Grid>      
       <Grid container item xs={2} justifyContent='center'>
-        <Transport/>
+        <Transport mode='pattern'/>
       </Grid>
       <Grid container item xs={3} justifyContent='flex-end' spacing={1}>  
         {

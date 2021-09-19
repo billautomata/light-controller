@@ -25,7 +25,6 @@ module.exports = function createStateMachine() {
 
   loadPattern(config.activePatternId)
   loadSong(config.activeSongId)
-
   init()
 
   function createPattern () {
@@ -70,41 +69,45 @@ module.exports = function createStateMachine() {
     saveToDisk()
   }
 
+  function getPattern (id) {
+    return patterns.filter(o=>o.id === id)[0]
+  }
+
+  function getPatternIndex (id) {
+    return patterns.findIndex(o=>o.id === id)
+  }
+
   function getPatterns () { return patterns }
   function getPlaylists () { return playlists }
   function getSongs () { return songs }
-  
-  function tick () {
 
-    clearTimeout(pulseTimeout)
-
-    if(Date.now() > sequencer.nextActionTime) {
-      // do the action
-      // set the next action time
-      process()
-    }
-
-    if(config.isPlaying) {
-      pulseTimeout = setTimeout(tick, 0)
-    }    
+  function init () {
+    nextActionTime = Date.now()    
+    currentStep = -1    
+    pins.init()
   }
 
-  function start () {
-    console.log('starting sequencer')
-    config.isPlaying = true
-    tick()
-  }
-
-  function stop () {
+  function loadPattern (id) {
+    // loads a pattern into the active pattern
+    console.log('loading pattern', id)
     sequencer.currentStep = -1
-    Object.values(sockets).forEach(socket=>{
-      if(socket === null) {
-        return
-      }
-      socket.emit('set-step', { value: sequencer.currentStep })      
-    })
-    config.isPlaying = false
-    clearTimeout(pulseTimeout)
+    sequencer.currentSpeed = 500
+
+    config.activePatternId = id
+    config.activePattern = JSON.parse(JSON.stringify(patterns.filter(o=>o.id===config.activePatternId)[0]))
+  }
+
+  function loadSong (id) {
+    console.log('loading song', id)
+    sequencer.currentStep = -1
+    sequencer.currentSpeed = 500
+
+    config.activeSongId = id
+    config.activeSong = JSON.parse(JSON.stringify(songs.filter(o=>o.id===config.activeSongId)[0]))
+  }
+
+  function onConnect(socketId) {
+    sockets[socketId].emit('state-machine', { config, patterns, songs, playlists })
   }
 
   function process () {
@@ -141,46 +144,24 @@ module.exports = function createStateMachine() {
     //
     pins.doPins(config.activePattern, sequencer.currentStep)
   }
+  
+  function tick () {
 
-  function getPattern (id) {
-    return patterns.filter(o=>o.id === id)[0]
-  }
+    clearTimeout(pulseTimeout)
 
-  function getPatternIndex (id) {
-    return patterns.findIndex(o=>o.id === id)
-  }
+    if(Date.now() > sequencer.nextActionTime) {
+      // do the action
+      // set the next action time
+      process()
+    }
 
-  function loadPattern (id) {
-    // loads a pattern into the active pattern
-    console.log('loading pattern', id)
-    sequencer.currentStep = -1
-    sequencer.currentSpeed = 500
-
-    config.activePatternId = id
-    config.activePattern = JSON.parse(JSON.stringify(patterns.filter(o=>o.id===config.activePatternId)[0]))
-  }
-
-  function loadSong (id) {
-    console.log('loading song', id)
-    sequencer.currentStep = -1
-    sequencer.currentSpeed = 500
-
-    config.activeSongId = id
-    config.activeSong = JSON.parse(JSON.stringify(songs.filter(o=>o.id===config.activeSongId)[0]))
+    if(config.isPlaying) {
+      pulseTimeout = setTimeout(tick, 0)
+    }    
   }
 
   function registerSockets (_sockets) {
     sockets = _sockets
-  }
-
-  function onConnect(socketId) {
-    sockets[socketId].emit('state-machine', { config, patterns, songs, playlists })
-  }
-
-  function init () {
-    nextActionTime = Date.now()    
-    currentStep = -1    
-    pins.init()
   }
 
   function saveToDisk () {
@@ -191,6 +172,54 @@ module.exports = function createStateMachine() {
     console.log('saving song')
     const songIndex = songs.findIndex(o=>o.id === config.activeSongId)
     songs[songIndex] = JSON.parse(JSON.stringify(config.activeSong))
+  }
+
+  function songAddStep (payload) {
+    console.log('song add step', payload)
+  }
+
+  function songChangeStepOrder (payload) {
+    console.log('changing step order', payload)
+    console.log(config.activeSong.steps)
+    if (payload.idx === 0 && payload.direciton === 'up') {
+      return
+    } else if (payload.idx === config.activeSong.steps.length - 1 && payload.direction === 'down') {
+      return
+    }
+    let a = config.activeSong.steps[Number(payload.idx) + (payload.direction === 'up' ? -1 : 1)]
+    config.activeSong.steps[Number(payload.idx) + (payload.direction === 'up' ? -1 : 1)] = JSON.parse(JSON.stringify(config.activeSong.steps[Number(payload.idx)]))
+    config.activeSong.steps[Number(payload.idx)] = JSON.parse(JSON.stringify(a))
+  }
+
+  function songDeleteStep (payload) {
+    console.log('song deleting step', payload)
+    config.activeSong.steps = config.activeSong.steps.filter((o,idx)=>idx !== payload.idx)
+  }
+
+  function songCopyStep (payload) {
+    console.log('song copy step', payload)
+    const stepToCopy = config.activeSong.steps[payload.idx]
+    config.activeSong.steps.push(JSON.parse(JSON.stringify(stepToCopy)))
+  }
+
+  function start (payload) {
+    console.log('starting sequencer')
+    config.isPlaying = true
+    config.playingMode = payload.mode
+    console.log(config.playingMode)
+    tick()
+  }
+
+  function stop () {
+    sequencer.currentStep = -1
+    Object.values(sockets).forEach(socket=>{
+      if(socket === null) {
+        return
+      }
+      socket.emit('set-step', { value: sequencer.currentStep })      
+    })
+    config.isPlaying = false
+    clearTimeout(pulseTimeout)
   }
 
   return {
@@ -209,11 +238,15 @@ module.exports = function createStateMachine() {
     getSongs,
     loadPattern,
     loadSong,
-    registerSockets,
-    start,
-    stop,    
+    onConnect,
+    registerSockets,    
     saveToDisk,
     saveSong,
-    onConnect
+    songAddStep,
+    songChangeStepOrder,
+    songCopyStep,
+    songDeleteStep,    
+    start,
+    stop,        
   }
 }

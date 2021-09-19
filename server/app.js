@@ -32,7 +32,7 @@ const sockets = {}
 
 const stateMachine = createStateMachine()
 stateMachine.registerSockets(sockets)
-stateMachine.start()
+// stateMachine.start({ mode: 'pattern' })
 
 io.attach(f, {
   pingInterval: 10000,

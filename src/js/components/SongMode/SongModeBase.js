@@ -4,6 +4,7 @@ import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './SongName'
 import LoadPatterns from '../LoadPatterns'
+import { songChangeStepOrder, songCopyStep, songDeleteStep } from '../../actions'
 
 // const song = []
 
@@ -28,10 +29,14 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return {
+    songChangeStepOrder: payload => { dispatch(songChangeStepOrder(payload)) },
+    songCopyStep: payload => { dispatch(songCopyStep(payload)) },
+    songDeleteStep: payload => { dispatch(songDeleteStep(payload)) },    
+  }
 }
 
-function SongModeBase ({ patterns, song }) {
+function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep }) {
   const songPatterns = song.steps
   const totalLength = 64
   console.log('total length', totalLength)
@@ -99,7 +104,7 @@ function SongModeBase ({ patterns, song }) {
                 return (              
                   <Grid item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
                     <Grid container align='center' alignItems='center'>
-                      <Grid item xs={1} align='left' style={{paddingTop: '4px'}}>
+                      <Grid item xs={1} align='left' style={{paddingTop: '4px'}} onClick={()=>{ songDeleteStep({idx}) }}>
                         <svg width='18' height='18'>                          
                           <line x1='17' y1='1' x2='1' y2='17' stroke='steelblue' strokeWidth='4'/>
                           <line x1='1' y1='1' x2='17' y2='17' stroke='steelblue' strokeWidth='4'/>
@@ -167,23 +172,23 @@ function SongModeBase ({ patterns, song }) {
                       <Grid container item xs={2} md={3} lg={2} justifyContent='space-around' style={{paddingTop: '4px'}}>
                         { indexesEditActive.indexOf(idx) === -1 ? 
                             <>
-                              <Grid item onClick={()=>{ moveUp(idx) }}>
-                                <svg width='18' height='18'>
+                              <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'up' }) }} style={{cursor: idx === 0 ? null : 'pointer'}}>
+                                <svg width='18' height='18' style={{ opacity : idx === 0 ? 0 : 1 }}>
                                   <polygon points='9 0 18 18 0 18' fill='steelblue'/>
                                 </svg>
                               </Grid>
-                              <Grid item>
+                              <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'down' }) }} style={{cursor: 'pointer'}}>
                                 <svg width='18' height='18'>                          
                                   <polygon transform='rotate(180 9,9)' points='9 0 18 18 0 18' fill='steelblue'/>
                                 </svg>
                               </Grid>
-                              <Grid item align='right'>
+                              <Grid item align='right' style={{cursor: 'pointer'}} onClick={()=>{ songCopyStep({idx}) }}>
                                 <svg width='18' height='18'>                          
                                   <line x1='1' y1='9' x2='17' y2='9' stroke='steelblue' strokeWidth='4'/>
                                   <line x1='9' y1='1' x2='9' y2='17' stroke='steelblue' strokeWidth='4'/>
                                 </svg>                        
                               </Grid> 
-                              <Grid item align='right'>
+                              <Grid item align='right' style={{cursor: 'pointer'}}>
                                 <svg width='18' height='18'>                          
                                   <rect x='2' y='2' width='14' height='14' fill='none' stroke='steelblue' strokeWidth='4'/>
                                   <line x1='19' y1='0' x2='9' y2='9' stroke='white' strokeWidth='7'/>
