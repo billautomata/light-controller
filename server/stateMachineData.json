@@ -3,9 +3,9 @@
     "uiMode": "pattern",
     "isPlaying": false,
     "activePattern": {
-      "name": "longer pattern",
-      "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
-      "patternLength": 32,
+      "name": "basic pattern",
+      "id": "971017b2-32c0-461e-a97a-f691228d3db8",
+      "patternLength": 8,
       "channels": [
         {
           "name": "time-channel",
@@ -13,13 +13,63 @@
           "steps": [
             {
               "idx": 0,
-              "value": 500
+              "value": 200
             }
           ]
         },
         {
           "name": "channel-0",
           "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-1",
+          "id": 1,
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-2",
+          "id": 2,
+          "steps": [
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-3",
+          "id": 3,
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-4",
+          "id": 4,
+          "steps": [
+            {
+              "idx": 4,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "channel-5",
+          "id": 5,
           "steps": [
             {
               "idx": 5,
@@ -28,78 +78,28 @@
           ]
         },
         {
-          "name": "channel-0",
-          "id": 0,
+          "name": "channel-6",
+          "id": 6,
           "steps": [
             {
-              "idx": 5,
+              "idx": 6,
               "value": 1
             }
           ]
         },
         {
-          "name": "channel-0",
-          "id": 0,
+          "name": "channel-7",
+          "id": 7,
           "steps": [
             {
-              "idx": 5,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "name": "channel-0",
-          "id": 0,
-          "steps": [
-            {
-              "idx": 5,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "name": "channel-0",
-          "id": 0,
-          "steps": [
-            {
-              "idx": 5,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "name": "channel-0",
-          "id": 0,
-          "steps": [
-            {
-              "idx": 5,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "name": "channel-0",
-          "id": 0,
-          "steps": [
-            {
-              "idx": 5,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "name": "channel-0",
-          "id": 0,
-          "steps": [
-            {
-              "idx": 5,
+              "idx": 7,
               "value": 1
             }
           ]
         }
       ]
     },
-    "activePatternId": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+    "activePatternId": "971017b2-32c0-461e-a97a-f691228d3db8",
     "activeSong": {
       "name": "jingle bells verse",
       "id": "df72b3e3-cd11-41af-b583-fbb3f4771d43",
@@ -117,12 +117,7 @@
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
           "repeat": 1,
-          "speed": 1
-        },
-        {
-          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
-          "repeat": 1,
-          "speed": 1
+          "speed": 2
         },
         {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
@@ -131,6 +126,11 @@
         },
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 14,
+          "speed": 4
+        },
+        {
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         }
@@ -354,12 +354,7 @@
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
           "repeat": 1,
-          "speed": 1
-        },
-        {
-          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
-          "repeat": 1,
-          "speed": 1
+          "speed": 2
         },
         {
           "id": "971017b2-32c0-461e-a97a-f691228d3db8",
@@ -368,6 +363,11 @@
         },
         {
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+          "repeat": 14,
+          "speed": 4
+        },
+        {
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8",
           "repeat": 1,
           "speed": 1
         }

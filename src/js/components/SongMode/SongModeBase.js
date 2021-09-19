@@ -28,7 +28,7 @@ function mapDispatchToProps(dispatch) {
 function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue }) {
   const songPatterns = song.steps
   const totalLength = 64
-  const [ indexesEditActive, setEditActive ] = useState([])
+  const [ indexesEditActive, setEditActive ] = useState([1,2])
 
   console.log('total length', totalLength)
 
@@ -161,7 +161,7 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                                     {
                                       [0.25, 0.5, 1, 1.5, 2, 4, 8].map(value=>{
                                         return (
-                                          <option value={value} selected={Number(pattern.speed) === value ? 'true' : 'false'}>{value}</option>
+                                          <option value={value} selected={Number(pattern.speed) === value ? true : false}>{value}</option>
                                         )
                                       })
                                     }                                    
