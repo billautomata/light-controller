@@ -51,6 +51,25 @@ module.exports = function socketRoutes (socket, stateMachine) {
     socket.emit('config', stateMachine.config)
   })
 
+  socket.on('SONG_SET_VALUE', payload => {
+    console.log('song set value', payload)
+    switch(payload.type) {
+      case 'pattern':
+        stateMachine.config.activeSong.steps[payload.idx].id = payload.value
+        break;
+      case 'repeat':
+        stateMachine.config.activeSong.steps[payload.idx].repeat = Number(payload.value)
+        break;
+      case 'speed':
+        stateMachine.config.activeSong.steps[payload.idx].speed = Number(payload.value)
+        break;
+      default:
+        break;
+    }
+    socket.emit('config', stateMachine.config)
+  })
+
+
   socket.on('START_SEQUENCER', payload => {
     console.log('starting sequencer', payload)
     stateMachine.start(payload)

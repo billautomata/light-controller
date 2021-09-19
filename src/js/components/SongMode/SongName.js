@@ -4,10 +4,11 @@ import { saveEdits, saveSong, setEditMode, setPatternName } from '../../actions/
 import Transport from '../subcomponents/Transport'
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('state', state)
+  const activeSongIdx = state.songs.findIndex(o=>o.id === state.config.activeSongId)
   return {
     name: state.config.activeSong.name,
-    editMode: state.uiState.editModeSong
+    editMode: state.uiState.editModeSong,
+    showSave: JSON.stringify(state.config.activeSong) !== JSON.stringify(state.songs[activeSongIdx])
   }
 }
 
@@ -20,7 +21,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function PatternName ({ editMode, name, saveEdits, saveSong, setEditMode, setPatternName }) {
+function PatternName ({ editMode, name, saveEdits, saveSong, setEditMode, setPatternName, showSave }) {
   return (
     <Grid container item xs={12} alignItems='center' spacing={1}>
       <Grid item xs={1} align='center'>
@@ -31,13 +32,13 @@ function PatternName ({ editMode, name, saveEdits, saveSong, setEditMode, setPat
           editMode ? 
           <>
             <Grid item xs={4}>
-              <TextField defaultValue={name} style={{width: 280}}
+              <TextField defaultValue={name}
                 onChange={(event)=>{
                   setPatternName({ mode: 'song', value: event.target.value })
                 }}/>
             </Grid>
             <Grid item xs={2}/>
-            <Grid container item xs={3} justifyContent='center' align='right' style={{outline: '1px solid black'}}>
+            <Grid container item xs={3} justifyContent='center' align='right'>
               <Button variant='contained' color='primary' size='small' onClick={()=>{ saveEdits({ mode: 'song' }); setEditMode({ mode: 'song', value: false })}}>Done</Button>
               <Button size='small' onClick={()=>{setEditMode({ mode: 'song', value: false })}}>&#10005;</Button>
             </Grid>
@@ -56,7 +57,7 @@ function PatternName ({ editMode, name, saveEdits, saveSong, setEditMode, setPat
         <Transport mode='song'/>
       </Grid>      
       <Grid container item xs={3} justifyContent='flex-end' spacing={1}>  
-        <Grid item>
+        <Grid item style={{display: showSave ? null : 'none' }}>
           <Button variant='contained' color='primary' size='medium'
             onClick={()=>{ saveSong() }}>Save</Button>
         </Grid>        

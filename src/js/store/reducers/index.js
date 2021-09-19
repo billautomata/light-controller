@@ -25,6 +25,7 @@ import {
   SONG_CHANGE_STEP_ORDER,
   SONG_COPY_STEP,
   SONG_DELETE_STEP,
+  SONG_SET_VALUE,
   START_SEQUENCER,
   STOP_SEQUENCER
 } from '../../constants/action-types'
@@ -202,6 +203,9 @@ function rootReducer(state = initialState, action) {
       return state
     case SONG_DELETE_STEP:
       window.socket.emit('SONG_DELETE_STEP', action.payload)
+      return state
+    case SONG_SET_VALUE:
+      window.socket.emit('SONG_SET_VALUE', action.payload)
       return state
     case START_SEQUENCER:
       console.log('REDUCER - '+START_SEQUENCER) 

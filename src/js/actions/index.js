@@ -25,6 +25,7 @@ import {
   SONG_CHANGE_STEP_ORDER,
   SONG_COPY_STEP,
   SONG_DELETE_STEP,
+  SONG_SET_VALUE,
   START_SEQUENCER,
   STOP_SEQUENCER
 } from '../constants/action-types'
@@ -131,6 +132,10 @@ export function songCopyStep (payload) {
 
 export function songDeleteStep (payload) {
   return { type: SONG_DELETE_STEP, payload }
+}
+
+export function songSetValue (payload) {
+  return { type: SONG_SET_VALUE, payload }
 }
 
 export function startSequencer (payload) {

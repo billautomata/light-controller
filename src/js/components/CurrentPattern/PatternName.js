@@ -67,7 +67,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternClear,
                 }}
               />
             </Grid>
-            <Grid item xs={3} align='right'  style={{outline: '1px solid black'}}>
+            <Grid item xs={3} align='right'>
               <Button 
                 variant='contained' 
                 color='primary' 

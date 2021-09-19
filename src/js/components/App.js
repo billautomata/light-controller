@@ -64,7 +64,7 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
 
   return (
     <ThemeProvider theme={createTheme()}>
-      <div style={{ margin: 'auto', marginTop: 12, minWidth: 1280,  }}>
+      <div style={{ margin: 'auto', marginTop: 12, width: 1280, outline: '1px solid #AAA' }}>
         {
           dataLoaded ? 
           <Grid container justifyContent='center'>

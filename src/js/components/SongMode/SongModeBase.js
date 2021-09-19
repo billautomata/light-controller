@@ -1,25 +1,13 @@
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import * as d3 from 'd3'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './SongName'
 import LoadPatterns from '../LoadPatterns'
-import { songChangeStepOrder, songCopyStep, songDeleteStep } from '../../actions'
+import { songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue } from '../../actions'
 
-// const song = []
 
-// function moveUp (idx) {
-//   if(idx === 0) {
-//     return
-//   }
-//   const a = song[idx-1]
-//   song[idx-1] = song[idx]
-//   song[idx] = a
-// }
-
-// const songName = 'Simple Song'
-function moveUp () {}
-const indexesEditActive = []
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -33,12 +21,15 @@ function mapDispatchToProps(dispatch) {
     songChangeStepOrder: payload => { dispatch(songChangeStepOrder(payload)) },
     songCopyStep: payload => { dispatch(songCopyStep(payload)) },
     songDeleteStep: payload => { dispatch(songDeleteStep(payload)) },    
+    songSetValue: payload => {dispatch(songSetValue(payload)) }
   }
 }
 
-function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep }) {
+function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue }) {
   const songPatterns = song.steps
   const totalLength = 64
+  const [ indexesEditActive, setEditActive ] = useState([])
+
   console.log('total length', totalLength)
 
   const scaleXPattern = d3.scaleLinear()
@@ -88,14 +79,11 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
             <Grid item xs={12} style={{ fontSize: 12, fontWeight: 800, textTransform: 'uppercase', marginBottom: 2, padding: 8}}>
               <Grid container align='center'>
                 <Grid item xs={1}>&nbsp;</Grid>
-                {/* <Grid item xs={1}>Index</Grid> */}
                 <Grid item xs={10} md={5} align='left'>Pattern Name</Grid>
-                <Grid container item xs={3} md={4} lg={4}>
-                  <Grid item xs={3}>Steps</Grid>
+                <Grid container item xs={3} md={4} lg={6}>
                   <Grid item xs={3}>Repeat</Grid>
                   <Grid item xs={3}>Speed</Grid>
                 </Grid>
-                <Grid item xs={2}>&nbsp;</Grid>
               </Grid>
             </Grid>
             {
@@ -116,11 +104,17 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                           indexesEditActive.indexOf(idx) === -1 ? 
                           <>{ o.name }</> :
                           <>
-                            <select style={{width: '100%'}}>
+                            <select style={{width: '100%'}} 
+                              onChange={ event => { 
+                                console.log(event.target.value)
+                                songSetValue({ idx, type: 'pattern', value: event.target.value }) 
+                              } }>
                               {
                                 patterns.map(pattern=>{
+                                  const stepNameMatches = o.id === pattern.id
+                                  console.log(stepNameMatches, o.id, pattern.id)
                                   return (
-                                    <option>{pattern.name}</option>
+                                    <option value={pattern.id} selected={stepNameMatches} >{pattern.name}</option>
                                   )
                                 })
                               }
@@ -129,15 +123,21 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                         
                         }
                       </Grid>
-                      <Grid container item xs={3} md={3} lg={4} alignItems='center'>
-                        <Grid item xs={3}>{o.patternLength}</Grid>
-                        <Grid item xs={3} align='center'>
+                      <Grid container item xs={3} md={3} lg={3} alignItems='center' justifyContent='space-around'>
+                        <Grid item xs={6} align='center'>
                           {
                             indexesEditActive.indexOf(idx) === -1 ? 
                               <>{pattern.repeat}x</> : 
                               <Grid container item xs={12} justifyContent='center' alignItems='center'>
                                 <Grid item>
-                                  <TextField size='small' defaultValue={pattern.repeat} style={{ width: '32px', textAlign: 'center' }}/>
+                                  <TextField size='small' 
+                                    defaultValue={pattern.repeat} 
+                                    style={{ width: '32px', textAlign: 'center' }}
+                                    onChange={ event => { 
+                                      console.log(event.target.value)
+                                      songSetValue({ idx, type: 'repeat', value: event.target.value }) 
+                                    }}
+                                    />
                                 </Grid>
                                 <Grid item>
                                   <span>x</span>
@@ -146,20 +146,25 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
 
                           }                        
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={6}>
                           {
                             indexesEditActive.indexOf(idx) === -1 ? 
                               <>{pattern.speed}x</> : 
                               <Grid container item xs={12} justifyContent='center' alignItems='center' spacing={1}>
                                 <Grid item>
-                                  <select style={{width: 40}}>
-                                    <option>.25</option>
-                                    <option>.5</option>
-                                    <option>1</option>
-                                    <option>1.5</option>
-                                    <option>2</option>
-                                    <option>4</option>
-                                    <option>8</option>
+                                  <select style={{width: 40}}
+                                  onChange={ event => { 
+                                    console.log(event.target.value)
+                                    songSetValue({ idx, type: 'speed', value: event.target.value }) 
+                                  } }                                  
+                                  >
+                                    {
+                                      [0.25, 0.5, 1, 1.5, 2, 4, 8].map(value=>{
+                                        return (
+                                          <option value={value} selected={Number(pattern.speed) === value ? 'true' : 'false'}>{value}</option>
+                                        )
+                                      })
+                                    }                                    
                                   </select>
                                 </Grid>
                                 <Grid item>
@@ -169,7 +174,7 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                           }                        
                         </Grid>
                       </Grid>
-                      <Grid container item xs={2} md={3} lg={2} justifyContent='space-around' style={{paddingTop: '4px'}}>
+                      <Grid container item xs={2} md={3} lg={3} justifyContent='flex-end' style={{paddingTop: '4px'}} spacing={1}>
                         { indexesEditActive.indexOf(idx) === -1 ? 
                             <>
                               <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'up' }) }} style={{cursor: idx === 0 ? null : 'pointer'}}>
@@ -178,7 +183,7 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                                 </svg>
                               </Grid>
                               <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'down' }) }} style={{cursor: 'pointer'}}>
-                                <svg width='18' height='18'>                          
+                                <svg width='18' height='18' style={{ opacity : idx === song.steps.length-1 ? 0 : 1 }}>                           
                                   <polygon transform='rotate(180 9,9)' points='9 0 18 18 0 18' fill='steelblue'/>
                                 </svg>
                               </Grid>
@@ -188,7 +193,13 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                                   <line x1='9' y1='1' x2='9' y2='17' stroke='steelblue' strokeWidth='4'/>
                                 </svg>                        
                               </Grid> 
-                              <Grid item align='right' style={{cursor: 'pointer'}}>
+                              <Grid item align='right' style={{cursor: 'pointer'}} 
+                                onClick={()=>{ 
+                                  const newIndexes = indexesEditActive
+                                  newIndexes.push(idx)
+                                  setEditActive(Object.assign([], [], newIndexes)) 
+                                }}                                
+                              >
                                 <svg width='18' height='18'>                          
                                   <rect x='2' y='2' width='14' height='14' fill='none' stroke='steelblue' strokeWidth='4'/>
                                   <line x1='19' y1='0' x2='9' y2='9' stroke='white' strokeWidth='7'/>
@@ -198,10 +209,20 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                             </> :
                             <>
                               <Grid item>
-                                <Button size='small' variant='contained' color='primary'>Done</Button>
+                                <Button size='small' variant='contained' color='primary'
+                                  onClick={()=>{ 
+                                    const newIndexes = indexesEditActive.filter(o=>o!==idx)
+                                    setEditActive(Object.assign([], [], newIndexes)) 
+                                  }}                                
+                                >Done</Button>
                               </Grid>
                               <Grid item>
-                                <Button size='small'>&#10005;</Button>
+                                <Button size='small'
+                                  onClick={()=>{ 
+                                    const newIndexes = indexesEditActive.filter(o=>o!==idx)
+                                    setEditActive(Object.assign([], [], newIndexes)) 
+                                  }}                                
+                                >&#10005;</Button>
                               </Grid>
                             </>
                         }
