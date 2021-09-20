@@ -21,7 +21,8 @@ import {
   SET_STEP_VALUE,  
   SET_SONGS,
   SET_TIME_VALUE,
-  SET_TIME_VALUE_TEMPORARY,  
+  SET_TIME_VALUE_TEMPORARY,
+  SONG_ADD_STEP,  
   SONG_CHANGE_STEP_ORDER,
   SONG_COPY_STEP,
   SONG_DELETE_STEP,
@@ -122,8 +123,12 @@ export function setTimeValueTemporary (payload) {
   return { type: SET_TIME_VALUE_TEMPORARY, payload }
 }
 
+export function songAddStep (payload) {
+  return { type: SONG_ADD_STEP, payload }
+}
+
 export function songChangeStepOrder (payload) {
-  return { type: SONG_CHANGE_STEP_ORDER ,payload }
+  return { type: SONG_CHANGE_STEP_ORDER, payload }
 }
 
 export function songCopyStep (payload) {

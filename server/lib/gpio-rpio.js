@@ -36,9 +36,19 @@ function _gpio () {
       )
     })
   }
+
+  function doPinsRaw (array) {
+    pins.forEach((pin,pinIdx)=>{
+      gpio.write(
+        pin,
+        array[pinIdx+1] === 0 ? gpio.HIGH : gpio.LOW
+      )
+    })
+  }
   
   return {
     doPins,
+    doPinsRaw,
     init
   }
 }

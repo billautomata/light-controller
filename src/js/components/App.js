@@ -77,9 +77,9 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
               <Paper square elevation={0} style={sectionStyle}>              
                 <CurrentPattern/>    
               </Paper>              
-              {/* <Paper square elevation={0} style={sectionStyle}>              
+              <Paper square elevation={0} style={sectionStyle}>              
                 <SongMode/>
-              </Paper>                 */}
+              </Paper>                
               {/* <Paper square elevation={0} style={sectionStyle}>              
                 <PlaylistMode/>
               </Paper>                 */}

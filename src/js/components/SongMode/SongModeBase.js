@@ -6,19 +6,19 @@ import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './SongName'
 import SongVisualized from './SongVisualized'
 import LoadPatterns from '../LoadPatterns'
-import { songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue } from '../../actions'
-
-
+import { songAddStep, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    song: state.config.activeSong,
-    patterns: state.patterns
+    patterns: state.patterns,
+    song: state.config.activeSong,    
+    songPattern: state.config.activeSong.songPattern
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    songAddStep: payload => { dispatch(songAddStep(payload)) },
     songChangeStepOrder: payload => { dispatch(songChangeStepOrder(payload)) },
     songCopyStep: payload => { dispatch(songCopyStep(payload)) },
     songDeleteStep: payload => { dispatch(songDeleteStep(payload)) },    
@@ -26,7 +26,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue }) {
+function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep, songPattern, songSetValue }) {
   const songPatterns = song.steps
   const totalLength = 64
   const [ indexesEditActive, setEditActive ] = useState([])
@@ -36,6 +36,16 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
   const scaleXPattern = d3.scaleLinear()
     .domain([0, totalLength])
     .range([0, 100])
+
+  let listOfPatterns = []
+  songPattern.forEach(pattern => {
+    if (listOfPatterns.indexOf(pattern.id) === -1) {
+      listOfPatterns.push(pattern.id)
+    }
+  })
+  listOfPatterns = listOfPatterns.sort()
+
+  const colors = d3.scaleOrdinal(d3.schemeCategory10)
 
   return (
     <Grid container item xs={12}>
@@ -73,7 +83,17 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                       <Grid item xs={10} md={5} align='left'>
                         {
                           indexesEditActive.indexOf(idx) === -1 ? 
-                          <>{ o.name }</> :
+                          <>
+                            <div style={{ 
+                              display: 'inline-block', 
+                              position: 'relative',
+                              marginRight: 6, 
+                              top: 2, left: 0, 
+                              width: 16, height: 16, 
+                              backgroundColor: colors(listOfPatterns.findIndex(o=>o===pattern.id)), 
+                              borderRadius: '50%'}}></div>
+                            <span>{o.name}</span>                            
+                          </> :
                           <>
                             <select style={{width: '100%'}} 
                               onChange={ event => { 
@@ -203,6 +223,9 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
                 )
               })
             }
+            <Grid item xs={12} align='center'>
+              <Button size='large'>ADD STEP</Button>
+            </Grid> 
           </Grid>
         </Grid>        
       </Grid>

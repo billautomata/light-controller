@@ -11,8 +11,7 @@ module.exports = function createStateMachine() {
   const sequencer = {
     currentStep: -1,
     currentSpeed: 300,
-    nextActionTime: 0,
-    mode: 'pattern'
+    nextActionTime: 0
   }
 
   const fileData = JSON.parse(fs.readFileSync('./stateMachineData.json'))
@@ -79,6 +78,7 @@ module.exports = function createStateMachine() {
     return patterns.findIndex(o=>o.id === id)
   }
 
+  function getConfig () { return config }
   function getPatterns () { return patterns }
   function getPlaylists () { return playlists }
   function getSongs () { return songs }
@@ -148,6 +148,33 @@ module.exports = function createStateMachine() {
     pins.doPins(config.activePattern, sequencer.currentStep)
   }
 
+  function processSong () {
+    // step
+    sequencer.currentStep += 1
+    sequencer.currentStep = sequencer.currentStep % config.activeSong.songLength
+
+    if (config.activeSong.songSteps[sequencer.currentStep][0] !== 0) {
+      // time value found
+      sequencer.currentSpeed = config.activeSong.songSteps[sequencer.currentStep][0]
+    }
+
+    sequencer.nextActionTime = Date.now() + sequencer.currentSpeed
+
+    console.log(['current step', sequencer.currentStep, config.activeSong.songSteps[sequencer.currentStep].join(',')].join('\t'))
+
+    // emit
+    // current step
+    Object.values(sockets).forEach(socket=>{
+      if(socket === null) {
+        return
+      }
+      socket.emit('set-step', { value: sequencer.currentStep })      
+    })
+
+    // gpio.doPinsRaw(config.activeSong.songSteps[sequencer.currentStep])
+
+  }
+
   function registerSockets (_sockets) {
     sockets = _sockets
   }
@@ -165,10 +192,18 @@ module.exports = function createStateMachine() {
 
   function songAddStep (payload) {
     console.log('song add step', payload)
+    songFillSteps()
   }
 
   function songFillSteps () {
     const songPattern = []
+
+    let songLength = 0
+    config.activeSong.steps.forEach(step=>{
+      songLength += patterns.filter(o=>{ return o.id === step.id })[0].patternLength * step.repeat
+    })
+
+    config.activeSong.songLength = songLength
 
     config.activeSong.steps.forEach(step=>{
       const pattern = patterns.filter(o=>o.id === step.id)[0]      
@@ -191,7 +226,25 @@ module.exports = function createStateMachine() {
         })
       }
     })
+
     config.activeSong.songPattern = songPattern
+    config.activeSong.songSteps = (()=>{
+      const steps = []
+
+      config.activeSong.steps.forEach(songStep=>{
+        const pattern = patterns.filter(o=>o.id===songStep.id)[0]
+        for(let j = 0; j < songStep.repeat; j++) {
+          for(let i = 0; i < pattern.patternLength; i++) {
+            steps.push(pattern.channels.map(
+              (channel,channelIdx) => { 
+                return channel.steps.findIndex(o=>Number(o.idx)===Number(i)) === -1 ? 0 : channel.steps.filter(o=>Number(o.idx)===Number(i))[0].value / (channelIdx === 0 ? songStep.speed : 1)
+              }))
+          }  
+        }
+      })
+
+      return steps
+    })()
   }
 
   function songChangeStepOrder (payload) {
@@ -205,6 +258,7 @@ module.exports = function createStateMachine() {
     let a = config.activeSong.steps[Number(payload.idx) + (payload.direction === 'up' ? -1 : 1)]
     config.activeSong.steps[Number(payload.idx) + (payload.direction === 'up' ? -1 : 1)] = JSON.parse(JSON.stringify(config.activeSong.steps[Number(payload.idx)]))
     config.activeSong.steps[Number(payload.idx)] = JSON.parse(JSON.stringify(a))
+    songFillSteps()
   }
 
   function songCopyStep (payload) {
@@ -247,7 +301,17 @@ module.exports = function createStateMachine() {
     if(Date.now() > sequencer.nextActionTime) {
       // do the action
       // set the next action time
-      process()
+      switch (config.playingMode) {
+        case 'pattern':
+          process()
+          break;
+        case 'song':
+          processSong()
+          break;
+        default:
+          break;
+      }
+      
     }
 
     if(config.isPlaying) {
@@ -264,6 +328,7 @@ module.exports = function createStateMachine() {
     createSong,
     deletePattern,
     deleteSong,
+    getConfig,
     getPattern,
     getPatterns,
     getPatternIndex,

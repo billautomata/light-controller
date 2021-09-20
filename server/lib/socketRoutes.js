@@ -16,39 +16,39 @@ module.exports = function socketRoutes (socket, stateMachine) {
       default:
         break;
     }
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
     return
   })
 
   socket.on('SONG_DELETE_STEP', payload => {
     console.log('song delete step', payload)
     stateMachine.songDeleteStep(payload)
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('SONG_COPY_STEP', payload => {
     console.log('song copy step', payload)
     stateMachine.songCopyStep(payload)
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('SONG_SET_NAME', (payload) => {
     console.log('SONG_SET_NAME', payload)
     stateMachine.config.activeSong.name = payload.value
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('SONG_SAVE', (payload) => {
     console.log('saving song')
     stateMachine.saveSong()
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
     socket.emit('songs', stateMachine.getSongs())
     stateMachine.saveToDisk()
   })
 
   socket.on('SONG_STEPS_CHANGE_ORDER', payload => {
     stateMachine.songChangeStepOrder(payload)
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('SONG_SET_VALUE', payload => {
@@ -66,19 +66,19 @@ module.exports = function socketRoutes (socket, stateMachine) {
       default:
         break;
     }
-    socket.emit('config', stateMachine.config)
+    stateMachine.songFillSteps()
+    socket.emit('config', stateMachine.getConfig())
   })
-
 
   socket.on('START_SEQUENCER', payload => {
     console.log('starting sequencer', payload)
     stateMachine.start(payload)
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('STOP_SEQUENCER', payload => {
     stateMachine.stop()
-    socket.emit('config', stateMachine.config)
+    socket.emit('config', stateMachine.getConfig())
   })
 
 }
