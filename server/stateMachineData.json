@@ -3,63 +3,299 @@
     "uiMode": "pattern",
     "isPlaying": false,
     "activePattern": {
-      "name": "New Pattern (2)",
-      "id": "5932e55f-f144-4b75-9aeb-f3273495d83f",
-      "patternLength": 16,
+      "name": "longer pattern",
+      "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
+      "patternLength": 32,
       "channels": [
         {
-          "id": "time-channel",
           "name": "time-channel",
+          "id": "time-channel",
           "steps": [
             {
               "idx": 0,
-              "value": 500
+              "value": 100
             }
           ]
         },
         {
-          "id": "channel-0",
-          "name": "Channel 0",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 29,
+              "value": 1
+            }
+          ]
         },
         {
-          "id": "channel-1",
-          "name": "Channel 1",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 25,
+              "value": 1
+            },
+            {
+              "idx": 30,
+              "value": 1
+            }
+          ]
         },
         {
-          "id": "channel-2",
-          "name": "Channel 2",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            },
+            {
+              "idx": 26,
+              "value": 1
+            },
+            {
+              "idx": 31,
+              "value": 1
+            }
+          ]
         },
         {
-          "id": "channel-3",
-          "name": "Channel 3",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 27,
+              "value": 1
+            }
+          ]
         },
         {
-          "id": "channel-4",
-          "name": "Channel 4",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 28,
+              "value": 1
+            }
+          ]
         },
         {
-          "id": "channel-5",
-          "name": "Channel 5",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            }
+          ]
         },
         {
-          "id": "channel-6",
-          "name": "Channel 6",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            }
+          ]
         },
         {
-          "id": "channel-7",
-          "name": "Channel 7",
-          "steps": []
+          "name": "channel-0",
+          "id": 0,
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 11,
+              "value": 1
+            }
+          ]
         }
       ]
     },
-    "activePatternId": "5932e55f-f144-4b75-9aeb-f3273495d83f",
+    "activePatternId": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
     "activeSong": {
       "name": "jingle bells verse",
       "id": "df72b3e3-cd11-41af-b583-fbb3f4771d43",
@@ -101,31 +337,19 @@
           "id": "971017b2-32c0-461e-a97a-f691228d3db8"
         },
         {
-          "msLength": 8000,
+          "msLength": 3200,
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         },
         {
-          "msLength": 8000,
+          "msLength": 3200,
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         },
         {
-          "msLength": 8000,
+          "msLength": 3200,
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         },
         {
-          "msLength": 8000,
-          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
-        },
-        {
-          "msLength": 1600,
-          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
-        },
-        {
-          "msLength": 8000,
-          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
-        },
-        {
-          "msLength": 8000,
+          "msLength": 3200,
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         },
         {
@@ -133,11 +357,23 @@
           "id": "971017b2-32c0-461e-a97a-f691228d3db8"
         },
         {
-          "msLength": 8000,
+          "msLength": 3200,
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         },
         {
-          "msLength": 8000,
+          "msLength": 3200,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 1600,
+          "id": "971017b2-32c0-461e-a97a-f691228d3db8"
+        },
+        {
+          "msLength": 3200,
+          "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
+        },
+        {
+          "msLength": 3200,
           "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4"
         }
       ]
@@ -248,7 +484,7 @@
     {
       "name": "longer pattern",
       "id": "581bb4a7-8465-4fae-a267-02be8d7c7ae4",
-      "patternLength": 16,
+      "patternLength": 32,
       "channels": [
         {
           "name": "time-channel",
@@ -256,7 +492,7 @@
           "steps": [
             {
               "idx": 0,
-              "value": 500
+              "value": 100
             }
           ]
         },
@@ -265,7 +501,19 @@
           "id": 0,
           "steps": [
             {
-              "idx": 5,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 29,
               "value": 1
             }
           ]
@@ -275,7 +523,31 @@
           "id": 0,
           "steps": [
             {
-              "idx": 5,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 25,
+              "value": 1
+            },
+            {
+              "idx": 30,
               "value": 1
             }
           ]
@@ -285,7 +557,39 @@
           "id": 0,
           "steps": [
             {
-              "idx": 5,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            },
+            {
+              "idx": 26,
+              "value": 1
+            },
+            {
+              "idx": 31,
               "value": 1
             }
           ]
@@ -295,7 +599,39 @@
           "id": 0,
           "steps": [
             {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
               "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 27,
               "value": 1
             }
           ]
@@ -305,7 +641,39 @@
           "id": 0,
           "steps": [
             {
-              "idx": 5,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 28,
               "value": 1
             }
           ]
@@ -315,7 +683,35 @@
           "id": 0,
           "steps": [
             {
-              "idx": 5,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
               "value": 1
             }
           ]
@@ -325,7 +721,31 @@
           "id": 0,
           "steps": [
             {
-              "idx": 5,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 16,
               "value": 1
             }
           ]
@@ -335,7 +755,19 @@
           "id": 0,
           "steps": [
             {
-              "idx": 5,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 11,
               "value": 1
             }
           ]

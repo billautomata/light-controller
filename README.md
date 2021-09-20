@@ -1,5 +1,22 @@
 # crosstown-trees
 
+To start the application you need to run two commands
+
+`npm start` in the root of the folder
+
+`node app.js` in the `/server` folder
+
+```
+# in one terminal
+node app.js
+
+# in another terminal
+npm start
+```
+
+Then go to `http://ip.of.device:3000/`
+
+
 ## data structures
 
 ### step

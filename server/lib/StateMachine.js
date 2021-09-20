@@ -11,7 +11,8 @@ module.exports = function createStateMachine() {
   const sequencer = {
     currentStep: -1,
     currentSpeed: 300,
-    nextActionTime: 0
+    nextActionTime: 0,
+    mode: 'pattern'
   }
 
   const fileData = JSON.parse(fs.readFileSync('./stateMachineData.json'))
