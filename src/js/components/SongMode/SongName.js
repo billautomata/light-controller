@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch) {
 
 function PatternName ({ editMode, name, saveEdits, saveSong, setEditMode, setPatternName, showSave }) {
   return (
-    <Grid container item xs={12} alignItems='center' spacing={1}>
+    <Grid container item xs={12} alignItems='center'>
       <Grid item xs={1} align='center'>
         <Typography variant='body2'>Name</Typography>        
       </Grid>

@@ -20,15 +20,21 @@ module.exports = function socketRoutes (socket, stateMachine) {
     return
   })
 
-  socket.on('SONG_DELETE_STEP', payload => {
-    console.log('song delete step', payload)
-    stateMachine.songDeleteStep(payload)
+  socket.on('SONG_ADD_STEP', payload => {
+    console.log('song add step')
+    stateMachine.songAddStep()
     socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('SONG_COPY_STEP', payload => {
     console.log('song copy step', payload)
     stateMachine.songCopyStep(payload)
+    socket.emit('config', stateMachine.getConfig())
+  })
+
+  socket.on('SONG_DELETE_STEP', payload => {
+    console.log('song delete step', payload)
+    stateMachine.songDeleteStep(payload)
     socket.emit('config', stateMachine.getConfig())
   })
 

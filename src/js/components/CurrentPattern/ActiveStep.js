@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
 function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }) {
   const boxSize = 1000 / patternLength 
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={11}>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
           <Grid item xs={12}>
             <Typography variant='body2'>Active Step</Typography>

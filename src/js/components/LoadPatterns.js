@@ -25,7 +25,7 @@ function LoadPatterns ({ activePatternId, copyPattern, createPattern, deletePatt
   const [ patternsHalfwayToDeletion, setPatternsHalfway ] = useState([])
 
   return (
-    <Grid container item spacing={0} alignItems='flex-start' justifyContent='center'  style={{borderLeft: '1px solid #EEE', height: '100%'}}>      
+    <Grid container item spacing={0} alignItems='flex-start' justifyContent='center'  style={{borderLeft: '0px solid #EEE', height: '100%'}}>      
       <Grid container item xs={12} alignItems='flex-start' justifyContent='center' style={{ border: '1px solid #EEE' }} >
         <Grid item xs={12} style={{backgroundColor: '#EEE', marginBottom: 4}}>
           <Typography style={{color: '#333', marginLeft: 10, textTransform:'uppercase', fontWeight: 300, letterSpacing:'-.1px'}}>

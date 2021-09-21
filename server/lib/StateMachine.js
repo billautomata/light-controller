@@ -170,7 +170,7 @@ module.exports = function createStateMachine() {
     const sum = config.activeSong.songPattern.map(o=>o.msLength).reduce((a,b)=>a+b)
     const percentElapsed = (Date.now() - sequencer.sequenceStarted_ms) / sum
 
-    console.log('sum', sum, 'percent elapsed', percentElapsed)
+    // console.log('sum', sum, 'percent elapsed', percentElapsed)
 
     // emit
     // current step
@@ -182,7 +182,7 @@ module.exports = function createStateMachine() {
       socket.emit('set-step-time', { value: percentElapsed })
     })
 
-    // gpio.doPinsRaw(config.activeSong.songSteps[sequencer.currentStep])
+    pins.doPinsRaw(config.activeSong.songSteps[sequencer.currentStep])
 
   }
 
@@ -203,6 +203,11 @@ module.exports = function createStateMachine() {
 
   function songAddStep (payload) {
     console.log('song add step', payload)
+    if (config.activeSong.steps.length === 0) {
+      config.activeSong.steps.push({ id: patterns[0].id, repeat: 1, speed: 1 })
+    } else {
+      config.activeSong.steps.push(JSON.parse(JSON.stringify(config.activeSong.steps[0])))
+    }
     songFillSteps()
   }
 
@@ -224,7 +229,7 @@ module.exports = function createStateMachine() {
       for(let i = 0; i < pattern.patternLength; i++) {
         const timeForThisStepIdx = pattern.channels[0].steps.findIndex(o=>Number(o.idx)===Number(i))
         if (timeForThisStepIdx !== -1) {
-          currentSpeed = pattern.channels[0].steps[timeForThisStepIdx].value
+          currentSpeed = pattern.channels[0].steps[timeForThisStepIdx].value / step.speed
         }
         sum_ms += currentSpeed
       }

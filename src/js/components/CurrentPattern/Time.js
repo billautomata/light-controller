@@ -23,7 +23,7 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
   const boxSize = 1000 / patternLength
   const boxHeight = Math.min(24, boxSize)  
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={11}>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
           <Grid item xs={12}><Typography variant='body2'>Time (ms)</Typography></Grid>
         </Grid>

@@ -21,7 +21,7 @@ function Time ({ channels, pattern, setStepValue }) {
   const boxSize = 1000 / pattern.patternLength
   const boxHeight = Math.min(24, boxSize)
   return (
-    <Grid container item xs={12}>
+    <Grid container item xs={11}>
       {
         channels.slice(1,channels.length).map((channel,channelIdx)=>{
           return (

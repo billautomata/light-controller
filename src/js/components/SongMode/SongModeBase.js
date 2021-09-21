@@ -26,7 +26,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep, songPattern, songSetValue }) {
+function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songCopyStep, songDeleteStep, songPattern, songSetValue }) {
   const songPatterns = song.steps
   const [ indexesEditActive, setEditActive ] = useState([])
 
@@ -217,12 +217,12 @@ function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, song
               })
             }
             <Grid item xs={12} align='center'>
-              <Button size='large'>ADD STEP</Button>
+              <Button size='large' onClick={()=>{ songAddStep() }}>ADD STEP</Button>
             </Grid> 
           </Grid>
         </Grid>        
       </Grid>
-      <Grid container item xs={2} alignItems='flex-start' spacing={2}>
+      <Grid container item xs={2}>
         <LoadPatterns mode='song'/>
       </Grid>
     </Grid>

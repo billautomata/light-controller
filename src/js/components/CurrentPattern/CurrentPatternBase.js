@@ -16,14 +16,14 @@ function mapDispatchToProps(dispatch) {
 
 function CurrentPattern ({ }) {
   return (
-    <Grid container item xs={12} spacing={2}>
+    <Grid container item xs={12}>
       <Grid container item xs={10}>
         <PatternName/>
         <ActiveStep/>
         <Time/>
         <Channels/>            
       </Grid>
-      <Grid container item xs={2} spacing={2}>
+      <Grid container item xs={2}>
         <LoadPatterns mode='pattern'/>
       </Grid>
     </Grid>

@@ -31,7 +31,7 @@ function SongVisualized ({ currentStepTime, songPattern }) {
 
   return (
     <Grid container item xs={12}>
-      <svg width='90%' height='45px' viewBox={`'0 0 ${w} 45'`} style={{margin: 'auto', backgroundColor: 'white'}}>
+      <svg width='90%' height='45px' viewBox={`'0 0 ${w} 45'`} style={{ margin: 'auto', backgroundColor: 'white', opacity: songPattern.length === 0 ? 0 : null }}>
         {
           songPattern.map((pattern,idx)=>{
             const x = scaleX_ms(d3.sum(songPattern.filter((o,i)=>i<idx), d=>d.msLength))
