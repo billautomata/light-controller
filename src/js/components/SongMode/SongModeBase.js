@@ -28,14 +28,7 @@ function mapDispatchToProps(dispatch) {
 
 function SongModeBase ({ patterns, song, songChangeStepOrder, songCopyStep, songDeleteStep, songPattern, songSetValue }) {
   const songPatterns = song.steps
-  const totalLength = 64
   const [ indexesEditActive, setEditActive ] = useState([])
-
-  console.log('total length', totalLength)
-
-  const scaleXPattern = d3.scaleLinear()
-    .domain([0, totalLength])
-    .range([0, 100])
 
   let listOfPatterns = []
   songPattern.forEach(pattern => {

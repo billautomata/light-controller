@@ -11,6 +11,7 @@ module.exports = function createStateMachine() {
   const sequencer = {
     currentStep: -1,
     currentSpeed: 300,
+    sequenceStarted_ms: -1,
     nextActionTime: 0
   }
 
@@ -153,6 +154,10 @@ module.exports = function createStateMachine() {
     sequencer.currentStep += 1
     sequencer.currentStep = sequencer.currentStep % config.activeSong.songLength
 
+    if (sequencer.currentStep === 0) {
+      sequencer.sequenceStarted_ms = Date.now()
+    }
+
     if (config.activeSong.songSteps[sequencer.currentStep][0] !== 0) {
       // time value found
       sequencer.currentSpeed = config.activeSong.songSteps[sequencer.currentStep][0]
@@ -162,13 +167,19 @@ module.exports = function createStateMachine() {
 
     console.log(['current step', sequencer.currentStep, config.activeSong.songSteps[sequencer.currentStep].join(',')].join('\t'))
 
+    const sum = config.activeSong.songPattern.map(o=>o.msLength).reduce((a,b)=>a+b)
+    const percentElapsed = (Date.now() - sequencer.sequenceStarted_ms) / sum
+
+    console.log('sum', sum, 'percent elapsed', percentElapsed)
+
     // emit
     // current step
     Object.values(sockets).forEach(socket=>{
       if(socket === null) {
         return
       }
-      socket.emit('set-step', { value: sequencer.currentStep })      
+      socket.emit('set-step', { value: sequencer.currentStep })
+      socket.emit('set-step-time', { value: percentElapsed })
     })
 
     // gpio.doPinsRaw(config.activeSong.songSteps[sequencer.currentStep])
@@ -279,6 +290,7 @@ module.exports = function createStateMachine() {
     config.isPlaying = true
     config.playingMode = payload.mode
     console.log(config.playingMode)
+    sequencer.sequenceStarted_ms = Date.now()
     tick()
   }
 
@@ -289,6 +301,7 @@ module.exports = function createStateMachine() {
         return
       }
       socket.emit('set-step', { value: sequencer.currentStep })      
+      socket.emit('set-step-time', { value: 0 })      
     })
     config.isPlaying = false
     clearTimeout(pulseTimeout)

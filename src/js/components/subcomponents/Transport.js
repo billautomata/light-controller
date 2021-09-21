@@ -35,7 +35,7 @@ function Transport (props) {
           <polygon fill='steelblue' points='0 0 18 0 18 18 0 18'/>
         </svg>
       </Grid>
-      {
+      {/* {
         props.mode === 'song' ?
               <Grid className='transport-button' item style={{borderBottom: '4px solid transparent'}}>
                 <svg width='18' height='18' style={{ border: '0px solid black' }}>
@@ -44,7 +44,7 @@ function Transport (props) {
                 </svg>
               </Grid>
             : null          
-      }      
+      }       */}
     </Grid>    
   )
 }

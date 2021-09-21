@@ -4,7 +4,6 @@ import { Button, Grid, Typography } from '@material-ui/core'
 import { copyPattern, createPattern, deletePattern, loadPattern } from '../actions'
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state)
   return {
     props: ownProps,
     activePatternId: ownProps.mode === 'song' ? state.config.activeSongId : state.config.activePatternId,

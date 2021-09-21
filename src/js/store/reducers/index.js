@@ -19,6 +19,7 @@ import {
   SET_PATTERN_NAME,
   SET_SONGS,
   SET_STEP,
+  SET_STEP_TIME,
   SET_STEP_VALUE,
   SET_TIME_VALUE,
   SET_TIME_VALUE_TEMPORARY,
@@ -128,6 +129,7 @@ function rootReducer(state = initialState, action) {
           confirmedTimeSteps: action.payload.value.activePattern.channels[0].steps.map(o=>{ return { idx: o.idx }})
         }
       )
+      console.log(action.payload.value)
       return Object.assign({}, state, { config: action.payload.value, uiState: state.uiState })    
     case COPY_PATTERN:
       window.socket.emit('PATTERN_COPY', action.payload)
@@ -175,7 +177,10 @@ function rootReducer(state = initialState, action) {
       return Object.assign({}, state, { songs: action.payload.value })
     case SET_STEP:
       console.log('REDUCER - '+SET_STEP, action.payload)
-      return Object.assign({}, state, { currentStep: action.payload.value.value })
+      return Object.assign({}, state, { currentStep: action.payload.value })
+    case SET_STEP_TIME:
+      console.log('REDUCER - '+SET_STEP_TIME, action.payload)
+      return Object.assign({}, state, { currentStepTime: action.payload.value })
     case SET_STEP_VALUE: 
       console.log('REDUCER - '+SET_STEP_VALUE, action.payload)
       window.socket.emit('PATTERN_SET_VALUE_STEP', action.payload )
@@ -213,7 +218,7 @@ function rootReducer(state = initialState, action) {
       window.socket.emit('START_SEQUENCER', action.payload)
       return state
     case STOP_SEQUENCER:
-      console.log('REDUCER - '+START_SEQUENCER) 
+      console.log('REDUCER - '+STOP_SEQUENCER) 
       window.socket.emit('STOP_SEQUENCER', action.paylaod)
       return state
     default:      

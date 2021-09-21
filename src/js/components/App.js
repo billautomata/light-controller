@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@material-ui/core'
-import { initializeData, setConfig, setStep, setSongs, setPatterns } from '../actions/index'
+import { initializeData, setConfig, setStep, setStepTime, setSongs, setPatterns } from '../actions/index'
 import { connect } from "react-redux"
 import CurrentPattern from './CurrentPattern/CurrentPatternBase'
 import { Grid, Paper } from '@material-ui/core'
@@ -23,7 +23,8 @@ function mapDispatchToProps(dispatch) {
     setConfig: payload => dispatch(setConfig(payload)),
     setPatterns: payload => dispatch(setPatterns(payload)),
     setSongs: payload => dispatch(setSongs(payload)),
-    setStep: payload => dispatch(setStep(payload))
+    setStep: payload => dispatch(setStep(payload)),
+    setStepTime: payload => dispatch(setStepTime(payload))
   }
 }
 
@@ -34,7 +35,7 @@ const sectionStyle = {
   borderBottom: '1px solid #EEE' 
 }
 
-const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setStep }) {
+const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setStep, setStepTime }) {
 
   if(window.socket === undefined) {
     window.socket = io.connect("/")
@@ -47,7 +48,9 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
         case 'config':
           return setConfig({ value })
         case 'set-step':
-          return setStep({ value: value})
+          return setStep({ value: value.value })
+        case 'set-step-time':
+          return setStepTime({ value: value.value })
         case 'patterns':
           return setPatterns({ value })
         case 'songs':

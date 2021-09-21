@@ -6,6 +6,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentStep: state.currentStep,
     patternLength: state.config.activePattern.patternLength,
+    playingMode: state.config.playingMode
   }
 }
 
@@ -15,9 +16,8 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function ActiveStep ({ currentStep, patternLength, setCurrentStep }) {
+function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }) {
   const boxSize = 1000 / patternLength 
-  const boxHeight = Math.min(24, boxSize)  
   return (
     <Grid container item xs={12}>
         <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
@@ -42,7 +42,7 @@ function ActiveStep ({ currentStep, patternLength, setCurrentStep }) {
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
                       <rect x='1' y='0' width={boxSize-1} height={25} 
-                        fill={ currentStep === index ? 'steelblue' : '#CCC' }/>
+                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? 'steelblue' : '#CCC' }/>
                     </g>
                   )
                 })

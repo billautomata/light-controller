@@ -18,6 +18,7 @@ import {
   SET_PATTERNS,
   SET_PATTERN_NAME,
   SET_STEP,
+  SET_STEP_TIME,
   SET_STEP_VALUE,  
   SET_SONGS,
   SET_TIME_VALUE,
@@ -97,6 +98,10 @@ export function setNumberOfSteps (payload) {
 
 export function setStep (payload) {
   return { type: SET_STEP, payload }
+}
+
+export function setStepTime (payload) {
+  return { type: SET_STEP_TIME, payload }
 }
 
 export function setPatterns (payload) {

@@ -2,10 +2,10 @@ import { connect } from 'react-redux'
 import * as d3 from 'd3'
 import { Grid } from '@material-ui/core'
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    songPattern: state.config.activeSong.songPattern
+    currentStepTime: state.currentStepTime,
+    songPattern: state.config.activeSong.songPattern,    
   }
 }
 
@@ -13,13 +13,11 @@ function mapDispatchToProps(dispatch) {
   return {}
 }
 
-function SongVisualized ({ songPattern }) {
-
-  console.log('song pattern', songPattern)
+function SongVisualized ({ currentStepTime, songPattern }) {
   const sum = d3.sum(songPattern, d=>d.msLength)
-
   const w = 960
   const scaleX_ms = d3.scaleLinear().domain([0,sum]).range([0,w])
+  const scaleX_percent = d3.scaleLinear().domain([0,1]).range([0,w])
 
   let listOfPatterns = []
   songPattern.forEach(pattern => {
@@ -33,7 +31,7 @@ function SongVisualized ({ songPattern }) {
 
   return (
     <Grid container item xs={12}>
-      <svg width='90%' height='35px' viewBox={`'0 0 ${w} 35'`} style={{margin: 'auto', backgroundColor: '#DDD'}}>
+      <svg width='90%' height='45px' viewBox={`'0 0 ${w} 45'`} style={{margin: 'auto', backgroundColor: 'white'}}>
         {
           songPattern.map((pattern,idx)=>{
             const x = scaleX_ms(d3.sum(songPattern.filter((o,i)=>i<idx), d=>d.msLength))
@@ -43,6 +41,14 @@ function SongVisualized ({ songPattern }) {
             )
           })
         }
+        <g transform={`translate(${scaleX_percent(currentStepTime)} 0)`}>
+          <line x1='0' y1='0' x2='0' y2='35' stroke='black' strokeWidth='4px'/>
+          <g transform='translate(0 35)'>
+            <polygon points='0 0 5 10 -5 10' fill='black'/>
+          </g>
+          
+        </g>
+        
       </svg>
     </Grid>
   )
