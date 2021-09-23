@@ -8,6 +8,7 @@ To start the application you need to run two commands
 
 ```
 # in one terminal
+cd server
 node app.js
 
 # in another terminal

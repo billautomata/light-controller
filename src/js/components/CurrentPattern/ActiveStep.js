@@ -42,7 +42,7 @@ function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
                       <rect x='1' y='0' width={boxSize-1} height={25} 
-                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? 'steelblue' : '#CCC' }/>
+                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? '#1f77b4' : '#CCC' }/>
                     </g>
                   )
                 })

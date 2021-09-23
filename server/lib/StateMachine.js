@@ -27,6 +27,7 @@ module.exports = function createStateMachine() {
 
   loadPattern(config.activePatternId)
   loadSong(config.activeSongId)
+  loadPlaylist(config.activePlaylistId)
   init()
 
   function createPattern () {
@@ -36,7 +37,7 @@ module.exports = function createStateMachine() {
       patternLength: 16,
       channels: [
         { id: 'time-channel', name: 'time-channel', steps: [{idx:0, value: 500}]},        
-      ].concat(new Array(8).fill(0).map((o,i)=>{
+      ].concat(new Array(16).fill(0).map((o,i)=>{
         return {
           id: 'channel-'+i,
           name: 'Channel '+i,
@@ -108,6 +109,15 @@ module.exports = function createStateMachine() {
     config.activeSongId = id
     config.activeSong = JSON.parse(JSON.stringify(songs.filter(o=>o.id===config.activeSongId)[0]))
     songFillSteps()
+  }
+
+  function loadPlaylist (id) {
+    console.log('loading playlist', id)
+    sequencer.currentStep = -1
+    sequencer.currentSpeed = 500
+
+    config.activePlaylistId = id
+    config.activePlaylist = JSON.parse(JSON.stringify(playlists.filter(o=>o.id===config.activePlaylistId)[0]))
   }
 
   function onConnect(socketId) {
@@ -188,6 +198,12 @@ module.exports = function createStateMachine() {
 
   function registerSockets (_sockets) {
     sockets = _sockets
+  }
+
+  function savePlaylist () {
+    console.log('saving playlist')
+    const playlistIndex = playlists.findIndex(o=>o.id === config.activePlaylistId)
+    playlists[playlistIndex] = JSON.parse(JSON.stringify(config.activePlaylist))
   }
 
   function saveToDisk () {
@@ -353,9 +369,11 @@ module.exports = function createStateMachine() {
     getPlaylists,
     getSongs,
     loadPattern,
+    loadPlaylist,
     loadSong,
     onConnect,
     registerSockets,    
+    savePlaylist,
     saveToDisk,
     saveSong,
     songAddStep,

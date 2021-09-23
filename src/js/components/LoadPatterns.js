@@ -28,7 +28,7 @@ function LoadPatterns ({ activePatternId, copyPattern, createPattern, deletePatt
     <Grid container item spacing={0} alignItems='flex-start' justifyContent='center'  style={{borderLeft: '0px solid #EEE', height: '100%'}}>      
       <Grid container item xs={12} alignItems='flex-start' justifyContent='center' style={{ border: '1px solid #EEE' }} >
         <Grid item xs={12} style={{backgroundColor: '#EEE', marginBottom: 4}}>
-          <Typography style={{color: '#333', marginLeft: 10, textTransform:'uppercase', fontWeight: 300, letterSpacing:'-.1px'}}>
+          <Typography style={{color: '#333', marginLeft: 10, textTransform:'uppercase', fontWeight: 900, letterSpacing:'-.1px'}}>
             { props.mode === 'song' ? 'Songs' : props.mode === 'playlist' ? 'Playlists' : 'Patterns'}
           </Typography>
         </Grid>
@@ -45,9 +45,9 @@ function LoadPatterns ({ activePatternId, copyPattern, createPattern, deletePatt
                       <Grid item xs={10}
                         onClick={()=>{ loadPattern({ id: pattern.id, mode: props.mode }) }} 
                         style={{              
-                          backgroundColor: activePatternId === pattern.id ? 'steelblue' : 'white',
+                          backgroundColor: activePatternId === pattern.id ? '#1f77b4' : 'white',
                           borderRadius: 2,
-                          border: `1px solid ${ activePatternId === pattern.id ? 'steelblue': '#DDD' }`,
+                          border: `1px solid ${ activePatternId === pattern.id ? '#1f77b4': '#DDD' }`,
                           fontWeight: activePatternId === pattern.id ? 700 : 500,
                           color: activePatternId === pattern.id ? 'white' : 'black',
                           padding: 6, 

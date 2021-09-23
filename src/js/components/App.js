@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@material-ui/core'
-import { initializeData, setConfig, setStep, setStepTime, setSongs, setPatterns } from '../actions/index'
+import { initializeData, setConfig, setStep, setStepTime, setSongs, setPatterns, setPlaylists } from '../actions/index'
 import { connect } from "react-redux"
 import CurrentPattern from './CurrentPattern/CurrentPatternBase'
 import { Grid, Paper } from '@material-ui/core'
@@ -22,6 +22,7 @@ function mapDispatchToProps(dispatch) {
     initializeData: payload => dispatch(initializeData(payload)),
     setConfig: payload => dispatch(setConfig(payload)),
     setPatterns: payload => dispatch(setPatterns(payload)),
+    setPlaylists: payload => dispatch(setPlaylists(payload)),
     setSongs: payload => dispatch(setSongs(payload)),
     setStep: payload => dispatch(setStep(payload)),
     setStepTime: payload => dispatch(setStepTime(payload))
@@ -29,13 +30,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 const sectionStyle = { 
-  marginBottom: 4, 
-  paddingTop: 8, 
-  paddingBottom: 12, 
-  borderBottom: '1px solid #EEE' 
+  marginBottom: 16, 
+  padding: '12px 4px',
+  border: '1px solid #DDD' 
 }
 
-const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setStep, setStepTime }) {
+const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setPlaylists, setStep, setStepTime }) {
 
   if(window.socket === undefined) {
     window.socket = io.connect("/")
@@ -53,6 +53,8 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
           return setStepTime({ value: value.value })
         case 'patterns':
           return setPatterns({ value })
+        case 'playlists':
+            return setPlaylists({ value })  
         case 'songs':
           return setSongs({ value })  
         case 'state-machine':
@@ -72,20 +74,26 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
           dataLoaded ? 
           <Grid container justifyContent='center'>
             <Grid container item xs={12}>
-              {/* <Grid item xs={12}>        
+              <Grid item xs={12}>        
                 <Paper square elevation={0} style={sectionStyle}>
                   <LayoutBase/>
                 </Paper>
+              </Grid>
+              {/* <Grid item xs={12}>
+                <Paper square elevation={0} style={sectionStyle}>              
+                  <CurrentPattern/>    
+                </Paper>           
+              </Grid>   
+              <Grid item xs={12}>
+                <Paper square elevation={0} style={sectionStyle}>              
+                  <SongMode/>
+                </Paper>
               </Grid> */}
-              <Paper square elevation={0} style={sectionStyle}>              
-                <CurrentPattern/>    
-              </Paper>              
-              <Paper square elevation={0} style={sectionStyle}>              
-                <SongMode/>
-              </Paper>                
-              {/* <Paper square elevation={0} style={sectionStyle}>              
-                <PlaylistMode/>
-              </Paper>                 */}
+              <Grid item xs={12}>
+                <Paper square elevation={0} style={sectionStyle}>              
+                  <PlaylistMode/>
+                </Paper>           
+              </Grid>     
             </Grid>
           </Grid>
           : null

@@ -68,8 +68,8 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                     <Grid container align='center' alignItems='center'>
                       <Grid item xs={1} align='left' style={{paddingTop: '4px'}} onClick={()=>{ songDeleteStep({idx}) }}>
                         <svg width='18' height='18'>                          
-                          <line x1='17' y1='1' x2='1' y2='17' stroke='steelblue' strokeWidth='4'/>
-                          <line x1='1' y1='1' x2='17' y2='17' stroke='steelblue' strokeWidth='4'/>
+                          <line x1='17' y1='1' x2='1' y2='17' stroke='#1f77b4' strokeWidth='4'/>
+                          <line x1='1' y1='1' x2='17' y2='17' stroke='#1f77b4' strokeWidth='4'/>
                         </svg>
                       </Grid>
                       {/* <Grid itme xs={1}>{idx}</Grid> */}
@@ -163,18 +163,18 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                             <>
                               <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'up' }) }} style={{cursor: idx === 0 ? null : 'pointer'}}>
                                 <svg width='18' height='18' style={{ opacity : idx === 0 ? 0 : 1 }}>
-                                  <polygon points='9 0 18 18 0 18' fill='steelblue'/>
+                                  <polygon points='9 0 18 18 0 18' fill='#1f77b4'/>
                                 </svg>
                               </Grid>
                               <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'down' }) }} style={{cursor: 'pointer'}}>
                                 <svg width='18' height='18' style={{ opacity : idx === song.steps.length-1 ? 0 : 1 }}>                           
-                                  <polygon transform='rotate(180 9,9)' points='9 0 18 18 0 18' fill='steelblue'/>
+                                  <polygon transform='rotate(180 9,9)' points='9 0 18 18 0 18' fill='#1f77b4'/>
                                 </svg>
                               </Grid>
                               <Grid item align='right' style={{cursor: 'pointer'}} onClick={()=>{ songCopyStep({idx}) }}>
                                 <svg width='18' height='18'>                          
-                                  <line x1='1' y1='9' x2='17' y2='9' stroke='steelblue' strokeWidth='4'/>
-                                  <line x1='9' y1='1' x2='9' y2='17' stroke='steelblue' strokeWidth='4'/>
+                                  <line x1='1' y1='9' x2='17' y2='9' stroke='#1f77b4' strokeWidth='4'/>
+                                  <line x1='9' y1='1' x2='9' y2='17' stroke='#1f77b4' strokeWidth='4'/>
                                 </svg>                        
                               </Grid> 
                               <Grid item align='right' style={{cursor: 'pointer'}} 
@@ -185,9 +185,9 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                                 }}                                
                               >
                                 <svg width='18' height='18'>                          
-                                  <rect x='2' y='2' width='14' height='14' fill='none' stroke='steelblue' strokeWidth='4'/>
+                                  <rect x='2' y='2' width='14' height='14' fill='none' stroke='#1f77b4' strokeWidth='4'/>
                                   <line x1='19' y1='0' x2='9' y2='9' stroke='white' strokeWidth='7'/>
-                                  <line x1='16' y1='2.5' x2='7' y2='11' stroke='steelblue' strokeWidth='4' strokeLinecap='round'/>
+                                  <line x1='16' y1='2.5' x2='7' y2='11' stroke='#1f77b4' strokeWidth='4' strokeLinecap='round'/>
                                 </svg>
                               </Grid> 
                             </> :
@@ -217,7 +217,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
               })
             }
             <Grid item xs={12} align='center'>
-              <Button size='large' onClick={()=>{ songAddStep() }}>ADD STEP</Button>
+              <Button size='large' onClick={()=>{ songAddStep() }}>ADD PATTERN</Button>
             </Grid> 
           </Grid>
         </Grid>        

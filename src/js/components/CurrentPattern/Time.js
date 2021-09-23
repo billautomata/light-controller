@@ -50,7 +50,7 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
                           <input type='text'                         
                             defaultValue={ valueForStep.value }
                             style={{ 
-                              backgroundColor: confirmed === -1 ? 'white' : 'steelblue',
+                              backgroundColor: confirmed === -1 ? 'white' : '#1f77b4',
                               color: confirmed === -1 ? 'black' : 'white',
                               fontWeight: confirmed === -1 ? '500' : '700',
                               border: '1px solid #DDD',

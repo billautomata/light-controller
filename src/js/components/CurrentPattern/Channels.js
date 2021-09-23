@@ -45,7 +45,7 @@ function Time ({ channels, pattern, setStepValue }) {
                         <g key={`sequenceValues_${idx}`} transform={`translate(${idx*boxSize} 0)`}>
                           <rect x='0' y='1' 
                             width={boxSize-1} height={Math.min(24, boxHeight-2)} 
-                            fill={ value ? 'steelblue' : '#FFF' }
+                            fill={ value ? '#1f77b4' : '#FFF' }
                             style={{
                               cursor: 'pointer'
                             }}

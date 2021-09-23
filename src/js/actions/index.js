@@ -17,6 +17,7 @@ import {
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
+  SET_PLAYLISTS,
   SET_STEP,
   SET_STEP_TIME,
   SET_STEP_VALUE,  
@@ -110,6 +111,10 @@ export function setPatterns (payload) {
 
 export function setPatternName (payload) {
   return {  type: SET_PATTERN_NAME, payload }
+}
+
+export function setPlaylists (payload) {
+  return { type: SET_PLAYLISTS, payload }
 }
 
 export function setSongs (payload) {

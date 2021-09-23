@@ -12,12 +12,27 @@ module.exports = function socketRoutes (socket, stateMachine) {
         stateMachine.loadSong(payload.id)
         break;
       case 'playlist':
+        stateMachine.loadPlaylist(payload.id)
         break;
       default:
         break;
     }
     socket.emit('config', stateMachine.getConfig())
     return
+  })
+
+  socket.on('PLAYLIST_SAVE', payload => {
+    console.log('saving playlist')
+    stateMachine.savePlaylist()
+    socket.emit('config', stateMachine.getConfig())
+    socket.emit('playlists', stateMachine.getPlaylists())
+    stateMachine.saveToDisk()    
+  })
+
+  socket.on('PLAYLIST_SET_NAME', payload => {
+    console.log('PLAYLIST_SET_NAME', payload)
+    stateMachine.config.activePlaylist.name = payload.value
+    socket.emit('config', stateMachine.getConfig())    
   })
 
   socket.on('SONG_ADD_STEP', payload => {

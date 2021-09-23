@@ -17,6 +17,7 @@ import {
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
+  SET_PLAYLISTS,
   SET_SONGS,
   SET_STEP,
   SET_STEP_TIME,
@@ -64,7 +65,7 @@ function rootReducer(state = initialState, action) {
           uiState: {
             editModePattern: false,
             editModeSong: false,
-            editModePlaylist: true,
+            editModePlaylist: false,
             nSteps: action.payload.value.config.activePattern.patternLength,
             name: action.payload.value.config.activePattern.name,
             nameSong: action.payload.value.config.activeSong.name,
@@ -100,6 +101,9 @@ function rootReducer(state = initialState, action) {
         case 'song':
           window.socket.emit('SONG_SET_NAME', { value: state.uiState.nameSong })
           break;
+        case 'playlist':
+          window.socket.emit('PLAYLIST_SET_NAME', { value: state.uiState.namePlaylist })
+          break;
         default: 
           break;
       }
@@ -130,8 +134,17 @@ function rootReducer(state = initialState, action) {
           confirmedTimeSteps: action.payload.value.activePattern.channels[0].steps.map(o=>{ return { idx: o.idx }})
         }
       )
+      state.config = Object.assign(
+        {},
+        action.payload.value,
+        action.payload.value
+        // {
+        //   activeSong: Object.assign({}, action.payload.value.activeSong, { songSteps: action.payload.value.activeSong.songSteps })
+        // }
+      )
       console.log(action.payload.value)
-      return Object.assign({}, state, { config: action.payload.value, uiState: state.uiState })    
+      return Object.assign({}, state, { config: state.config, uiState: state.uiState })    
+      // return Object.assign({}, state, { config: action.payload.value, uiState: state.uiState })    
     case COPY_PATTERN:
       window.socket.emit('PATTERN_COPY', action.payload)
       return state
@@ -146,6 +159,8 @@ function rootReducer(state = initialState, action) {
           return Object.assign({}, state, { uiState: Object.assign({}, state.uiState, { editModePattern: action.payload.value }) })
         case 'song': 
           return Object.assign({}, state, { uiState: Object.assign({}, state.uiState, { editModeSong: action.payload.value }) })
+        case 'playlist':
+          return Object.assign({}, state, { uiState: Object.assign({}, state.uiState, { editModePlaylist: action.payload.value }) })
         default:
           return state          
       }
@@ -165,6 +180,9 @@ function rootReducer(state = initialState, action) {
         case 'song':
           state.uiState.nameSong = action.payload.value
           return Object.assign({}, state, { uiState: state.uiState })    
+        case 'playlist':
+          state.uiState.namePlaylist = action.payload.value
+          return Object.assign({}, state, { uiState: state.uiState })    
         default:
           return state
       }
@@ -173,6 +191,9 @@ function rootReducer(state = initialState, action) {
       state.patterns = Object.assign([], [], action.payload.value )
       console.log('patterns', state.patterns)
       return Object.assign({}, state, { patterns: state.patterns })
+    case SET_PLAYLISTS:
+      console.log('REDUCER - '+SET_PLAYLISTS, action.payload)
+      return Object.assign({}, state, { playlists: action.payload.value })  
     case SET_SONGS:
       console.log('REDUCER - '+SET_SONGS, action.payload)
       return Object.assign({}, state, { songs: action.payload.value })
