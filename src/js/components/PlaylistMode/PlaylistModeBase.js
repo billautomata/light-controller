@@ -6,28 +6,29 @@ import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './PlaylistName'
 import PlaylistVisualized from './PlaylistVisualized'
 import LoadPatterns from '../LoadPatterns'
-import { songAddStep, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue } from '../../actions'
+import { playlistAddStep, playlistChangeStepOrder, playlistCopyStep, playlistDeleteStep, playlistSetValue } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
     patterns: state.patterns,
-    song: state.config.activePlaylist,    
+    playlist: state.config.activePlaylist,
+    songs: state.songs,    
     songPattern: state.config.activeSong.songPattern
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    songAddStep: payload => { dispatch(songAddStep(payload)) },
-    songChangeStepOrder: payload => { dispatch(songChangeStepOrder(payload)) },
-    songCopyStep: payload => { dispatch(songCopyStep(payload)) },
-    songDeleteStep: payload => { dispatch(songDeleteStep(payload)) },    
-    songSetValue: payload => {dispatch(songSetValue(payload)) }
+    playlistAddStep: payload => { dispatch(playlistAddStep(payload)) },
+    playlistChangeStepOrder: payload => { dispatch(playlistChangeStepOrder(payload)) },
+    playlistCopyStep: payload => { dispatch(playlistCopyStep(payload)) },
+    playlistDeleteStep: payload => { dispatch(playlistDeleteStep(payload)) },    
+    playlistSetValue: payload => {dispatch(playlistSetValue(payload)) }
   }
 }
 
-function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songCopyStep, songDeleteStep, songPattern, songSetValue }) {
-  const songPatterns = song.steps
+function SongModeBase ({ playlist, songs, playlistAddStep, playlistChangeStepOrder, playlistCopyStep, playlistDeleteStep, songPattern, playlistSetValue }) {
+  // const songPatterns = playlist.steps
   const [ indexesEditActive, setEditActive ] = useState([])
 
   let listOfPatterns = []
@@ -50,7 +51,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
         <Grid container item xs={12} justifyContent='center'>
           <Grid container item xs={12} sm={12} md={10} justifyContent='space-around' style={{marginTop: 8}}>
             <Grid container item xs={12} style={{ fontSize: 12, fontWeight: 800, textTransform: 'uppercase', marginBottom: 2, padding: 8}}>
-              <Grid container item align='center' style={{ display: song.steps.length === 0 ? 'none' : null }}>
+              <Grid container item align='center' style={{ display: playlist.steps.length === 0 ? 'none' : null }}>
                 <Grid item xs={1}>&nbsp;</Grid>
                 <Grid item xs={10} md={5} align='left'>Song Name</Grid>
                 <Grid container item xs={3} md={4} lg={6}>
@@ -60,13 +61,13 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
               </Grid>
             </Grid>
             {
-              true || song.steps.length === 0 ? <></> :
-              song.steps.map((pattern,idx)=>{
-                const o = patterns.filter(o=>{return o.id === pattern.id})[0]
+              playlist.steps.length === 0 ? <></> :
+              playlist.steps.map((pattern,idx)=>{
+                const o = songs.filter(o=>{return o.id === pattern.id})[0]
                 return (              
                   <Grid item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
                     <Grid container align='center' alignItems='center'>
-                      <Grid item xs={1} align='left' style={{paddingTop: '4px'}} onClick={()=>{ songDeleteStep({idx}) }}>
+                      <Grid item xs={1} align='left' style={{paddingTop: '4px'}} onClick={()=>{ playlistDeleteStep({idx}) }}>
                         <svg width='18' height='18'>                          
                           <line x1='17' y1='1' x2='1' y2='17' stroke='#1f77b4' strokeWidth='4'/>
                           <line x1='1' y1='1' x2='17' y2='17' stroke='#1f77b4' strokeWidth='4'/>
@@ -91,10 +92,10 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                             <select style={{width: '100%'}} 
                               onChange={ event => { 
                                 console.log(event.target.value)
-                                songSetValue({ idx, type: 'pattern', value: event.target.value }) 
+                                playlistSetValue({ idx, type: 'song', value: event.target.value }) 
                               } }>
                               {
-                                patterns.map(pattern=>{
+                                songs.map(pattern=>{
                                   const stepNameMatches = o.id === pattern.id
                                   console.log(stepNameMatches, o.id, pattern.id)
                                   return (
@@ -119,7 +120,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                                     style={{ width: '32px', textAlign: 'center' }}
                                     onChange={ event => { 
                                       console.log(event.target.value)
-                                      songSetValue({ idx, type: 'repeat', value: event.target.value }) 
+                                      playlistSetValue({ idx, type: 'repeat', value: event.target.value }) 
                                     }}
                                     />
                                 </Grid>
@@ -139,7 +140,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                                   <select style={{width: 40}}
                                   onChange={ event => { 
                                     console.log(event.target.value)
-                                    songSetValue({ idx, type: 'speed', value: event.target.value }) 
+                                    playlistSetValue({ idx, type: 'speed', value: event.target.value }) 
                                   } }                                  
                                   >
                                     {
@@ -161,17 +162,17 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                       <Grid container item xs={2} md={3} lg={3} justifyContent='flex-end' style={{paddingTop: '4px'}} spacing={1}>
                         { indexesEditActive.indexOf(idx) === -1 ? 
                             <>
-                              <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'up' }) }} style={{cursor: idx === 0 ? null : 'pointer'}}>
+                              <Grid item onClick={()=>{ playlistChangeStepOrder({ idx, direction: 'up' }) }} style={{cursor: idx === 0 ? null : 'pointer'}}>
                                 <svg width='18' height='18' style={{ opacity : idx === 0 ? 0 : 1 }}>
                                   <polygon points='9 0 18 18 0 18' fill='#1f77b4'/>
                                 </svg>
                               </Grid>
-                              <Grid item onClick={()=>{ songChangeStepOrder({ idx, direction: 'down' }) }} style={{cursor: 'pointer'}}>
-                                <svg width='18' height='18' style={{ opacity : idx === song.steps.length-1 ? 0 : 1 }}>                           
+                              <Grid item onClick={()=>{ playlistChangeStepOrder({ idx, direction: 'down' }) }} style={{cursor: 'pointer'}}>
+                                <svg width='18' height='18' style={{ opacity : idx === playlist.steps.length-1 ? 0 : 1 }}>                           
                                   <polygon transform='rotate(180 9,9)' points='9 0 18 18 0 18' fill='#1f77b4'/>
                                 </svg>
                               </Grid>
-                              <Grid item align='right' style={{cursor: 'pointer'}} onClick={()=>{ songCopyStep({idx}) }}>
+                              <Grid item align='right' style={{cursor: 'pointer'}} onClick={()=>{ playlistCopyStep({idx}) }}>
                                 <svg width='18' height='18'>                          
                                   <line x1='1' y1='9' x2='17' y2='9' stroke='#1f77b4' strokeWidth='4'/>
                                   <line x1='9' y1='1' x2='9' y2='17' stroke='#1f77b4' strokeWidth='4'/>
@@ -217,7 +218,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
               })
             }
             <Grid item xs={12} align='center'>
-              <Button size='large' onClick={()=>{ songAddStep() }}>ADD SONG</Button>
+              <Button size='large' onClick={()=>{ playlistAddStep() }}>ADD SONG</Button>
             </Grid> 
           </Grid>
         </Grid>        

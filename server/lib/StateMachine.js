@@ -50,6 +50,18 @@ module.exports = function createStateMachine() {
     saveToDisk()
   }
 
+  function createPlaylist () {
+    console.log('state machine - create playlist')
+    const defaultPlaylist = {
+      name: 'New Playlist (' + playlists.length + ')',
+      id: uuid(),
+      steps: []
+    }
+    playlists.push(defaultPlaylist)
+    console.log('playlists length', playlists.length)
+    saveToDisk()
+  }
+
   function createSong () {
     const defaultSong = {
       name: 'New Song (' + songs.length + ')',
@@ -196,6 +208,39 @@ module.exports = function createStateMachine() {
 
   }
 
+  function playlistAddStep (payload) {
+    console.log('playlist add step')
+    if (config.activePlaylist.steps.length === 0) {
+      config.activePlaylist.steps.push({ id: songs[0].id, repeat: 1, speed: 1 })
+    } else {
+      config.activePlaylist.steps.push(JSON.parse(JSON.stringify(config.activePlaylist.steps[0])))
+    }
+  }
+
+  function playlistChangeStepOrder (payload) {
+    console.log('changing playlist step order', payload)
+    console.log(config.activePlaylist.steps)
+    if (payload.idx === 0 && payload.direciton === 'up') {
+      return
+    } else if (payload.idx === config.activeSong.steps.length - 1 && payload.direction === 'down') {
+      return
+    }
+    let a = config.activePlaylist.steps[Number(payload.idx) + (payload.direction === 'up' ? -1 : 1)]
+    config.activePlaylist.steps[Number(payload.idx) + (payload.direction === 'up' ? -1 : 1)] = JSON.parse(JSON.stringify(config.activePlaylist.steps[Number(payload.idx)]))
+    config.activePlaylist.steps[Number(payload.idx)] = JSON.parse(JSON.stringify(a))
+  }
+
+  function playlistCopyStep (payload) {
+    console.log('playlist copy step', payload)
+    const stepToCopy = config.activePlaylist.steps[payload.idx]
+    config.activePlaylist.steps.push(JSON.parse(JSON.stringify(stepToCopy)))
+  }  
+
+  function playlistDeleteStep (payload) {
+    console.log('playlist delete step')
+    config.activePlaylist.steps = config.activePlaylist.steps.filter((o,idx)=>idx !== payload.idx)
+  }
+
   function registerSockets (_sockets) {
     sockets = _sockets
   }
@@ -280,7 +325,7 @@ module.exports = function createStateMachine() {
   }
 
   function songChangeStepOrder (payload) {
-    console.log('changing step order', payload)
+    console.log('changing song step order', payload)
     console.log(config.activeSong.steps)
     if (payload.idx === 0 && payload.direciton === 'up') {
       return
@@ -301,7 +346,7 @@ module.exports = function createStateMachine() {
   }
 
   function songDeleteStep (payload) {
-    console.log('song deleting step', payload)
+    console.log('song delete step', payload)
     config.activeSong.steps = config.activeSong.steps.filter((o,idx)=>idx !== payload.idx)
     songFillSteps()
   }
@@ -359,6 +404,7 @@ module.exports = function createStateMachine() {
     songs,
     playlists,
     createPattern,
+    createPlaylist,
     createSong,
     deletePattern,
     deleteSong,
@@ -372,6 +418,10 @@ module.exports = function createStateMachine() {
     loadPlaylist,
     loadSong,
     onConnect,
+    playlistAddStep,
+    playlistChangeStepOrder,
+    playlistCopyStep,
+    playlistDeleteStep,
     registerSockets,    
     savePlaylist,
     saveToDisk,

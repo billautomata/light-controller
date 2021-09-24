@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
-import { patternClear, saveEdits, savePattern, setEditMode, setNumberOfChannels, setNumberOfSteps, setPatternName } from '../../actions/index'
+import { patternClear, saveEdits, savePattern, setEditMode, setNumberOfSteps, setPatternName } from '../../actions/index'
 import Transport from '../subcomponents/Transport'
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,13 +20,12 @@ function mapDispatchToProps(dispatch) {
     saveEdits: payload => dispatch(saveEdits(payload)),
     savePattern: payload => dispatch(savePattern(payload)),
     setEditMode: payload => dispatch(setEditMode(payload)),
-    setNumberOfChannels: payload => dispatch(setNumberOfChannels(payload)),
     setNumberOfSteps: payload => dispatch(setNumberOfSteps(payload)),    
     setPatternName: payload => dispatch(setPatternName(payload))
   }
 }
 
-function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternClear, patternName, saveEdits, savePattern, setEditMode, showSave, setNumberOfChannels, setNumberOfSteps, setPatternName }) {
+function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, saveEdits, savePattern, setEditMode, showSave, setNumberOfSteps, setPatternName }) {
   let nChannels = numberOfChannels
   let nSteps = numberOfSteps
   let name = patternName

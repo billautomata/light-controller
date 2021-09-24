@@ -1,4 +1,4 @@
-module.exports = function setup (socket, stateMachine) {
+module.exports = function setupPattern (socket, stateMachine) {
 
   socket.on('PATTERN_SAVE', (payload) => {
     console.log('saving pattern')

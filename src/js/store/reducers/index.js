@@ -6,6 +6,11 @@ import {
   DELETE_SONG,
   LOAD_PATTERN,
   PATTERN_CLEAR,
+  PLAYLIST_ADD_STEP,
+  PLAYLIST_CHANGE_STEP_ORDER,
+  PLAYLIST_COPY_STEP,
+  PLAYLIST_DELETE_STEP,
+  PLAYLIST_SET_VALUE,
   SAVE_EDITS,
   SAVE_PATTERN,
   SAVE_PLAYLIST,
@@ -13,7 +18,6 @@ import {
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
-  SET_NUMBER_OF_CHANNELS,
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
@@ -91,6 +95,21 @@ function rootReducer(state = initialState, action) {
       console.log('REDUCER = '+PATTERN_CLEAR)
       window.socket.emit('PATTERN_CLEAR', action.payload)
       return state
+    case PLAYLIST_ADD_STEP:
+      window.socket.emit('PLAYLIST_ADD_STEP', {})
+      return state
+    case PLAYLIST_CHANGE_STEP_ORDER:
+      console.log('REDUCER - '+PLAYLIST_CHANGE_STEP_ORDER, action.payload)
+      window.socket.emit('PLAYLIST_CHANGE_STEP_ORDER', action.payload)
+      return state
+    case PLAYLIST_COPY_STEP:
+      console.log('REDUCER - '+PLAYLIST_COPY_STEP, action.payload)
+      window.socket.emit('PLAYLIST_COPY_STEP', action.payload)
+      return state
+    case PLAYLIST_SET_VALUE:
+      console.log('REDUCER - '+PLAYLIST_SET_VALUE, action.paylaod)
+      window.socket.emit('PLAYLIST_SET_VALUE', action.payload)
+      return state
     case SAVE_EDITS:
       console.log('REDUCER - '+SAVE_EDITS, action.payload)
       switch (action.payload.mode) {
@@ -108,16 +127,20 @@ function rootReducer(state = initialState, action) {
           break;
       }
       return state
+    case PLAYLIST_DELETE_STEP:
+      console.log('REDUCER - '+PLAYLIST_DELETE_STEP, action.payload)
+      window.socket.emit('PLAYLIST_DELETE_STEP', action.payload)
+      return state
     case SAVE_PATTERN:
       console.log('REDUCER - '+SAVE_PATTERN, action.payload)
       console.log('emitting a save pattern')
       window.socket.emit('PATTERN_SAVE', { value: true })
       return state
     case SAVE_PLAYLIST:
-        console.log('REDUCER - '+SAVE_PLAYLIST, action.payload)
-        console.log('emitting a save playlist')
-        window.socket.emit('PLAYLIST_SAVE', { value: true })
-        return state      
+      console.log('REDUCER - '+SAVE_PLAYLIST, action.payload)
+      console.log('emitting a save playlist')
+      window.socket.emit('PLAYLIST_SAVE', { value: true })
+      return state      
     case SAVE_SONG:
       console.log('REDUCER - '+SAVE_SONG, action.payload)
       console.log('emitting a save song')
@@ -227,7 +250,7 @@ function rootReducer(state = initialState, action) {
       window.socket.emit('SONG_ADD_STEP', action.payload)
       return state
     case SONG_CHANGE_STEP_ORDER:
-      window.socket.emit('SONG_STEPS_CHANGE_ORDER', action.payload)
+      window.socket.emit('SONG_CHANGE_STEP_ORDER', action.payload)
       return state  
     case SONG_COPY_STEP:
       window.socket.emit('SONG_COPY_STEP', action.payload)

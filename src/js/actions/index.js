@@ -6,6 +6,11 @@ import {
   DELETE_SONG,
   LOAD_PATTERN,
   PATTERN_CLEAR,
+  PLAYLIST_ADD_STEP,
+  PLAYLIST_CHANGE_STEP_ORDER,
+  PLAYLIST_COPY_STEP,
+  PLAYLIST_DELETE_STEP,
+  PLAYLIST_SET_VALUE,
   SAVE_EDITS,
   SAVE_PATTERN,
   SAVE_PLAYLIST,
@@ -13,7 +18,6 @@ import {
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
-  SET_NUMBER_OF_CHANNELS,
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
@@ -61,6 +65,26 @@ export function patternClear (payload) {
   return { type: PATTERN_CLEAR, payload }
 }
 
+export function playlistAddStep (payload) {
+  return { type: PLAYLIST_ADD_STEP, payload }
+}
+
+export function playlistChangeStepOrder (payload) {
+  return { type: PLAYLIST_CHANGE_STEP_ORDER, payload }
+}
+
+export function playlistCopyStep (payload) {
+  return { type: PLAYLIST_COPY_STEP, payload }
+}
+
+export function playlistDeleteStep (payload) {
+  return { type: PLAYLIST_DELETE_STEP, payload }
+}
+
+export function playlistSetValue(payload) {
+  return { type: PLAYLIST_SET_VALUE, payload }
+}
+
 export function saveEdits (payload) {
   return { type: SAVE_EDITS, payload }
 }
@@ -87,10 +111,6 @@ export function setCurrentStep (payload) {
 
 export function setEditMode (payload) {
   return { type: SET_EDIT_MODE, payload }
-}
-
-export function setNumberOfChannels (payload) {
-  return { type: SET_NUMBER_OF_CHANNELS, payload }
 }
 
 export function setNumberOfSteps (payload) {
