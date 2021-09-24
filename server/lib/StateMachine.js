@@ -84,6 +84,70 @@ module.exports = function createStateMachine() {
     saveToDisk()
   }
 
+  function generateSongSteps (songId) {
+    const songPattern = []
+    let song = songId === 'active' ? config.activeSong : songs.filter(o=>o.id===songId)[0]
+    song = JSON.parse(JSON.stringify(song))
+
+    let songLength = 0
+    song.steps.forEach(step=>{
+      songLength += patterns.filter(o=>{ return o.id === step.id })[0].patternLength * step.repeat
+    })
+
+    // console.log('setting song length', songLength)
+
+    if (songId === 'active') {
+      config.activeSong.songLength = songLength
+    } else {
+      song.songLength = songLength
+    }
+  
+    song.steps.forEach(step=>{
+      const pattern = patterns.filter(o=>o.id === step.id)[0]      
+      let sum_ms = 0
+      let currentSpeed = 0
+
+      for(let i = 0; i < pattern.patternLength; i++) {
+        const timeForThisStepIdx = pattern.channels[0].steps.findIndex(o=>Number(o.idx)===Number(i))
+        if (timeForThisStepIdx !== -1) {
+          currentSpeed = pattern.channels[0].steps[timeForThisStepIdx].value / step.speed
+        }
+        sum_ms += currentSpeed
+      }
+      // console.log('sum_ms', sum_ms)
+
+      for(let i = 0; i < step.repeat; i++) {
+        songPattern.push({
+          msLength: sum_ms,
+          id: pattern.id,          
+        })
+      }
+    })
+
+    song.songPattern = songPattern
+    song.songSteps = (()=>{
+      const steps = []
+      config.activeSong.steps.forEach(songStep=>{
+        const pattern = patterns.filter(o=>o.id===songStep.id)[0]
+        for(let j = 0; j < songStep.repeat; j++) {
+          for(let i = 0; i < pattern.patternLength; i++) {
+            steps.push(pattern.channels.map(
+              (channel,channelIdx) => { 
+                return channel.steps.findIndex(o=>Number(o.idx)===Number(i)) === -1 ? 0 : channel.steps.filter(o=>Number(o.idx)===Number(i))[0].value / (channelIdx === 0 ? songStep.speed : 1)
+              }))
+          }  
+        }
+      })
+      return steps
+    })()    
+
+    return {
+      steps: song.songSteps,
+      pattern: song.songPattern
+    }
+
+  }
+
   function getPattern (id) {
     return patterns.filter(o=>o.id === id)[0]
   }
@@ -130,6 +194,7 @@ module.exports = function createStateMachine() {
 
     config.activePlaylistId = id
     config.activePlaylist = JSON.parse(JSON.stringify(playlists.filter(o=>o.id===config.activePlaylistId)[0]))
+    playlistFillSteps()
   }
 
   function onConnect(socketId) {
@@ -173,6 +238,8 @@ module.exports = function createStateMachine() {
 
   function processSong () {
     // step
+    console.log('song length', config.activeSong.songLength)
+
     sequencer.currentStep += 1
     sequencer.currentStep = sequencer.currentStep % config.activeSong.songLength
 
@@ -180,16 +247,19 @@ module.exports = function createStateMachine() {
       sequencer.sequenceStarted_ms = Date.now()
     }
 
-    if (config.activeSong.songSteps[sequencer.currentStep][0] !== 0) {
+    console.log(config.songSteps.slice(0,1))
+    console.log(sequencer.currentStep)
+
+    if (config.songSteps[sequencer.currentStep][0] !== 0) {
       // time value found
-      sequencer.currentSpeed = config.activeSong.songSteps[sequencer.currentStep][0]
+      sequencer.currentSpeed = config.songSteps[sequencer.currentStep][0]
     }
 
     sequencer.nextActionTime = Date.now() + sequencer.currentSpeed
 
-    console.log(['current step', sequencer.currentStep, config.activeSong.songSteps[sequencer.currentStep].join(',')].join('\t'))
+    console.log(['current step', sequencer.currentStep, config.songSteps[sequencer.currentStep].join(',')].join('\t'))
 
-    const sum = config.activeSong.songPattern.map(o=>o.msLength).reduce((a,b)=>a+b)
+    const sum = config.songPattern.map(o=>o.msLength).reduce((a,b)=>a+b)
     const percentElapsed = (Date.now() - sequencer.sequenceStarted_ms) / sum
 
     // console.log('sum', sum, 'percent elapsed', percentElapsed)
@@ -204,7 +274,11 @@ module.exports = function createStateMachine() {
       socket.emit('set-step-time', { value: percentElapsed })
     })
 
-    pins.doPinsRaw(config.activeSong.songSteps[sequencer.currentStep])
+    pins.doPinsRaw(config.songSteps[sequencer.currentStep])
+
+  }
+
+  function processPlaylist () {
 
   }
 
@@ -215,6 +289,7 @@ module.exports = function createStateMachine() {
     } else {
       config.activePlaylist.steps.push(JSON.parse(JSON.stringify(config.activePlaylist.steps[0])))
     }
+    playlistFillSteps()
   }
 
   function playlistChangeStepOrder (payload) {
@@ -234,11 +309,31 @@ module.exports = function createStateMachine() {
     console.log('playlist copy step', payload)
     const stepToCopy = config.activePlaylist.steps[payload.idx]
     config.activePlaylist.steps.push(JSON.parse(JSON.stringify(stepToCopy)))
+    playlistFillSteps()
   }  
 
   function playlistDeleteStep (payload) {
     console.log('playlist delete step')
     config.activePlaylist.steps = config.activePlaylist.steps.filter((o,idx)=>idx !== payload.idx)
+    playlistFillSteps()
+  }
+
+  function playlistFillSteps () {
+    console.log('playlist fill steps')
+    const songIds = config.activePlaylist.steps.map(song=>song.id)
+    const playlistData =  config.activePlaylist.steps.map(song=>{return generateSongSteps(song.id)})
+    const playlistSteps = playlistData.reduce((a,b)=>{ if(a === undefined) { a = [] }; return a.steps.concat(b.steps) })
+
+    const sums = []
+    playlistData.forEach((song,songIdx)=>{
+      let sum = 0
+      song.pattern.forEach((pattern,patternIdx)=>{
+        sum += pattern.msLength
+      })
+      sums.push({ msLength: sum, id: songIds[songIdx] })      
+    })
+    config.playlistSteps = playlistSteps
+    config.playlistPattern = sums
   }
 
   function registerSockets (_sockets) {
@@ -273,55 +368,14 @@ module.exports = function createStateMachine() {
   }
 
   function songFillSteps () {
-    const songPattern = []
 
-    let songLength = 0
-    config.activeSong.steps.forEach(step=>{
-      songLength += patterns.filter(o=>{ return o.id === step.id })[0].patternLength * step.repeat
-    })
+    const o = JSON.parse(JSON.stringify(generateSongSteps('active')))
 
-    config.activeSong.songLength = songLength
+    config.songPattern = o.pattern 
+    config.songSteps = o.steps
 
-    config.activeSong.steps.forEach(step=>{
-      const pattern = patterns.filter(o=>o.id === step.id)[0]      
-      let sum_ms = 0
-      let currentSpeed = 0
+    console.log(config.songSteps.slice(0,1))
 
-      for(let i = 0; i < pattern.patternLength; i++) {
-        const timeForThisStepIdx = pattern.channels[0].steps.findIndex(o=>Number(o.idx)===Number(i))
-        if (timeForThisStepIdx !== -1) {
-          currentSpeed = pattern.channels[0].steps[timeForThisStepIdx].value / step.speed
-        }
-        sum_ms += currentSpeed
-      }
-      console.log('sum_ms', sum_ms)
-
-      for(let i = 0; i < step.repeat; i++) {
-        songPattern.push({
-          msLength: sum_ms,
-          id: pattern.id,          
-        })
-      }
-    })
-
-    config.activeSong.songPattern = songPattern
-    config.activeSong.songSteps = (()=>{
-      const steps = []
-
-      config.activeSong.steps.forEach(songStep=>{
-        const pattern = patterns.filter(o=>o.id===songStep.id)[0]
-        for(let j = 0; j < songStep.repeat; j++) {
-          for(let i = 0; i < pattern.patternLength; i++) {
-            steps.push(pattern.channels.map(
-              (channel,channelIdx) => { 
-                return channel.steps.findIndex(o=>Number(o.idx)===Number(i)) === -1 ? 0 : channel.steps.filter(o=>Number(o.idx)===Number(i))[0].value / (channelIdx === 0 ? songStep.speed : 1)
-              }))
-          }  
-        }
-      })
-
-      return steps
-    })()
   }
 
   function songChangeStepOrder (payload) {
@@ -388,6 +442,7 @@ module.exports = function createStateMachine() {
           processSong()
           break;
         default:
+          processPlaylist()
           break;
       }
       

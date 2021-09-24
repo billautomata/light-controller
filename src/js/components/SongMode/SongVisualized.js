@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core'
 const mapStateToProps = (state, ownProps) => {
   return {
     currentStepTime: state.currentStepTime,
-    songPattern: state.config.activeSong.songPattern,    
+    songPattern: state.config.songPattern,    
   }
 }
 

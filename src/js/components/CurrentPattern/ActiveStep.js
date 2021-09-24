@@ -41,8 +41,8 @@ function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }
                       transform={`translate(${(boxSize*index)} 0)`}
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
-                      <rect x='1' y='0' width={boxSize-1} height={25} 
-                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? '#1f77b4' : '#CCC' }/>
+                      <rect x='1' y='0' width={boxSize-2} height={25} stroke='#AAA'
+                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? '#1f77b4' : '#DDD' }/>
                     </g>
                   )
                 })

@@ -23,9 +23,9 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
   const boxSize = 1000 / patternLength
   const boxHeight = Math.min(24, boxSize)  
   return (
-    <Grid container item xs={11}>
-        <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-          <Grid item xs={12}><Typography variant='body2'>Time (ms)</Typography></Grid>
+    <Grid container item xs={11} style={{outline: '0px solid red'}} alignItems='center'>
+        <Grid item xs={1} align='center'>
+          <Typography variant='body2'>Time (ms)</Typography>
         </Grid>
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1001 25`}
@@ -33,7 +33,6 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
               backgroundColor: '#FFF', 
               width: '100%', 
               margin: 'auto',
-              marginTop: 0,
               marginBottom: 0
             }}>    
             {            
@@ -42,7 +41,7 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
                 const confirmed = confirmedTimeSteps.findIndex(o=>o.idx === idx)
                 return (
                   <g key={`pattern_${activePatternId}_speedvalue_${idx}`} transform={`translate(${(boxSize*idx)} 0)`}>
-                    <rect x='0' y='1' height={boxHeight} width={boxSize-1} fill='#AAA' onClick={()=>{ setTimeValue({ step: idx, value: Number(500) }) }}/>
+                    <rect x='1' y='1' height={boxHeight-1} width={boxSize-2} fill='#EEE' stroke='#AAA' onClick={()=>{ setTimeValue({ step: idx, value: Number(500) }) }}/>
                     {
                       valueForStep === undefined ? <></> :
                       <>
@@ -54,7 +53,7 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
                               color: confirmed === -1 ? 'black' : 'white',
                               fontWeight: confirmed === -1 ? '500' : '700',
                               border: '1px solid #DDD',
-                              height: boxHeight-4,
+                              height: boxHeight-5,
                               width: boxSize-7,
                               marginTop: 1,
                               outline: 'none', 

@@ -22,21 +22,21 @@ const output = {
     {
       name: 'Basic Pattern',
       id: uuidPattern,
-      patternLength: 12,
+      patternLength: 16,
       channels: [
-        { name: 'time-channel', id: 'time-channel', steps: [{idx: 0, value: 500}] },        
+        { name: 'time-channel', id: 'time-channel', steps: [{idx: 0, value: 100}] },        
       ].concat(new Array(16).fill(0).map((n,i)=> {         
-        return { name: 'channel-'+i, id: i, steps: [{idx:5, value: 1}]}
+        return { name: 'channel-'+i, id: i, steps: [{idx:i, value: 1}]}
       }))
     },
     {
-      name: 'Longer Pattern',
+      name: 'Flashing',
       id: uuidPattern2,
-      patternLength: 32,
+      patternLength: 2,
       channels: [
-        { name: 'time-channel', id: 'time-channel', steps: [{idx: 0, value: 500}] },        
+        { name: 'time-channel', id: 'time-channel', steps: [{idx: 0, value: 200}] },        
       ].concat(new Array(16).fill(0).map((n,i)=> {         
-        return { name: 'channel-'+i, id: i, steps: [{idx:5, value: 1}]}
+        return { name: 'channel-'+i, id: i, steps: [{idx:i%2, value: 1}]}
       }))
     }    
   ],
