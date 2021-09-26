@@ -1,9 +1,7 @@
 module.exports = function generatePatternData (id) {
   const patternData = {}
   const steps = []
-
   const pattern = this.getPatternById(id)
-
   for (let i = 0; i < pattern.patternLength; i++) {
     steps.push(pattern.channels.map(channel=>{
       const matchingStep = channel.steps.filter(o=>o.idx===i)[0]
@@ -14,7 +12,6 @@ module.exports = function generatePatternData (id) {
       }
     }))
   }
-
   let currentSpeed = 0
   let sum = 0
   steps.forEach(step=>{
@@ -26,8 +23,6 @@ module.exports = function generatePatternData (id) {
 
   patternData.msLength = sum
   patternData.id = id
-
-  console.log(patternData)
 
   return { patternData, steps }
 }

@@ -10,7 +10,6 @@ test('generatePatternData', t => {
   t.equal(s.getPatterns().length,1,'one pattern exists on the pattern list')
 })
 
-
 test('generateSongData', t => {
   t.plan(1)
   const s = createStateMachine()
@@ -21,9 +20,41 @@ test('generateSongData', t => {
 
   const song = s.getSongs()[0]
   song.steps.push({ id: s.getPatterns()[0].id, speed: 1, repeat: 1 })
-  song.steps.push({ id: s.getPatterns()[1].id, speed: 1, repeat: 1 })
+  song.steps.push({ id: s.getPatterns()[1].id, speed: 8, repeat: 2 })
 
-  s.generateSongData(song.id)
+  const p = s.generateSongData(song.id)
+  console.log(p.patterns)
+  console.log(p.steps.length)
+  console.log(p.steps.filter(s=>s[0]!==0))
 
-  t.equal(s.getPatterns().length,1,'one pattern exists on the pattern list')
+  t.equal(s.getPatterns().length,2,'two patterns exists on the pattern list')
+})
+
+test('generatePlaylistData', t => {
+  t.plan(1)
+  const s = createStateMachine()
+  s.createPattern()
+  s.createPattern()
+
+  s.createSong()
+  s.createSong()
+
+  const songA = s.getSongs()[0]
+  songA.steps.push({ id: s.getPatterns()[0].id, speed: 1, repeat: 1 })
+  songA.steps.push({ id: s.getPatterns()[1].id, speed: 1, repeat: 1 })
+
+  const songB = s.getSongs()[1]
+  songB.steps.push({ id: s.getPatterns()[1].id, speed: 1, repeat: 1 })
+  songB.steps.push({ id: s.getPatterns()[0].id, speed: 1, repeat: 1 })
+
+  s.createPlaylist()
+
+  const playlist = s.getPlaylists()[0]
+
+  playlist.steps.push({ id: songA.id, speed: 1, repeat: 1 })
+  playlist.steps.push({ id: songB.id, speed: 1, repeat: 1 })
+
+  const p = s.generatePlaylistData(playlist.id)
+
+  t.equal(s.getPatterns().length, 2, 'two patterns exists on the pattern list')
 })

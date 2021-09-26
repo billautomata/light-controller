@@ -1,5 +1,4 @@
 module.exports = function StateMachine () {
-
   this.config = {}
   this.patterns = []
   this.playlists = []
@@ -9,5 +8,4 @@ module.exports = function StateMachine () {
   this.songs = []
 
   return this
-
 }

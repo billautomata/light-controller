@@ -4,6 +4,7 @@ const getPatternById = require('./getPatternById.js')
 const getPatternIndex = require('./getPatternIndex.js')
 const getPatterns = require('./getPatterns.js')
 const loadPattern = require('./loadPattern.js')
+const setStepTimePattern = require('./setStepTimePattern.js')
 const setStepValuePattern = require('./setStepValuePattern.js')
 
 module.exports = function registerPatternFns (s) {
@@ -13,5 +14,6 @@ module.exports = function registerPatternFns (s) {
   s.getPatternIndex = getPatternIndex.bind(s)
   s.getPatterns = getPatterns.bind(s)
   s.loadPattern = loadPattern.bind(s)
+  s.setStepTimePattern = setStepTimePattern.bind(s)
   s.setStepValuePattern = setStepValuePattern.bind(s)
 }

@@ -1,6 +1,6 @@
 const { loadFromDisk, saveToDisk } = require('./FileIO.js')
 const { setupPins, setPins } = require('./GPIO.js')
-const { registerSocket, sendMessage } = require('./SocketIO.js')
+const { registerSocket, sendMessage } = require('./Sockets.js')
 
 module.exports = function registerIOFns (s) {
   s.loadFromDisk = loadFromDisk.bind(s)
