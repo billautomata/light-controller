@@ -22,7 +22,9 @@ function getLightValues (state) {
         }
       })    
     case 'song': 
-      return state.config.songSteps[state.currentStep] !== undefined ? state.config.songSteps[state.currentStep].slice(1) : []
+      return state.config.songSteps[state.currentStep] !== undefined ? state.config.songSteps[state.currentStep].slice(1) : []      
+    case 'playlist':
+      return state.config.playlistSteps[state.currentStep] !== undefined ? state.config.playlistSteps[state.currentStep].slice(1) : []
     default:
       return []
   }

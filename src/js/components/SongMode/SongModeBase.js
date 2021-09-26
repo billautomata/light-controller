@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './SongName'
-import SongVisualized from './SongVisualized'
+import Visualized from '../subcomponents/Visualized'
 import LoadPatterns from '../LoadPatterns'
 import { songAddStep, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue } from '../../actions'
 
@@ -45,7 +45,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
       <Grid container item xs={10}>
         <SongName/>
         <Grid container item xs={12} style={{ margin: '24px 0px 18px 0px' }}>
-          <SongVisualized/>
+          <Visualized mode='song'/>
         </Grid>      
         <Grid container item xs={12} justifyContent='center'>
           <Grid container item xs={12} sm={12} md={10} justifyContent='space-around' style={{marginTop: 8}}>

@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './PlaylistName'
-import PlaylistVisualized from './PlaylistVisualized'
+import Visualized from '../subcomponents/Visualized'
 import LoadPatterns from '../LoadPatterns'
 import { playlistAddStep, playlistChangeStepOrder, playlistCopyStep, playlistDeleteStep, playlistSetValue } from '../../actions'
 
@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     patterns: state.patterns,
     playlist: state.config.activePlaylist,
     songs: state.songs,    
-    songPattern: state.config.songPattern
+    songPattern: state.config.playlistPattern
   }
 }
 
@@ -45,9 +45,9 @@ function SongModeBase ({ playlist, songs, playlistAddStep, playlistChangeStepOrd
     <Grid container item xs={12}>
       <Grid container item xs={10}>
         <SongName/>
-        {/* <Grid container item xs={12} style={{ margin: '24px 0px 18px 0px' }}>
-          <PlaylistVisualized/>
-        </Grid>       */}
+        <Grid container item xs={12} style={{ margin: '24px 0px 18px 0px' }}>
+          <Visualized mode='playlist'/>
+        </Grid>      
         <Grid container item xs={12} justifyContent='center'>
           <Grid container item xs={12} sm={12} md={10} justifyContent='space-around' style={{marginTop: 8}}>
             <Grid container item xs={12} style={{ fontSize: 12, fontWeight: 800, textTransform: 'uppercase', marginBottom: 2, padding: 8}}>

@@ -5,7 +5,8 @@ import { Grid } from '@material-ui/core'
 const mapStateToProps = (state, ownProps) => {
   return {
     currentStepTime: state.currentStepTime,
-    songPattern: state.config.songPattern,    
+    songPattern: ownProps.mode === 'playlist' ? state.config.playlistPattern : state.config.songPattern,    
+    doIndicator: ownProps.mode === state.config.playingMode
   }
 }
 
@@ -13,7 +14,7 @@ function mapDispatchToProps(dispatch) {
   return {}
 }
 
-function SongVisualized ({ currentStepTime, songPattern }) {
+function Visualized ({ currentStepTime, doIndicator, songPattern }) {
   const sum = d3.sum(songPattern, d=>d.msLength)
   const w = 960
   const scaleX_ms = d3.scaleLinear().domain([0,sum]).range([0,w])
@@ -41,12 +42,11 @@ function SongVisualized ({ currentStepTime, songPattern }) {
             )
           })
         }
-        <g transform={`translate(${scaleX_percent(currentStepTime)} 0)`}>
+        <g transform={`translate(${scaleX_percent(currentStepTime)} 0)`} style={{ display: doIndicator ? null : 'none' }}>
           <line x1='0' y1='0' x2='0' y2='35' stroke='black' strokeWidth='4px'/>
           <g transform='translate(0 35)'>
             <polygon points='0 0 5 10 -5 10' fill='black'/>
-          </g>
-          
+          </g>          
         </g>
         
       </svg>
@@ -54,5 +54,5 @@ function SongVisualized ({ currentStepTime, songPattern }) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SongVisualized)
+export default connect(mapStateToProps, mapDispatchToProps)(Visualized)
 
