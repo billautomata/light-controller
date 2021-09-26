@@ -4,12 +4,18 @@ const gpio = require('./gpio-rpio.js')
 
 module.exports = function createStateMachine() {
 
+  this.config = {}
+  this.patterns = []
+  this.playlists = []
+  this.pulseTimeout = {}
+  this.sequencer = {}
+  this.sockets = {}
+  this.songs = []
+
   const fileData = JSON.parse(fs.readFileSync('./stateMachineData.json'))
   const pins = gpio()
 
   let sockets = {}
-  let pulse = {}
-
   let pulseTimeout = {}
 
   const sequencer = {
@@ -26,11 +32,10 @@ module.exports = function createStateMachine() {
   let songs = fileData.songs
   let playlists = fileData.playlists
 
-
-  loadPattern(config.activePatternId)
-  loadSong(config.activeSongId)
+  // loadPattern(config.activePatternId)
+  // loadSong(config.activeSongId)
   // loadPlaylist(config.activePlaylistId)
-  init()
+  // init()
 
   function createPattern () {
     const defaultPattern = {
@@ -483,18 +488,18 @@ module.exports = function createStateMachine() {
     patterns,
     songs,
     playlists,
-    createPattern,
+    createPattern,              // X
     createPlaylist,
     createSong,
-    deletePattern,
+    deletePattern,              // X
     deleteSong,
     getConfig,
-    getPattern,
-    getPatterns,
-    getPatternIndex,
+    getPattern,                 // X
+    getPatterns,                // X
+    getPatternIndex,            // X
     getPlaylists,
     getSongs,
-    loadPattern,
+    loadPattern,                // X
     loadPlaylist,
     loadSong,
     onConnect,
