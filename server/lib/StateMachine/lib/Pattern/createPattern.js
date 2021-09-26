@@ -11,7 +11,7 @@ module.exports = function createPattern () {
       return {
         id: 'channel-'+i,
         name: 'Channel '+i,
-        steps: []
+        steps: [ {idx: i, value: 1 } ]
       }
     }))
   }
