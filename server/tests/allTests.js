@@ -1,3 +1,3 @@
-require('./patternTests.js')
-require('./utilTests.js')
-require('./initialize.js')
+// require('./patternTests.js')
+// require('./utilTests.js')
+require('./initializeTest.js')
