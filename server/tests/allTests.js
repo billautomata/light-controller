@@ -1,3 +1,3 @@
 // require('./patternTests.js')
-// require('./utilTests.js')
-require('./initializeTest.js')
+require('./utilTests.js')
+// require('./initializeTest.js')

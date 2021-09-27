@@ -2,37 +2,41 @@ const test = require('tape')
 const createStateMachine = require('../lib/StateMachine/main.js')
 
 test('generatePatternData', t => {
-  t.plan(1)
-  const s = createStateMachine({ doInit: false })
-  s.createPattern()
-  s.generatePatternData(s.getPatterns()[0].id)
+  t.plan(2)
 
-  t.equal(s.getPatterns().length,1,'one pattern exists on the pattern list')
+  const s = createStateMachine({ doInit: false })
+
+  s.createPattern()
+
+  const d = s.generatePatternData(s.getPatterns()[0].id)
+
+  t.equal(d.patternData.patternLength, 16, 'pattern length is correctly calculated')
+  t.equal(s.getPatterns().length, 1, 'one pattern exists on the pattern list')
 })
 
 test('generateSongData', t => {
-  t.plan(1)
+  t.plan(2)
+
   const s = createStateMachine({ doInit: false })
   s.createPattern()
   s.createPattern()
 
   s.createSong()
-
   const song = s.getSongs()[0]
   song.steps.push({ id: s.getPatterns()[0].id, speed: 1, repeat: 1 })
-  song.steps.push({ id: s.getPatterns()[1].id, speed: 8, repeat: 2 })
+  song.steps.push({ id: s.getPatterns()[1].id, speed: 1, repeat: 2 })
 
   const p = s.generateSongData(song.id)
-  console.log(p.patterns)
-  console.log(p.steps.length)
-  console.log(p.steps.filter(s=>s[0]!==0))
 
-  t.equal(s.getPatterns().length,2,'two patterns exists on the pattern list')
+  t.equal(p.songLength, 48, 'song length is correctly calculated')
+  t.equal(s.getPatterns().length, 2, 'two patterns exists on the pattern list')
 })
 
 test('generatePlaylistData', t => {
-  t.plan(1)
+  t.plan(2)
+
   const s = createStateMachine({ doInit: false })
+  
   s.createPattern()
   s.createPattern()
 
@@ -56,5 +60,6 @@ test('generatePlaylistData', t => {
 
   const p = s.generatePlaylistData(playlist.id)
 
+  t.equal(p.playlistLength, 64, 'playlist length is correctly calculated')
   t.equal(s.getPatterns().length, 2, 'two patterns exists on the pattern list')
 })

@@ -23,6 +23,7 @@ module.exports = function generatePatternData (id) {
 
   patternData.msLength = sum
   patternData.id = id
+  patternData.patternLength = pattern.patternLength
 
   return { patternData, steps }
 }

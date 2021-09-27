@@ -11,5 +11,6 @@ module.exports = function generateSongData (id) {
       steps = steps.concat(data.steps)
     }
   })
-  return { patterns, steps }
+  const songLength = patterns.reduce((a,b)=>a+b.patternLength,0)
+  return { patterns, steps, songLength }
 }
