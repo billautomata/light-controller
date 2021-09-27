@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     patterns: state.patterns,
     song: state.config.activeSong,    
-    songPattern: state.config.songPattern
+    songPattern: state.config.songData
   }
 }
 
@@ -31,7 +31,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
   const [ indexesEditActive, setEditActive ] = useState([])
 
   let listOfPatterns = []
-  songPattern.forEach(pattern => {
+  songPattern.patterns.forEach(pattern => {
     if (listOfPatterns.indexOf(pattern.id) === -1) {
       listOfPatterns.push(pattern.id)
     }

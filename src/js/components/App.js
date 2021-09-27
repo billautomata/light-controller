@@ -79,11 +79,11 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
                   <LayoutBase/>
                 </Paper>
               </Grid>
-              {/* <Grid item xs={12}>
+              <Grid item xs={12}>
                 <Paper square elevation={0} style={sectionStyle}>              
                   <CurrentPattern/>    
                 </Paper>           
-              </Grid>    */}
+              </Grid>   
               <Grid item xs={12}>
                 <Paper square elevation={0} style={sectionStyle}>              
                   <SongMode/>

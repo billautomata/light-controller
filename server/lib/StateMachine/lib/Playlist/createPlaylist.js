@@ -7,4 +7,5 @@ module.exports = function createPlaylist () {
     steps: []
   }
   this.playlists.push(defaultPlaylist)
+  return defaultPlaylist
 }

@@ -7,4 +7,5 @@ module.exports = function createSong () {
     steps: []
   }
   this.songs.push(defaultSong)
+  return defaultSong
 }

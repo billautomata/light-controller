@@ -16,4 +16,5 @@ module.exports = function createPattern () {
     }))
   }
   this.patterns.push(defaultPattern)
+  return defaultPattern
 }

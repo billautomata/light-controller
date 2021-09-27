@@ -1,7 +1,16 @@
-module.exports = { registerSocket, sendMessage }
+module.exports = { onConnect, registerSockets, sendMessage }
 
-function registerSocket (socket) {
-  this.sockets.push(socket)
+function onConnect (socketId) {
+  this.sockets[socketId].emit('state-machine', {
+    config: this.config,
+    patterns: this.patterns,
+    playlists: this.playlists,
+    songs: this.songs
+  })
+}
+
+function registerSockets (sockets) {
+  this.sockets = sockets  
 }
 
 function sendMessage (type, message) {

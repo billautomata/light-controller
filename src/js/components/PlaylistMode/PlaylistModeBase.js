@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     patterns: state.patterns,
     playlist: state.config.activePlaylist,
     songs: state.songs,    
-    songPattern: state.config.playlistPattern
+    songPattern: state.config.playlistData.songs
   }
 }
 

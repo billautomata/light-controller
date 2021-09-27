@@ -1,4 +1,4 @@
-const createStateMachine = require('./lib/StateMachine.js')
+const createStateMachine = require('./lib/StateMachine/main.js')
 const socketRoutes = require('./lib/socketRoutes.js')
 var restify = require('restify')
 
@@ -20,17 +20,30 @@ const f = server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 })
 
-const io = require("socket.io")({
-  // path: "/socket.io",
-  // serveClient: true,
-})
+const io = require("socket.io")({})
 
 // either
 const socketServer = require("http").createServer()
 
 const sockets = {}
 
-const stateMachine = createStateMachine()
+const stateMachine = createStateMachine({ doInit: false })
+
+const pattern = stateMachine.createPattern()
+const pattern2 = stateMachine.createPattern()
+
+const song = stateMachine.createSong()
+song.steps.push({ id: pattern.id, speed: 1, repeat: 1 })
+song.steps.push({ id: pattern2.id, speed: 1, repeat: 1 })
+
+const playlist = stateMachine.createPlaylist()
+
+playlist.steps.push({ id: song.id, speed: 1, repeat: 1 })
+
+stateMachine.loadSong(song.id)
+stateMachine.loadPlaylist(playlist.id)
+stateMachine.loadPattern(pattern.id)
+
 stateMachine.registerSockets(sockets)
 // stateMachine.start({ mode: 'pattern' })
 
@@ -57,93 +70,6 @@ io.on('connection', (socket)=>{
   })
 
   socketRoutes(socket, stateMachine)
-
-  return
-
-  socket.on('TIME_VALUE', payload => {
-    console.log(payload, Number(payload.value))
-    if(Number(payload.value) === 0) {
-      patterns[currentPattern].channels[0].steps[payload.step].value = -1
-    } else {
-      patterns[currentPattern].channels[0].steps[payload.step].value = Number(payload.value)
-    }    
-  })
-
-  socket.on('PATTERN_VALUE', payload => {
-    console.log('pattern value', payload)
-    patterns[currentPattern].channels[payload.channel].steps[payload.step] = { value: payload.value }
-    socket.send('patterns', { value: patterns })
-  })
-
-  socket.on('SET_TIME_VALUE', payload => {
-    console.log('setting time value', payload)
-    patterns[currentPattern].channels[0].steps[payload.step].value = payload.value
-  })
-
-  socket.on('SET_CURRENT_STEP', payload => {
-    currentStep = payload.value
-    socket.send('step', { step: currentStep })
-  })
-
-  socket.on('SET_NUMBER_OF_CHANNELS', payload => {
-    payload.value = Number(payload.value)
-    console.log('set number of channels called', payload)
-    if(payload.value + 1 === patterns[currentPattern].channels.length) {
-      console.log('payload value matches, doing nothing')
-        // do nothing
-      return 
-    } else if(payload.value + 1 < patterns[currentPattern].channels.length) {
-      console.log('reducing the number of channels')
-      patterns[currentPattern].channels.length = payload.value + 1
-    } else if(payload.value + 1 > patterns[currentPattern].channels.length) {      
-      const nBaseChannels = patterns[currentPattern].channels.length
-      const nChannelsToAdd = payload.value - nBaseChannels + 1
-      console.log('adding to the number of channels', nChannelsToAdd)
-      for(let i = 0; i < nChannelsToAdd; i++) {
-        console.log('adding channel')
-        patterns[currentPattern].channels.push({
-          id: patterns[currentPattern].channels.length + 1,
-          name: 'new channel',
-          steps: new Array(patterns[currentPattern].patternLength).fill({ value: 0 })
-        })
-      }
-    }
-    socket.send('patterns', { value: patterns })
-  })
-
-  socket.on('SET_NUMBER_OF_STEPS', payload => {
-    payload.value = Number(payload.value)
-    console.log('setting number of steps', payload)
-    const current = patterns[currentPattern]
-    console.log(current.patternLength)
-    if (current.patternLength === payload.value) {
-      // do nothing
-      console.log('payload value matches pattern length, doing nothing')
-      return
-    } else if (current.patternLength < payload.value) {
-      console.log('payload value is greater than current length')      
-      const delta = payload.value - current.patternLength
-      current.patternLength = payload.value
-      current.channels.forEach((channel,channelIdx)=>{
-        for(let i = 0; i < delta; i++) {
-          if(channelIdx === 0) {
-            channel.steps.push({ value: -1 })
-          } else {
-            channel.steps.push({ value: 0 })
-          }
-        }
-      })
-    } else if (current.patternLength > payload.value) {
-      currentStep = 0
-      current.patternLength = payload.value
-      console.log('payload value is less than current length')
-      current.channels.forEach(channel=>{
-        channel.steps.length = payload.value
-      })
-    }
-    socket.send('patterns', { value: patterns })
-  })
-
 })
 
 // socketServer.listen(9001, ()=>{
