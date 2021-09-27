@@ -3,7 +3,7 @@ const createStateMachine = require('../lib/StateMachine/main.js')
 
 test('generatePatternData', t => {
   t.plan(1)
-  const s = createStateMachine()
+  const s = createStateMachine({ doInit: false })
   s.createPattern()
   s.generatePatternData(s.getPatterns()[0].id)
 
@@ -12,7 +12,7 @@ test('generatePatternData', t => {
 
 test('generateSongData', t => {
   t.plan(1)
-  const s = createStateMachine()
+  const s = createStateMachine({ doInit: false })
   s.createPattern()
   s.createPattern()
 
@@ -32,7 +32,7 @@ test('generateSongData', t => {
 
 test('generatePlaylistData', t => {
   t.plan(1)
-  const s = createStateMachine()
+  const s = createStateMachine({ doInit: false })
   s.createPattern()
   s.createPattern()
 

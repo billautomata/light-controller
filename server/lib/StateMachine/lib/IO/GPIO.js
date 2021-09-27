@@ -1,9 +1,9 @@
-module.exports = { setupPins, setPins }
+module.exports = { setupPins, writePins }
 
-function setPins () {
+function setupPins () {
 
 }
 
-function setupPins () {
+function writePins () {
 
 }

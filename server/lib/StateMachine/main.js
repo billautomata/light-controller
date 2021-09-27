@@ -7,7 +7,8 @@ const registerSongFns = require('./lib/Song/_registerSongFns.js')
 const registerSequencerFns = require('./lib/Sequencer/_registerSequencerFns.js')
 const registerUtilFns = require('./lib/Util/_registerUtilFns.js')
 
-module.exports = function createStateMachine (config) {
+module.exports = function createStateMachine (settings) {
+  if (settings === undefined) { settings = {} }
   const s = StateMachine()
   registerConfigFns(s)
   registerIOFns(s)
@@ -17,8 +18,20 @@ module.exports = function createStateMachine (config) {
   registerSongFns(s)
   registerUtilFns(s)
 
+  if (settings.doInit === false) {
+    return s
+  }
+  initialize(s, settings)
   // console.log('state machine')
   // console.log(s)
 
   return s
+}
+
+function initialize(s, settings) {
+  s.initializeSequencer()
+  s.loadFromDisk(settings.fileName)
+  s.loadPattern()
+  s.loadSong()
+  s.loadPlaylist()
 }

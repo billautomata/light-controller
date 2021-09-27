@@ -3,7 +3,7 @@ const createStateMachine = require('../lib/StateMachine/main.js')
 
 test('createPattern', t => {
   t.plan(1)
-  const s = createStateMachine()
+  const s = createStateMachine({ doInit: false })
   s.createPattern()
   t.equal(s.getPatterns().length,1,'one pattern exists on the pattern list')
 })
@@ -11,7 +11,7 @@ test('createPattern', t => {
 test('deletePattern', t => {
   t.plan(2)
 
-  const s = createStateMachine()
+  const s = createStateMachine({ doInit: false })
   s.createPattern()
   s.createPattern()
 
@@ -27,7 +27,7 @@ test('deletePattern', t => {
 test('loadPattern', t => {
   t.plan(2)
 
-  const s = createStateMachine()
+  const s = createStateMachine({ doInit: false })
   s.createPattern()
 
   const id = s.getPatterns()[0].id
