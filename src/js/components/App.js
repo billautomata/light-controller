@@ -7,7 +7,7 @@ import SongMode from './SongMode/SongModeBase.js'
 import PlaylistMode from './PlaylistMode/PlaylistModeBase.js'
 import createTheme from './createTheme.js'
 import LayoutBase from './Layout/LayoutBase.js'
-import Config from './Config.js'
+import Config from './Config/ConfigBase.js'
 
 import { io } from "socket.io-client"
 

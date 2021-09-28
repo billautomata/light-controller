@@ -28,6 +28,7 @@ module.exports = function createStateMachine (settings) {
 
 function initialize(s, settings) {
   s.initializeSequencer()
+  s.setupPins()
   s.loadFromDisk(settings.fileName)
   s.loadPattern(s.config.activePatternId)
   s.loadSong(s.config.activeSongId)

@@ -3,6 +3,7 @@ import { Grid, Typography } from '@material-ui/core'
 import { setTimeValue, setTimeValueTemporary } from '../../actions/index'
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('confirmed time steps', state.uiState.confirmedTimeSteps)
   return {
     patternLength: state.config.activePattern.patternLength,
     timePattern: state.config.activePattern.channels[0],
@@ -58,11 +59,13 @@ function Time ({ activePatternId, confirmedTimeSteps, timePattern, setTimeValue,
                               textAlign: 'center'
                             }}
                             onChange={(event)=>{
-                              console.log(event.target.value)
-                              setTimeValueTemporary({ step: idx, value: Number(event.target.value) })                            
+                              // return
+                              console.log('onchange', event.target.value)
+                              // setTimeValueTemporary({ step: idx, value: Number(event.target.value) })                            
                             }}
                             onKeyDown={(event)=>{
-                              console.log(event.key, event.target.value)
+                              // return
+                              console.log('onkeydown', event.key, event.target.value)
                               if (event.key === 'Enter' || event.key === 'Tab') {
                                 setTimeValue({ step: idx, value: Number(event.target.value) })                            
                               }                        

@@ -3,7 +3,7 @@ const fs = require('fs')
 module.exports = { loadFromDisk, saveToDisk }
 
 function loadFromDisk (fileName) {
-  const fileData = JSON.parse(fs.readFileSync(fileName, 'utf-8'))
+  const fileData = JSON.parse(fs.readFileSync('./data/state-machine.json').toString())
 
   this.config.activePatternId = fileData.config.activePatternId
   this.config.activePlaylistId = fileData.config.activePlaylistId
@@ -12,6 +12,11 @@ function loadFromDisk (fileName) {
   this.patterns = fileData.patterns
   this.playlists = fileData.playlists
   this.songs = fileData.songs
+
+  this.initializeSequencer()
+  this.loadPattern(this.config.activePatternId)
+  this.loadSong(this.config.activeSongId)
+  this.loadPlaylist(this.config.activePlaylistId)  
 }
 
 function saveToDisk (fileName) {
@@ -19,13 +24,13 @@ function saveToDisk (fileName) {
     config: { 
       activePatternId: this.config.activePatternId,
       activePlaylistId: this.config.activePlaylistId,
-      activeSongid: this.config.activeSongId
+      activeSongId: this.config.activeSongId
     },
     patterns: this.patterns,
     playlists: this.playlists,
     songs: this.songs
   }
 
-  fs.writeFileSync('./data/state-machine.json', JSON.stringify(o))
+  fs.writeFileSync('./data/state-machine.json', JSON.stringify(o,null,2))
 }
 

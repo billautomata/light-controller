@@ -232,6 +232,7 @@ function rootReducer(state = initialState, action) {
       window.socket.emit('PATTERN_SET_VALUE_STEP', action.payload )
       return state
     case SET_TIME_VALUE_TEMPORARY:
+      console.log('REDUCER - '+SET_TIME_VALUE_TEMPORARY, action.payload)
       // remove the payload from the confirmedTimeSteps
       state.uiState.confirmedTimeSteps = state.uiState.confirmedTimeSteps.filter(o=>o.idx !== action.payload.step)
       state.uiState = Object.assign({}, state.uiState, { uiState: state.uiState })      

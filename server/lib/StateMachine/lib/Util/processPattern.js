@@ -17,4 +17,5 @@ module.exports = function processPattern () {
 
     this.sendMessage('set-step', { value: sequencer.currentStep })
     this.writePins(channelValues)
+
 }

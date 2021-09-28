@@ -34,4 +34,14 @@ module.exports = function socketRoutes (socket, stateMachine) {
     socket.emit('config', stateMachine.getConfig())
   })
 
+  socket.on('SAVE_TO_DISK', payload => {
+    console.log('saving to disk')
+    stateMachine.saveToDisk()
+  })
+
+  socket.on('LOAD_FROM_DISK', payload => {
+    console.log('loading from disk')
+    stateMachine.loadFromDisk()
+  })
+
 }

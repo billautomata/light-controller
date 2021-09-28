@@ -20,6 +20,7 @@ module.exports = function setupPattern (socket, stateMachine) {
   })
 
   socket.on('PATTERN_SET_VALUE_TIME', payload => {
+    console.log('PATTERN_SET_VALUE_TIME')
     console.log(payload)
     const existingIndex = stateMachine.config.activePattern.channels[0].steps.findIndex(o=>o.idx === payload.step)
     if(existingIndex === -1) {

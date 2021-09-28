@@ -23,47 +23,43 @@ const f = server.listen(8080, function () {
 const io = require("socket.io")({})
 
 // either
-const socketServer = require("http").createServer()
+// const socketServer = require("http").createServer()
 
 const sockets = {}
 
-const stateMachine = createStateMachine({ doInit: false })
+const stateMachine = createStateMachine()
 
-const pattern = stateMachine.createPattern()
-const pattern2 = stateMachine.createPattern()
-const pattern3 = stateMachine.createPattern()
+// const stateMachine = createStateMachine({ doInit: false })
 
-const song = stateMachine.createSong()
-song.steps.push({ id: pattern.id, speed: 1, repeat: 1 })
-song.steps.push({ id: pattern2.id, speed: 1, repeat: 1 })
+// const pattern = stateMachine.createPattern()
+// const pattern2 = stateMachine.createPattern()
+// const pattern3 = stateMachine.createPattern()
 
-const songB = stateMachine.createSong()
-songB.steps.push({ id: pattern3.id, speed: 1, repeat: 1 })
-songB.steps.push({ id: pattern2.id, speed: 1, repeat: 1 })
-songB.steps.push({ id: pattern.id, speed: 1, repeat: 4 })
+// const song = stateMachine.createSong()
+// song.steps.push({ id: pattern.id, speed: 1, repeat: 1 })
+// song.steps.push({ id: pattern2.id, speed: 1, repeat: 1 })
 
-const playlist = stateMachine.createPlaylist()
+// const songB = stateMachine.createSong()
+// songB.steps.push({ id: pattern3.id, speed: 1, repeat: 1 })
+// songB.steps.push({ id: pattern2.id, speed: 1, repeat: 1 })
+// songB.steps.push({ id: pattern.id, speed: 1, repeat: 4 })
 
-playlist.steps.push({ id: song.id, speed: 1, repeat: 1 })
-playlist.steps.push({ id: songB.id, speed: 1, repeat: 1 })
+// const playlist = stateMachine.createPlaylist()
 
-stateMachine.loadSong(song.id)
-stateMachine.loadPlaylist(playlist.id)
-stateMachine.loadPattern(pattern.id)
+// playlist.steps.push({ id: song.id, speed: 1, repeat: 1 })
+// playlist.steps.push({ id: songB.id, speed: 1, repeat: 1 })
+
+// stateMachine.loadSong(song.id)
+// stateMachine.loadPlaylist(playlist.id)
+// stateMachine.loadPattern(pattern.id)
 
 stateMachine.registerSockets(sockets)
-// stateMachine.start({ mode: 'pattern' })
 
 io.attach(f, {
   pingInterval: 10000,
   pingTimeout: 5000,
   cookie: false
 })
-
-let pulse = {}
-let currentStep = 0
-let currentSpeed = 300
-let currentPattern = 0
 
 io.on('connection', (socket)=>{
   console.log('socket-id', socket.id)
@@ -78,7 +74,3 @@ io.on('connection', (socket)=>{
 
   socketRoutes(socket, stateMachine)
 })
-
-// socketServer.listen(9001, ()=>{
-//   console.log('socket server listening on 9001')
-// })
