@@ -31,14 +31,21 @@ const stateMachine = createStateMachine({ doInit: false })
 
 const pattern = stateMachine.createPattern()
 const pattern2 = stateMachine.createPattern()
+const pattern3 = stateMachine.createPattern()
 
 const song = stateMachine.createSong()
 song.steps.push({ id: pattern.id, speed: 1, repeat: 1 })
 song.steps.push({ id: pattern2.id, speed: 1, repeat: 1 })
 
+const songB = stateMachine.createSong()
+songB.steps.push({ id: pattern3.id, speed: 1, repeat: 1 })
+songB.steps.push({ id: pattern2.id, speed: 1, repeat: 1 })
+songB.steps.push({ id: pattern.id, speed: 1, repeat: 4 })
+
 const playlist = stateMachine.createPlaylist()
 
 playlist.steps.push({ id: song.id, speed: 1, repeat: 1 })
+playlist.steps.push({ id: songB.id, speed: 1, repeat: 1 })
 
 stateMachine.loadSong(song.id)
 stateMachine.loadPlaylist(playlist.id)

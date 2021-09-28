@@ -1,8 +1,8 @@
 const getSequencer = require('./getSequencer.js')
 const initializeSequencer = require('./initializeSequencer.js')
 const startSequencer = require('./startSequencer.js')
-const stopSequencer = require('./stopSequencer')
-const tickSequencer = require('./tickSequencer')
+const stopSequencer = require('./stopSequencer.js')
+const tickSequencer = require('./tickSequencer.js')
 
 module.exports = function registerSequencerFns (s) {
   s.getSequencer = getSequencer.bind(s)

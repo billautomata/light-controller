@@ -32,7 +32,8 @@ function mapDispatchToProps(dispatch) {
 const sectionStyle = { 
   marginBottom: 16, 
   padding: '12px 4px',
-  border: '1px solid #DDD' 
+  borderBottom: '1px solid #AAA'
+  // outline: '1px solid #DDD' 
 }
 
 const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setPlaylists, setStep, setStepTime }) {

@@ -1,6 +1,6 @@
 let pulseTimeout = {}
 
-module.exports = function tickSequencer (payload) {
+module.exports = function tickSequencer () {
   clearTimeout(pulseTimeout)
   if (this.sequencer.isPlaying === false) {
     return
@@ -20,7 +20,7 @@ module.exports = function tickSequencer (payload) {
     }
   }
 
-  if (config.isPlaying) {
-    pulseTimeout = setTimeout(this.sequencer.tickSequencer, 0)
+  if (this.sequencer.isPlaying) {
+    pulseTimeout = setTimeout(()=>{this.tickSequencer()}, 0)
   }
 }

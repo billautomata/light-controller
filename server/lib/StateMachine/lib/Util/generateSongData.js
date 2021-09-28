@@ -1,7 +1,7 @@
 module.exports = function generateSongData (id) {
   const patterns = []
   let steps = []
-  const song = this.getSongById(id)
+  const song = id === this.config.activeSongId ? this.config.activeSong : this.getSongById(id)
   song.steps.forEach(step => {
     const data = this.generatePatternData(step.id)
     data.patternData.msLength = data.patternData.msLength / step.speed

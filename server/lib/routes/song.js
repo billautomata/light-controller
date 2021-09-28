@@ -2,13 +2,13 @@ module.exports = function setupSong (socket, stateMachine) {
   
   socket.on('SONG_ADD_STEP', payload => {
     console.log('song add step')
-    stateMachine.songAddStep()
+    stateMachine.addStepSong()
     socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('SONG_COPY_STEP', payload => {
     console.log('song copy step', payload)
-    stateMachine.songCopyStep(payload)
+    stateMachine.copyStepSong(payload)
     socket.emit('config', stateMachine.getConfig())
   })
 
@@ -33,26 +33,13 @@ module.exports = function setupSong (socket, stateMachine) {
   })
 
   socket.on('SONG_CHANGE_STEP_ORDER', payload => {
-    stateMachine.songChangeStepOrder(payload)
+    stateMachine.changeStepOrderSong(payload)
     socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('SONG_SET_VALUE', payload => {
     console.log('song set value', payload)
-    switch(payload.type) {
-      case 'pattern':
-        stateMachine.config.activeSong.steps[payload.idx].id = payload.value
-        break;
-      case 'repeat':
-        stateMachine.config.activeSong.steps[payload.idx].repeat = Number(payload.value)
-        break;
-      case 'speed':
-        stateMachine.config.activeSong.steps[payload.idx].speed = Number(payload.value)
-        break;
-      default:
-        break;
-    }
-    stateMachine.songFillSteps()
+    stateMachine.setStepValueSong(payload)
     socket.emit('config', stateMachine.getConfig())
   })
 

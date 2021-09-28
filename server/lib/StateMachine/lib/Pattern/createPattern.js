@@ -6,7 +6,7 @@ module.exports = function createPattern () {
     id: uuid(),
     patternLength: 16,
     channels: [
-      { id: 'time-channel', name: 'time-channel', steps: [{ idx:0, value: 500 }]},        
+      { id: 'time-channel', name: 'time-channel', steps: [{ idx:0, value: 100 }]},        
     ].concat(new Array(16).fill(0).map((o,i)=>{
       return {
         id: 'channel-'+i,

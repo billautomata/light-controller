@@ -23,17 +23,15 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
   const boxSize = 1000 / patternLength
   const boxHeight = Math.min(24, boxSize)  
   return (
-    <Grid container item xs={11} style={{outline: '0px solid red'}} alignItems='center'>
-        <Grid item xs={1} align='center'>
-          <Typography variant='body2'>Time (ms)</Typography>
+    <Grid container item xs={11} style={{outline: '0px solid red', marginBottom: -4}} alignItems='center'>
+        <Grid item xs={1} align='center' style={{height: 20}}>
+          <Typography variant='body2'>Speed <span style={{fontStyle: 'italic'}}>(ms)</span></Typography>
         </Grid>
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1001 25`}
             style={{
               backgroundColor: '#FFF', 
-              width: '100%', 
-              margin: 'auto',
-              marginBottom: 0
+              width: '100%'
             }}>    
             {            
               new Array(patternLength).fill(0).map((value, idx) => {

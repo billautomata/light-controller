@@ -1,7 +1,7 @@
 module.exports = function generatePlaylistData (id) {
   const songs = []
   let steps = []
-  const playlist = this.getPlaylistById(id)
+  const playlist = id === this.config.activePlaylistId ? this.config.activePlaylist : this.getPlaylistById(id)
   playlist.steps.forEach(step => {
     const d = generateSongData(step.id)
     d.patterns.forEach(pattern=>{ pattern.msLength = pattern.msLength / step.speed })

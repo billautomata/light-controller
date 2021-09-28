@@ -1,13 +1,23 @@
+const addStepPlaylist = require('./addStepPlaylist.js')
+const changeStepOrderPlaylist = require('./changeStepOrderPlaylist.js')
+const copyStepPlaylist = require('./copyStepPlaylist.js')
 const createPlaylist = require('./createPlaylist.js')
 const deletePlaylist = require('./deletePlaylist.js')
 const getPlaylists = require('./getPlaylists.js')
 const getPlaylistById = require('./getPlaylistById.js')
 const getPlaylistIndex = require('./getPlaylistIndex.js')
+const savePlaylist = require('./savePlaylist.js')
+const setStepValuePlaylist = require('./setStepValuePlaylist.js')
 
 module.exports = function registerPlaylistFns (s) {
+  s.addStepPlaylist = addStepPlaylist.bind(s)
+  s.changeStepOrderPlaylist = changeStepOrderPlaylist.bind(s)
+  s.copyStepPlaylist = copyStepPlaylist.bind(s)
   s.createPlaylist = createPlaylist.bind(s)
   s.deletePlaylist = deletePlaylist.bind(s)
   s.getPlaylists = getPlaylists.bind(s)
   s.getPlaylistById = getPlaylistById.bind(s)
   s.getPlaylistIndex = getPlaylistIndex.bind(s)
+  s.savePlaylist = savePlaylist.bind(s)
+  s.setStepValuePlaylist = setStepValuePlaylist.bind(s)
 }

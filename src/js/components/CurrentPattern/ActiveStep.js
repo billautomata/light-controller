@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentStep: state.currentStep,
     patternLength: state.config.activePattern.patternLength,
-    playingMode: state.config.playingMode
+    playingMode: 'pattern' // state.config.playingMode
   }
 }
 
@@ -19,20 +19,17 @@ function mapDispatchToProps(dispatch) {
 function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }) {
   const boxSize = 1000 / patternLength 
   return (
-    <Grid container item xs={11}>
-        <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-          <Grid item xs={12}>
-            <Typography variant='body2'>Active Step</Typography>
-          </Grid>
+    <Grid container item xs={11} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -5}}>
+        <Grid item xs={1} align='center' style={{outline: '0px solid black', height: 22}}>
+          {/* <Typography variant='body2'>Active Step</Typography> */}
         </Grid>
         <Grid item xs={11}>
-          <svg viewBox={`-1 0 1001 25`}
+          <svg viewBox={`-1 0 1001 15`}
                 style={{
                   backgroundColor: '#FFF', 
                   width: '100%', 
-                  margin: 'auto',
-                  marginTop: 10,
-                  marginBottom: 0
+                  height: '15px',
+                  margin: 'auto'
                 }}>    
               {
                 new Array(patternLength).fill(0).map((o, index) => {
@@ -41,7 +38,7 @@ function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }
                       transform={`translate(${(boxSize*index)} 0)`}
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
-                      <rect x='1' y='0' width={boxSize-2} height={25} stroke='#AAA'
+                      <rect x='1' y='0' rx='2' ry='2' width={boxSize-2} height={15} stroke='#AAA'
                         fill={ ((playingMode === 'pattern') && (currentStep === index)) ? '#1f77b4' : '#DDD' }/>
                     </g>
                   )

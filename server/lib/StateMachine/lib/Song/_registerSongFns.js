@@ -1,13 +1,23 @@
+const addStepSong = require('./addStepSong.js')
+const changeStepOrderSong = require('./changeStepOrderSong.js')
+const copyStepSong = require('./copyStepSong.js')
 const createSong = require('./createSong.js')
 const deleteSong = require('./deleteSong.js')
 const getSongs = require('./getSongs.js')
 const getSongById = require('./getSongById.js')
 const getSongIndex = require('./getSongIndex.js')
+const saveSong = require('./saveSong.js')
+const setStepValueSong = require('./setStepValueSong.js')
 
 module.exports = function registerSongFns (s) {
+  s.addStepSong = addStepSong.bind(s)
+  s.changeStepOrderSong = changeStepOrderSong.bind(s)
+  s.copyStepSong = copyStepSong.bind(s)
   s.createSong = createSong.bind(s)
   s.deleteSong = deleteSong.bind(s)
   s.getSongs = getSongs.bind(s)
   s.getSongById = getSongById.bind(s)
   s.getSongIndex = getSongIndex.bind(s)
+  s.saveSong = saveSong.bind(s)
+  s.setStepValueSong = setStepValueSong.bind(s)
 }

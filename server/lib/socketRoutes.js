@@ -25,12 +25,12 @@ module.exports = function socketRoutes (socket, stateMachine) {
 
   socket.on('START_SEQUENCER', payload => {
     console.log('starting sequencer', payload)
-    stateMachine.start(payload)
+    stateMachine.startSequencer(payload)
     socket.emit('config', stateMachine.getConfig())
   })
 
   socket.on('STOP_SEQUENCER', payload => {
-    stateMachine.stop()
+    stateMachine.stopSequencer()
     socket.emit('config', stateMachine.getConfig())
   })
 
