@@ -20,7 +20,7 @@ module.exports = function setupPlaylist (socket, stateMachine) {
 
   socket.on('PLAYLIST_DELETE_STEP', payload => {
     console.log('playlist delete step', payload)
-    stateMachine.playlistDeleteStep(payload)
+    stateMachine.deleteStepPlaylist(payload)
     socket.emit('config', stateMachine.getConfig())
   })
 

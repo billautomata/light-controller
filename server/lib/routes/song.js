@@ -14,7 +14,7 @@ module.exports = function setupSong (socket, stateMachine) {
 
   socket.on('SONG_DELETE_STEP', payload => {
     console.log('song delete step', payload)
-    stateMachine.songDeleteStep(payload)
+    stateMachine.deleteStepSong(payload)
     socket.emit('config', stateMachine.getConfig())
   })
 
