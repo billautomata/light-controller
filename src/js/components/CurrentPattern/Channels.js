@@ -17,17 +17,17 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function Time ({ channels, pattern, setStepValue }) {
+function Channels ({ channels, pattern, setStepValue }) {
   const boxSize = 1000 / pattern.patternLength
   const boxHeight = Math.min(24, boxSize)
   return (
-    <Grid container item xs={11}>
+    <Grid container item xs={12}>
       {
         channels.slice(1,channels.length).map((channel,channelIdx)=>{
           return (
-            <Grid container item xs={12} alignItems='center' style={{marginBottom: 0}}>
+            <Grid key={`patternMode_channelParent_${channelIdx}`} container item xs={12} alignItems='center' style={{marginBottom: 0}}>
               <Grid container item xs={1}>
-                <Grid item align='center' xs={12}>
+                <Grid item align='center' xs={12} style={{height: 16}}>
                   <Typography variant='body2'>Channel {channelIdx}</Typography>
                 </Grid>
               </Grid>
@@ -42,7 +42,7 @@ function Time ({ channels, pattern, setStepValue }) {
                   new Array(pattern.patternLength).fill(0).map((n,idx)=>{
                     const value = channel.steps.filter(o=>{return o.idx === idx})[0] !== undefined
                     return (
-                      <g key={`sequenceValues_${idx}`} transform={`translate(${idx*boxSize} 0)`}>
+                      <g key={`patternMode_sequenceValues_${idx}_${channelIdx}`} transform={`translate(${idx*boxSize} 0)`}>
                         <rect x='1' y='1' 
                           width={boxSize-2} height={Math.min(24, boxHeight-2)} 
                           fill={ value ? '#1f77b4' : '#FFF' }
@@ -70,5 +70,5 @@ function Time ({ channels, pattern, setStepValue }) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Time)
+export default connect(mapStateToProps, mapDispatchToProps)(Channels)
 

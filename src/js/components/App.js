@@ -1,13 +1,13 @@
 import { ThemeProvider } from '@material-ui/core'
 import { initializeData, setConfig, setStep, setStepTime, setSongs, setPatterns, setPlaylists } from '../actions/index'
 import { connect } from "react-redux"
-import CurrentPattern from './CurrentPattern/CurrentPatternBase'
 import { Grid, Paper } from '@material-ui/core'
-import LoadPatterns from './LoadPatterns'
-import SongMode from './SongMode/SongModeBase'
-import PlaylistMode from './PlaylistMode/PlaylistModeBase'
+import CurrentPattern from './CurrentPattern/CurrentPatternBase'
+import SongMode from './SongMode/SongModeBase.js'
+import PlaylistMode from './PlaylistMode/PlaylistModeBase.js'
 import createTheme from './createTheme.js'
-import LayoutBase from './Layout/LayoutBase'
+import LayoutBase from './Layout/LayoutBase.js'
+import Config from './Config.js'
 
 import { io } from "socket.io-client"
 
@@ -70,7 +70,7 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
 
   return (
     <ThemeProvider theme={createTheme()}>
-      <div style={{ margin: 'auto', marginTop: 12, width: 1280, outline: '1px solid #FFF' }}>
+      <div style={{ margin: 'auto', marginBottom: 256, marginTop: 12, width: 1280, outline: '1px solid #FFF' }}>
         {
           dataLoaded ? 
           <Grid container justifyContent='center'>
@@ -94,7 +94,10 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
                 <Paper square elevation={0} style={sectionStyle}>              
                   <PlaylistMode/>
                 </Paper>           
-              </Grid>     
+              </Grid> 
+              <Grid item xs={12}>
+                <Config/>
+              </Grid>    
             </Grid>
           </Grid>
           : null

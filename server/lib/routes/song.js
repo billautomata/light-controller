@@ -29,7 +29,6 @@ module.exports = function setupSong (socket, stateMachine) {
     stateMachine.saveSong()
     socket.emit('config', stateMachine.getConfig())
     socket.emit('songs', stateMachine.getSongs())
-    stateMachine.saveToDisk()
   })
 
   socket.on('SONG_CHANGE_STEP_ORDER', payload => {

@@ -2,12 +2,9 @@ module.exports = function setupPattern (socket, stateMachine) {
 
   socket.on('PATTERN_SAVE', (payload) => {
     console.log('saving pattern')
-    let patternIndex = stateMachine.getPatternIndex(stateMachine.config.activePatternId)
-    stateMachine.getPatterns()[patternIndex] = JSON.parse(JSON.stringify(stateMachine.config.activePattern))
-    console.log(stateMachine.patterns[patternIndex].name)
+    stateMachine.savePattern()
     socket.emit('config', stateMachine.config)
     socket.emit('patterns', stateMachine.getPatterns())
-    stateMachine.saveToDisk()
   })
  
   socket.on('PATTERN_SET_STEPS', (payload) => {

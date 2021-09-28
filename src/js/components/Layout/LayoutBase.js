@@ -22,9 +22,9 @@ function getLightValues (state) {
         }
       })    
     case 'song': 
-      return state.config.songSteps[state.currentStep] !== undefined ? state.config.songSteps[state.currentStep].slice(1) : []      
+      return state.config.songData.steps[state.currentStep] !== undefined ? state.config.songData.steps[state.currentStep].slice(1) : []      
     case 'playlist':
-      return state.config.playlistSteps[state.currentStep] !== undefined ? state.config.playlistSteps[state.currentStep].slice(1) : []
+      return state.config.playlistData.steps[state.currentStep] !== undefined ? state.config.playlistData.steps[state.currentStep].slice(1) : []
     default:
       return []
   }
@@ -57,7 +57,7 @@ function LayoutBase({ currentStep, lightValues }) {
 
                 // console.log(x,y,treeIndex)
                 return (
-                  <circle cx={x} cy={y} r={33} fill={ active ? '#FFBF00' : '#333' }/>
+                  <circle key={`tree_${treeIndex}`} cx={x} cy={y} r={33} fill={ active ? '#FFBF00' : '#333' }/>
                 )
               })
             }

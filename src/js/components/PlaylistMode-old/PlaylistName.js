@@ -33,7 +33,7 @@ function PatternName ({ name, numberOfChannels, numberOfSteps, patternName, setN
           <Button variant='outlined'>Edit</Button>
         </Grid>
       </Grid>
-      <Grid item xs={2} justifyConent='center'>
+      <Grid container item xs={2} justifyContent='center'>
         <Transport mode='song'/>
       </Grid>      
       <Grid container item xs={3} justifyContent='flex-end' spacing={1}>  

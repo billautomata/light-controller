@@ -87,6 +87,7 @@ function rootReducer(state = initialState, action) {
     case DELETE_SONG:
       console.log('REDUCER - ' + DELETE_SONG)
       window.socket.emit('SONG_DELETE', action.payload)
+      return state
     case LOAD_PATTERN:
       console.log('REDUCER - '+LOAD_PATTERN, action.payload)
       window.socket.emit('CONFIG_LOAD_PATTERN', action.payload)
@@ -185,7 +186,7 @@ function rootReducer(state = initialState, action) {
         case 'playlist':
           return Object.assign({}, state, { uiState: Object.assign({}, state.uiState, { editModePlaylist: action.payload.value }) })
         default:
-          return state          
+          break;
       }
       const uiState = Object.assign({}, state.uiState, { editModePattern: action.payload.value })
       return Object.assign({}, state, { uiState })

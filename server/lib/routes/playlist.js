@@ -29,7 +29,6 @@ module.exports = function setupPlaylist (socket, stateMachine) {
     stateMachine.savePlaylist()
     socket.emit('config', stateMachine.getConfig())
     socket.emit('playlists', stateMachine.getPlaylists())
-    stateMachine.saveToDisk()    
   })
 
   socket.on('PLAYLIST_SET_NAME', payload => {

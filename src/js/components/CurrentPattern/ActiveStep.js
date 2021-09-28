@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { setCurrentStep } from '../../actions/index'
 
 const mapStateToProps = (state, ownProps) => {
   return {
     currentStep: state.currentStep,
     patternLength: state.config.activePattern.patternLength,
-    playingMode: 'pattern' // state.config.playingMode
+    playingMode: state.config.playingMode
   }
 }
 
@@ -19,10 +19,8 @@ function mapDispatchToProps(dispatch) {
 function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }) {
   const boxSize = 1000 / patternLength 
   return (
-    <Grid container item xs={11} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -5}}>
-        <Grid item xs={1} align='center' style={{outline: '0px solid black', height: 22}}>
-          {/* <Typography variant='body2'>Active Step</Typography> */}
-        </Grid>
+    <Grid container item xs={12} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -4}}>
+        <Grid item xs={1}/>
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1001 15`}
                 style={{

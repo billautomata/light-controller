@@ -53,7 +53,7 @@ function PatternName ({ editMode, name, saveEdits, savePlaylist, setEditMode, se
           </>
         }
       </Grid>
-      <Grid item xs={2} justifyConent='center'>
+      <Grid container item xs={2} justifyContent='center'>
         <Transport mode='playlist'/>
       </Grid>      
       <Grid container item xs={3} justifyContent='flex-end' spacing={1}>  

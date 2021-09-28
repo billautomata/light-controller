@@ -27,7 +27,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function SongModeBase ({ playlist, songs, playlistAddStep, playlistChangeStepOrder, playlistCopyStep, playlistDeleteStep, songPattern, playlistSetValue }) {
+function PlaylistModeBase ({ playlist, songs, playlistAddStep, playlistChangeStepOrder, playlistCopyStep, playlistDeleteStep, songPattern, playlistSetValue }) {
   // const songPatterns = playlist.steps
   const [ indexesEditActive, setEditActive ] = useState([])
 
@@ -65,7 +65,7 @@ function SongModeBase ({ playlist, songs, playlistAddStep, playlistChangeStepOrd
               playlist.steps.map((pattern,idx)=>{
                 const o = songs.filter(o=>{return o.id === pattern.id})[0]
                 return (              
-                  <Grid item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
+                  <Grid key={`playlistMode_steps_${idx}_${pattern.id}`} item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
                     <Grid container align='center' alignItems='center'>
                       <Grid item xs={1} align='left' style={{paddingTop: '4px'}} onClick={()=>{ playlistDeleteStep({idx}) }}>
                         <svg width='18' height='18'>                          
@@ -230,5 +230,5 @@ function SongModeBase ({ playlist, songs, playlistAddStep, playlistChangeStepOrd
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SongModeBase)
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistModeBase)
 

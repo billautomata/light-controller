@@ -6,7 +6,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     patternLength: state.config.activePattern.patternLength,
     timePattern: state.config.activePattern.channels[0],
-    channels: state.config.activePattern.channels,
     activePatternId: state.config.activePatternId,
     confirmedTimeSteps: state.uiState.confirmedTimeSteps
   }
@@ -19,11 +18,11 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, setTimeValue, setTimeValueTemporary, patternLength }) {
+function Time ({ activePatternId, confirmedTimeSteps, timePattern, setTimeValue, setTimeValueTemporary, patternLength }) {
   const boxSize = 1000 / patternLength
   const boxHeight = Math.min(24, boxSize)  
   return (
-    <Grid container item xs={11} style={{outline: '0px solid red', marginBottom: -4}} alignItems='center'>
+    <Grid container item xs={12} style={{outline: '0px solid red', marginBottom: -4}} alignItems='center'>
         <Grid item xs={1} align='center' style={{height: 20}}>
           <Typography variant='body2'>Speed <span style={{fontStyle: 'italic'}}>(ms)</span></Typography>
         </Grid>
@@ -38,7 +37,7 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
                 const valueForStep = timePattern.steps.filter(o=>o.idx === idx)[0]
                 const confirmed = confirmedTimeSteps.findIndex(o=>o.idx === idx)
                 return (
-                  <g key={`pattern_${activePatternId}_speedvalue_${idx}`} transform={`translate(${(boxSize*idx)} 0)`}>
+                  <g key={`pattern_${activePatternId}_speedvalue_${idx}_${Math.random()}`} transform={`translate(${(boxSize*idx)} 0)`}>
                     <rect x='1' y='1' height={boxHeight-1} width={boxSize-2} fill='#EEE' stroke='#AAA' onClick={()=>{ setTimeValue({ step: idx, value: Number(500) }) }}/>
                     {
                       valueForStep === undefined ? <></> :
@@ -71,7 +70,6 @@ function Time ({ activePatternId, channels, confirmedTimeSteps, timePattern, set
                         </foreignObject>                      
                       </>
                     }                    
-
                   </g>
                 )
               })

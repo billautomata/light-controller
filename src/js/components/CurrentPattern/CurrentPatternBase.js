@@ -19,9 +19,11 @@ function CurrentPattern ({ }) {
     <Grid container item xs={12}>
       <Grid container item xs={10}>
         <PatternName/>
-        <ActiveStep/>
-        <Time/>
-        <Channels/>            
+        <Grid container item xs={12} style={{paddingRight: 24}}>
+          <ActiveStep/>
+          <Time/>
+          <Channels/>            
+        </Grid>
       </Grid>
       <Grid container item xs={2}>
         <LoadPatterns mode='pattern'/>

@@ -26,7 +26,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, saveEdits, savePattern, setEditMode, showSave, setNumberOfSteps, setPatternName }) {
-  let nChannels = numberOfChannels
   let nSteps = numberOfSteps
   let name = patternName
   return (

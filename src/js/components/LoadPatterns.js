@@ -6,7 +6,7 @@ import { copyPattern, createPattern, deletePattern, loadPattern } from '../actio
 const mapStateToProps = (state, ownProps) => {
   return {
     props: ownProps,
-    activePatternId: ownProps.mode === 'song' ? state.config.activeSongId : state.config.activePatternId,
+    activePatternId: ownProps.mode === 'song' ? state.config.activeSongId : ownProps.mode === 'playlist' ? state.config.activePlaylistId : state.config.activePatternId,
     patterns: ownProps.mode === 'song' ? state.songs : ownProps.mode === 'playlist' ? state.playlists : state.patterns,    
   }
 }
@@ -103,10 +103,10 @@ function LoadPatterns ({ activePatternId, copyPattern, createPattern, deletePatt
             <Button size='small' variant='contained' color='primary'
               onClick={()=>{ createPattern({ mode: props.mode }) }}>NEW</Button>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button size='small' variant='outlined'
               onClick={()=>{ copyPattern(activePatternId) }}>COPY</Button>
-          </Grid>
+          </Grid> */}
         </Grid>          
       </Grid>      
     </Grid>

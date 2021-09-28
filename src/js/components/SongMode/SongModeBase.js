@@ -64,7 +64,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
               song.steps.map((pattern,idx)=>{
                 const o = patterns.filter(o=>{return o.id === pattern.id})[0]
                 return (              
-                  <Grid item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
+                  <Grid key={`songmode_list_of_patterns_${idx}_${pattern.id}`} item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
                     <Grid container align='center' alignItems='center'>
                       <Grid item xs={1} align='left' style={{paddingTop: '4px'}} onClick={()=>{ songDeleteStep({idx}) }}>
                         <svg width='18' height='18'>                          
@@ -143,9 +143,9 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                                   } }                                  
                                   >
                                     {
-                                      [0.25, 0.5, 1, 1.5, 2, 4, 8].map(value=>{
+                                      [0.25, 0.5, 1, 1.5, 2, 4, 8].map((value,optionIdx)=>{
                                         return (
-                                          <option value={value} selected={Number(pattern.speed) === value ? true : false}>{value}</option>
+                                          <option key={`speed_option_${idx}_${optionIdx}`}  value={value} selected={Number(pattern.speed) === value ? true : false}>{value}</option>
                                         )
                                       })
                                     }                                    

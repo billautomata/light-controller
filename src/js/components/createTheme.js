@@ -1,5 +1,4 @@
 import { createTheme as materialTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 
 export default function createTheme () {
@@ -21,7 +20,7 @@ export default function createTheme () {
     overrides: {
       MuiButton: {
         root: {
-          borderRadius: '24px',
+          borderRadius: '2px',
         },
         label: {
           fontWeight: '900',

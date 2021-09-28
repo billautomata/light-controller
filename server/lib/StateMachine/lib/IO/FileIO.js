@@ -15,5 +15,17 @@ function loadFromDisk (fileName) {
 }
 
 function saveToDisk (fileName) {
+  const o = {
+    config: { 
+      activePatternId: this.config.activePatternId,
+      activePlaylistId: this.config.activePlaylistId,
+      activeSongid: this.config.activeSongId
+    },
+    patterns: this.patterns,
+    playlists: this.playlists,
+    songs: this.songs
+  }
+
+  fs.writeFileSync('./data/state-machine.json', JSON.stringify(o))
 }
 
