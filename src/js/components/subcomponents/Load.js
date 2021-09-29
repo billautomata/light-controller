@@ -38,14 +38,25 @@ function Load ({ activePatternId, copyPattern, createPattern, deletePattern, loa
             LOAD { props.mode === 'song' ? 'Song' : props.mode === 'playlist' ? 'Playlist' : 'Pattern'}
           </Typography>
         </Grid> */}
-        <Grid container item xs={12} style={{maxHeight: '250px', overflow: 'hidden', overflowY: 'auto'}}>        
+        <Grid xs={12} container item alignItems='flex-start' align='center' justifyContent='flex-start' 
+          style={{outline: '0px solid red', paddingTop: '3px', paddingBottom: '16px'}}>
+          <Grid item xs={10}>
+            <Button size='large' variant='outlined' color='primary'
+              onClick={()=>{ createPattern({ mode: props.mode }) }}>NEW { props.mode === 'song' ? 'Song' : props.mode === 'playlist' ? 'Playlist' : 'Pattern' }</Button>
+          </Grid>
+          {/* <Grid item>
+            <Button size='small' variant='outlined'
+              onClick={()=>{ copyPattern(activePatternId) }}>COPY</Button>
+          </Grid> */}
+        </Grid>          
+        <Grid container item xs={12} style={{maxHeight: '410px', overflow: 'hidden', overflowY: 'auto'}}>        
           {
             patterns.map((pattern,patternIdx)=>{
               return (
                 <Grid key={'pattern-list-item-'+pattern.id} container item 
                   xs={12} sm={12} 
                   alignItems='center' justifyContent='center'
-                  style={{ paddingBottom: 0, marginBottom: 0 }}>
+                  style={{ paddingBottom: 0, marginBottom: 1 }}>
                   { patternsHalfwayToDeletion.indexOf(patternIdx) === -1 ? 
                       <>
                         <Grid item xs={10} 
@@ -97,16 +108,6 @@ function Load ({ activePatternId, copyPattern, createPattern, deletePattern, loa
             })
           }
         </Grid>
-        <Grid xs={12} container item alignItems='flex-start' align='center' justifyContent='flex-start' style={{outline: '0px solid red', paddingTop: '8px', paddingBottom: '16px'}}>
-          <Grid item xs={10}>
-            <Button size='small' variant='outlined' color='primary'
-              onClick={()=>{ createPattern({ mode: props.mode }) }}>NEW { props.mode === 'song' ? 'Song' : props.mode === 'playlist' ? 'Playlist' : 'Pattern' }</Button>
-          </Grid>
-          {/* <Grid item>
-            <Button size='small' variant='outlined'
-              onClick={()=>{ copyPattern(activePatternId) }}>COPY</Button>
-          </Grid> */}
-        </Grid>          
       </Grid>      
     </Grid>
   )

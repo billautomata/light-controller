@@ -29,11 +29,12 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const sectionStyle = { 
+const sectionStyle = {   
+  backgroundColor: 'white', 
+  borderRadius: 4,
+  boxShadow: '0px 0px 2px #AAA',
   marginBottom: 16, 
   padding: '16px 4px 16px 4px',
-  borderRadius: 4,
-  boxShadow: '0px 0px 2px #AAA'
 }
 
 const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setPlaylists, setStep, setStepTime }) {
@@ -75,7 +76,7 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
           dataLoaded ? 
           <Grid container justifyContent='center'>
             <Grid container item xs={12}>
-              <Grid item xs={12}>        
+              <Grid item xs={12} style={{position: 'sticky', top: 0, left: 0, zIndex: 2, marginBottom: 2}}>        
                 <Paper square elevation={0} style={sectionStyle}>
                   <LayoutBase/>
                 </Paper>

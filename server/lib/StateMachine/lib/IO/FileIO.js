@@ -12,6 +12,7 @@ function loadFromDisk (fileName) {
   this.patterns = fileData.patterns
   this.playlists = fileData.playlists
   this.songs = fileData.songs
+  this.pins = fileData.pins
 
   this.initializeSequencer()
   this.loadPattern(this.config.activePatternId)
@@ -28,7 +29,8 @@ function saveToDisk (fileName) {
     },
     patterns: this.patterns,
     playlists: this.playlists,
-    songs: this.songs
+    songs: this.songs,
+    pins: this.pins
   }
 
   fs.writeFileSync('./data/state-machine.json', JSON.stringify(o,null,2))

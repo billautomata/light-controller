@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
-import { Button, Grid, Paper, Typography } from '@material-ui/core'
-import ConfigFileIO from './ConfigFileIO.js'
+import { Grid, Typography } from '@material-ui/core'
+import ConfigBoot from './ConfigBoot'
+import ConfigFileIO from './ConfigFileIO'
+import ConfigPins from './ConfigPins'
 
 const mapStateToProps = (state, ownProps) => {
   return {}
@@ -17,11 +19,17 @@ const sectionStyle = {
 
 function Config ({ }) {
   return (
-    <Grid container item xs={12}>
-      <Grid item xs={12} style={{marginBottom: 30}}>
+    <Grid container item xs={12} justifyContent='center'>
+      <Grid item xs={12} style={{ marginBottom: 30, paddingLeft: 18 }}>
         <Typography variant='h4'>Configuration</Typography>
       </Grid>
-      <ConfigFileIO/>
+      <Grid container item xs={11} justifyContent='space-between'>
+        <Grid container item xs={4} alignItems='flex-start'>
+          <ConfigFileIO/>
+          <ConfigBoot/>
+        </Grid>
+        <ConfigPins/>      
+      </Grid>
     </Grid>
   )
 }

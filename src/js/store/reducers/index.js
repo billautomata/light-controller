@@ -47,9 +47,13 @@ const initialState = {
     nSteps: -1,
     name: '',
     nameSong: '',
-    confirmedTimeSteps: []
+    confirmedTimeSteps: [],
+    sectionPatternCollapsed: false,
+    sectionPlaylistCollapsed: false,
+    sectionSongCollapsed: false,    
   },
   patterns: [],
+  pins: [],
   songs: [],
   playlists: []
 }
@@ -64,6 +68,7 @@ function rootReducer(state = initialState, action) {
           config: action.payload.value.config,
           patterns: action.payload.value.patterns,
           songs: action.payload.value.songs,
+          pins: action.payload.value.pins,
           playlists: action.payload.value.playlists,
           dataLoaded: true,
           uiState: {
@@ -73,7 +78,10 @@ function rootReducer(state = initialState, action) {
             nSteps: action.payload.value.config.activePattern.patternLength,
             name: action.payload.value.config.activePattern.name,
             nameSong: action.payload.value.config.activeSong.name,
-            confirmedTimeSteps: action.payload.value.config.activePattern.channels[0].steps.map(o=>{return { idx: o.idx }})
+            confirmedTimeSteps: action.payload.value.config.activePattern.channels[0].steps.map(o=>{return { idx: o.idx }}),
+            sectionPatternCollapsed: true,
+            sectionPlaylistCollapsed: false,
+            sectionSongCollapsed: false,
         }
       })    
     case CREATE_PATTERN:
