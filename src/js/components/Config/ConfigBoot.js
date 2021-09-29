@@ -36,10 +36,10 @@ function ConfigBoot ({ playlists }) {
           </Grid>
         </Grid>
         <Grid container item xs={12} justifyContent='space-between' alignItems='center' style={styles}>
-          <Grid item xs={4}>
-            <Typography variant='body1'>Playlist</Typography>
+          <Grid item xs={5}>
+            <Typography variant='body1'>Boot Playlist</Typography>
           </Grid>
-          <Grid item xs={8} align='center'>
+          <Grid item xs={7} align='center'>
             <select style={{width: '100%', fontSize: 14}}>
               {
                 playlists.map((playlist,playlistIdx)=>{

@@ -1,7 +1,6 @@
 module.exports = { onConnect, registerSockets, sendMessage }
 
 function onConnect (socketId) {
-  console.log(this.pins)
   this.sockets[socketId].emit('state-machine', {
     config: this.config,
     patterns: this.patterns,

@@ -23,5 +23,4 @@ module.exports = function processPlaylist () {
   this.sendMessage('set-step-time', { value: percentElapsed })
 
   this.writePins(this.config.playlistData.steps[this.sequencer.currentStep].slice(1))
-
 }
