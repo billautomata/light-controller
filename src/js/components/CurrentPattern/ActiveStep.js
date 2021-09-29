@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
 function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }) {
   const boxSize = 1000 / patternLength 
   return (
-    <Grid container item xs={12} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -4}}>
+    <Grid container item xs={12} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -3}}>
         <Grid item xs={1}/>
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1001 15`}
@@ -37,7 +37,7 @@ function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
                       <rect x='1' y='0' rx='2' ry='2' width={boxSize-2} height={15} stroke='#AAA'
-                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? '#1f77b4' : '#DDD' }/>
+                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? '#FFBF00' : '#CCC' }/>
                     </g>
                   )
                 })

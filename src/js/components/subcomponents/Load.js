@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, Grid, Typography } from '@material-ui/core'
-import { copyPattern, createPattern, deletePattern, loadPattern } from '../actions'
+import { copyPattern, createPattern, deletePattern, loadPattern } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -20,55 +20,54 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function LoadPatterns ({ activePatternId, copyPattern, createPattern, deletePattern, loadPattern, patterns, props }) {
+function Load ({ activePatternId, copyPattern, createPattern, deletePattern, loadPattern, patterns, props }) {
 
   const [ patternsHalfwayToDeletion, setPatternsHalfway ] = useState([])
 
   return (
     <Grid container item spacing={0} alignItems='flex-start' justifyContent='center'  style={{borderLeft: '0px solid #EEE', height: '100%'}}>      
-      <Grid container item xs={12} alignItems='flex-start' justifyContent='center' style={{ border: '1px solid #EEE' }} >
-        <Grid item xs={12} style={{backgroundColor: '#EEE', marginBottom: 4}}>
-          <Typography style={{color: '#333', marginLeft: 10, textTransform:'uppercase', fontWeight: 900, letterSpacing:'-.1px'}}>
-            { props.mode === 'song' ? 'Songs' : props.mode === 'playlist' ? 'Playlists' : 'Patterns'}
+      <Grid container item xs={12} alignItems='flex-start' justifyContent='center' style={{ border: '0px solid #EEE' }} >
+        {/* <Grid item xs={12} style={{backgroundColor: '#777', marginBottom: 4, height: 32}}>
+          <Typography style={{
+            color: '#FFF', 
+            marginLeft: 10, 
+            textTransform:'uppercase', 
+            // fontWeight: 900, 
+            letterSpacing:'.5px'
+          }}>
+            LOAD { props.mode === 'song' ? 'Song' : props.mode === 'playlist' ? 'Playlist' : 'Pattern'}
           </Typography>
-        </Grid>
+        </Grid> */}
         <Grid container item xs={12} style={{maxHeight: '250px', overflow: 'hidden', overflowY: 'auto'}}>        
           {
             patterns.map((pattern,patternIdx)=>{
               return (
                 <Grid key={'pattern-list-item-'+pattern.id} container item 
                   xs={12} sm={12} 
-                  alignItems='center' justifyContent='space-evenly'
-                  style={{ paddingBottom: 4 }}>
+                  alignItems='center' justifyContent='center'
+                  style={{ paddingBottom: 0, marginBottom: 0 }}>
                   { patternsHalfwayToDeletion.indexOf(patternIdx) === -1 ? 
                       <>
-                      <Grid item xs={10}
-                        onClick={()=>{ loadPattern({ id: pattern.id, mode: props.mode }) }} 
-                        style={{              
-                          backgroundColor: activePatternId === pattern.id ? '#1f77b4' : 'white',
-                          borderRadius: 2,
-                          border: `1px solid ${ activePatternId === pattern.id ? '#1f77b4': '#DDD' }`,
-                          fontWeight: activePatternId === pattern.id ? 700 : 500,
-                          color: activePatternId === pattern.id ? 'white' : 'black',
-                          padding: 6, 
-                          cursor: 'pointer'                  
-                        }}>
-                        { pattern.name }
-                      </Grid>
-                      <Grid item xs={1} align='left'
-                        style={{ 
-                          cursor: 'pointer'
-                        }}
-                        onClick={(event)=>{ 
-                          event.stopPropagation()
-                          const p = patternsHalfwayToDeletion
-                          p.push(patternIdx)
-                          setPatternsHalfway(Object.assign([], patternsHalfwayToDeletion, p))
-                        }}>
-                        &#10005;
-                      </Grid>
-                      </>
-                  
+                        <Grid item xs={10} 
+                          onClick={()=>{ loadPattern({ id: pattern.id, mode: props.mode }) }} >
+                          <Button 
+                            size='small'
+                            variant={ activePatternId === pattern.id ? 'contained' : 'outlined' } 
+                            color={ activePatternId === pattern.id ? 'primary' : 'default' } 
+                            style={{ width: '100%', whiteSpace: 'nowrap' }}>
+                            {pattern.name}
+                          </Button>
+                        </Grid>
+                        <Grid item xs={2} align='left'
+                          onClick={(event)=>{ 
+                            event.stopPropagation()
+                            const p = patternsHalfwayToDeletion
+                            p.push(patternIdx)
+                            setPatternsHalfway(Object.assign([], patternsHalfwayToDeletion, p))
+                          }}>
+                            <Button size='small' variant='text' style={{width:'100%', minWidth: 0}}>&#10005;</Button>
+                        </Grid>
+                      </>                  
                     : 
                     <>
                       <Grid item xs={4} align='center' style={{padding: '8px 0px'}}>
@@ -98,10 +97,10 @@ function LoadPatterns ({ activePatternId, copyPattern, createPattern, deletePatt
             })
           }
         </Grid>
-        <Grid xs={12} container item spacing={3} alignItems='flex-start' align='center' justifyContent='center' style={{outline: '0px solid red', paddingTop: '12px', paddingBottom: '16px'}}>
-          <Grid item>
-            <Button size='small' variant='contained' color='primary'
-              onClick={()=>{ createPattern({ mode: props.mode }) }}>NEW</Button>
+        <Grid xs={12} container item alignItems='flex-start' align='center' justifyContent='flex-start' style={{outline: '0px solid red', paddingTop: '8px', paddingBottom: '16px'}}>
+          <Grid item xs={10}>
+            <Button size='small' variant='outlined' color='primary'
+              onClick={()=>{ createPattern({ mode: props.mode }) }}>NEW { props.mode === 'song' ? 'Song' : props.mode === 'playlist' ? 'Playlist' : 'Pattern' }</Button>
           </Grid>
           {/* <Grid item>
             <Button size='small' variant='outlined'
@@ -113,5 +112,5 @@ function LoadPatterns ({ activePatternId, copyPattern, createPattern, deletePatt
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoadPatterns)
+export default connect(mapStateToProps, mapDispatchToProps)(Load)
 

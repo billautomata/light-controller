@@ -58,7 +58,7 @@ function PatternName ({ editMode, name, saveEdits, savePlaylist, setEditMode, se
       </Grid>      
       <Grid container item xs={3} justifyContent='flex-end' spacing={1}>  
         <Grid item style={{display: showSave ? null : 'none' }}>
-          <Button variant='contained' color='primary' size='medium'
+          <Button variant='outlined' color='primary' size='medium'
             onClick={()=>{ savePlaylist() }}>Save</Button>
         </Grid>        
       </Grid>      

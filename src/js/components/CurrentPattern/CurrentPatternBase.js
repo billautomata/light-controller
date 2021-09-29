@@ -4,7 +4,7 @@ import ActiveStep from './ActiveStep'
 import Channels from './Channels'
 import PatternName from './PatternName'
 import Time from './Time'
-import LoadPatterns from '../LoadPatterns'
+import LoadPatterns from '../subcomponents/Load'
 
 const mapStateToProps = (state, ownProps) => {
   return {}

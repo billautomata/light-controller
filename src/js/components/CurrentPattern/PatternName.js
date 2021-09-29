@@ -106,7 +106,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
             {
               showSave ? 
               <Grid item>
-                <Button variant='contained' color='primary' size='medium'
+                <Button variant='outlined' color='primary' size='medium'
                   onClick={()=>{console.log('saving pattern'); savePattern({})}}
                 >Save</Button>
               </Grid> : <></>

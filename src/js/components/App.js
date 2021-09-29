@@ -31,9 +31,9 @@ function mapDispatchToProps(dispatch) {
 
 const sectionStyle = { 
   marginBottom: 16, 
-  padding: '12px 4px',
-  borderBottom: '1px solid #AAA'
-  // outline: '1px solid #DDD' 
+  padding: '16px 4px 16px 4px',
+  borderRadius: 4,
+  boxShadow: '0px 0px 2px #AAA'
 }
 
 const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setPlaylists, setStep, setStepTime }) {
@@ -70,7 +70,7 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
 
   return (
     <ThemeProvider theme={createTheme()}>
-      <div style={{ margin: 'auto', marginBottom: 256, marginTop: 12, width: 1280, outline: '1px solid #FFF' }}>
+      <div style={{ margin: 'auto', marginBottom: 256, marginTop: 12, width: 1280, outline: '0px solid #FFF' }}>
         {
           dataLoaded ? 
           <Grid container justifyContent='center'>
@@ -96,7 +96,9 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
                 </Paper>           
               </Grid> 
               <Grid item xs={12}>
-                <Config/>
+                <Paper square elevation={0} style={sectionStyle}>              
+                  <Config/>
+                </Paper>
               </Grid>    
             </Grid>
           </Grid>

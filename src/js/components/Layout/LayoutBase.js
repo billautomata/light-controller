@@ -47,7 +47,7 @@ function LayoutBase({ currentStep, lightValues }) {
   return (
     <Grid container item xs={12} justifyContent='center'>
       <Grid item xs={12} align='center'>
-        <svg height={height} width={width} style={{ backgroundColor: '#FFF', border: '1px solid #AAA', borderRadius: '60px' }}>
+        <svg height={height} width={width} style={{ backgroundColor: '#FFF', border: '0px solid #AAA', borderRadius: '60px' }}>
           <g transform='translate(0 0)'>
             {
               trees.map((tree,treeIndex)=>{

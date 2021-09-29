@@ -2,10 +2,9 @@ import { useState } from 'react'
 import { connect } from 'react-redux'
 import * as d3 from 'd3'
 import { Button, Grid, TextField, Typography } from '@material-ui/core'
-import SectionHeader from '../subcomponents/SectionHeader'
 import SongName from './SongName'
 import Visualized from '../subcomponents/Visualized'
-import LoadPatterns from '../LoadPatterns'
+import LoadPatterns from '../subcomponents/Load'
 import { songAddStep, songChangeStepOrder, songCopyStep, songDeleteStep, songSetValue } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -64,10 +63,10 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
               song.steps.map((pattern,idx)=>{
                 const o = patterns.filter(o=>{return o.id === pattern.id})[0]
                 return (              
-                  <Grid key={`songmode_list_of_patterns_${idx}_${pattern.id}`} item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
+                  <Grid key={`songMode_steps_${idx}`} item xs={12} style={{borderRadius: '4px', border: '1px solid #DDD', marginBottom: 4, padding: 8 }}>
                     <Grid container align='center' alignItems='center'>
-                      <Grid item xs={1} align='left' style={{paddingTop: '4px'}} onClick={()=>{ songDeleteStep({idx}) }}>
-                        <svg width='18' height='18'>                          
+                      <Grid item xs={1} align='left' style={{paddingTop: '4px', paddingLeft: '8px', cursor: 'pointer'}} onClick={()=>{ songDeleteStep({idx}) }}>
+                        <svg viewBox='0 0 18 18' width='12' height='12'>
                           <line x1='17' y1='1' x2='1' y2='17' stroke='#1f77b4' strokeWidth='4'/>
                           <line x1='1' y1='1' x2='17' y2='17' stroke='#1f77b4' strokeWidth='4'/>
                         </svg>
@@ -80,11 +79,11 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                             <div style={{ 
                               display: 'inline-block', 
                               position: 'relative',
-                              marginRight: 6, 
-                              top: 2, left: 0, 
+                              marginLeft: -16, 
+                              top: 2, left: -17, 
                               width: 16, height: 16, 
                               backgroundColor: colors(listOfPatterns.findIndex(o=>o===pattern.id)), 
-                              borderRadius: '50%'}}></div>
+                              borderRadius: '50%'}}/>
                             <span>{o.name}</span>                            
                           </> :
                           <>
