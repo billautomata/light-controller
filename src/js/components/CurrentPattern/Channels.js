@@ -46,7 +46,7 @@ function Channels ({ channels, pattern, setStepValue }) {
                         <rect x='1' y='1' 
                           width={boxSize-2} height={Math.min(24, boxHeight-2)} 
                           fill={ value ? '#1f77b4' : '#FFF' }
-                          stroke={'#AAA'}
+                          stroke={'#DDD'}
                           style={{
                             cursor: 'pointer'
                           }}

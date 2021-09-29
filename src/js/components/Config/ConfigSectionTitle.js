@@ -16,7 +16,7 @@ function ConfigSectionTitle ({ props }) {
     <div style={{ position: 'relative' }}>
       <div style={{
         backgroundColor: '#EEE', 
-        border: '1px solid #333',
+        border: '1px solid #CCC',
         borderRadius: 0, 
         color: '#333', 
         fontWeight: 700,

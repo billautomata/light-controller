@@ -94,7 +94,7 @@ module.exports = function setupPattern (socket, stateMachine) {
         socket.emit('songs', stateMachine.getSongs())
         break;
       case 'playlist':
-        // stateMachine.createPlaylist()
+        stateMachine.deletePlaylist(payload.id)
         socket.emit('playlists', stateMachine.getPlaylists())
         break;
       default:

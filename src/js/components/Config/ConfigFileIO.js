@@ -13,8 +13,8 @@ function mapDispatchToProps(dispatch) {
 function ConfigFileIO ({ }) {
   return (
     <Grid container item xs={12} alignItems='flex-start'>
-      <Paper elevation={2} style={{width: '100%', padding: 24}}>
-        <ConfigSectionTitle title='File I/O'/>
+      <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
+        <ConfigSectionTitle title='Backup & Restore'/>
         <Grid container item xs={12} justifyContent='space-evenly' >
           <Grid item>
             <Button variant='contained' color='primary'

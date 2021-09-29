@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = {
-  border: '1px solid #DDD',
+  // border: '1px solid #DDD',
   marginBottom: 4,
   padding: '4px 8px',
   height: 38
@@ -22,11 +22,11 @@ const styles = {
 function ConfigBoot ({ playlists }) {
   return (
     <Grid container item xs={12} alignItems='flex-start'>
-      <Paper elevation={2} style={{width: '100%', padding: 24}}>
+      <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
         <ConfigSectionTitle title='Boot Behavior'/>        
         <Grid container item xs={12} justifyContent='space-between' alignItems='center' style={styles}>
           <Grid item xs={6}>
-            <Typography variant='body'>Start On Boot</Typography>
+            <Typography variant='body1'>Start On Boot</Typography>
           </Grid>
           <Grid item xs={3} align='center'>
             <Button size='small' variant='contained' color='primary' style={{width: '100%'}}>Yes</Button>
@@ -37,7 +37,7 @@ function ConfigBoot ({ playlists }) {
         </Grid>
         <Grid container item xs={12} justifyContent='space-between' alignItems='center' style={styles}>
           <Grid item xs={4}>
-            <Typography variant='body'>Playlist</Typography>
+            <Typography variant='body1'>Playlist</Typography>
           </Grid>
           <Grid item xs={8} align='center'>
             <select style={{width: '100%', fontSize: 14}}>

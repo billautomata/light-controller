@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch) {
 function ConfigPins ({ pins }) {
   return (
     <Grid container item xs={7}>
-      <Paper elevation={2} style={{width: '100%', padding: 24}}>
+      <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
         <ConfigSectionTitle title='Map Channels to Pins'/>
         <Grid container item xs={12}>
           {
