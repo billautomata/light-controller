@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
 function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }) {
   const boxSize = 1000 / patternLength 
   return (
-    <Grid container item xs={12} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -3}}>
+    <Grid container item xs={12} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -5}}>
         <Grid item xs={1}/>
         <Grid item xs={11}>
           <svg viewBox={`-1 0 1001 15`}

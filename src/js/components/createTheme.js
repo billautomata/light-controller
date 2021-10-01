@@ -13,21 +13,35 @@ export default function createTheme () {
       },
     },
     typography: {
+      body1: {
+        fontSize: '14px'
+      },
       body2: {
         fontSize: '12px'
+      },
+      h4: {
+        fontWeight: 300
+      },
+      h6: {
+        fontWeight: 300
       }
     },
     overrides: {
       MuiButton: {
         root: {
-          borderRadius: '2px',
+          borderRadius: '1px',
         },
         label: {
-          fontWeight: '900',
-          letterSpacing: '-.5px',
+          fontWeight: '700',
+          // letterSpacing: '.5px',
           position: 'relative',
           top: '1px'
         }
+      }
+    },
+    props: {
+      MuiButtonBase: {
+        disableRipple: true
       }
     }
   })

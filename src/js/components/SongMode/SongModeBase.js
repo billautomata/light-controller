@@ -80,11 +80,11 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                               display: 'inline-block', 
                               position: 'relative',
                               marginLeft: -16, 
-                              top: 2, left: -17, 
+                              top: 3, left: -17, 
                               width: 16, height: 16, 
                               backgroundColor: colors(listOfPatterns.findIndex(o=>o===pattern.id)), 
                               borderRadius: '50%'}}/>
-                            <span>{o.name}</span>                            
+                            <span><Typography variant='body1' style={{display: 'inline-block'}}>{o.name}</Typography></span>
                           </> :
                           <>
                             <select style={{width: '100%'}} 
@@ -110,7 +110,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                         <Grid item xs={6} align='center'>
                           {
                             indexesEditActive.indexOf(idx) === -1 ? 
-                              <>{pattern.repeat}x</> : 
+                              <><Typography variant='body2'>{pattern.repeat}x</Typography></> : 
                               <Grid container item xs={12} justifyContent='center' alignItems='center'>
                                 <Grid item>
                                   <TextField size='small' 
@@ -132,7 +132,7 @@ function SongModeBase ({ patterns, song, songAddStep, songChangeStepOrder, songC
                         <Grid item xs={6}>
                           {
                             indexesEditActive.indexOf(idx) === -1 ? 
-                              <>{pattern.speed}x</> : 
+                              <><Typography variant='body2'>{pattern.speed}x</Typography></> : 
                               <Grid container item xs={12} justifyContent='center' alignItems='center' spacing={1}>
                                 <Grid item>
                                   <select style={{width: 40}}

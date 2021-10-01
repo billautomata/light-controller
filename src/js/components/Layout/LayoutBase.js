@@ -57,7 +57,7 @@ function LayoutBase({ currentStep, lightValues }) {
 
                 // console.log(x,y,treeIndex)
                 return (
-                  <circle key={`tree_${treeIndex}`} cx={x} cy={y} r={33} fill={ active ? '#FFBF00' : '#333' }/>
+                  <circle key={`tree_${treeIndex}`} cx={x} cy={y} r={33} stroke='#AAA' fill={ active ? '#FFBF00' : '#CCC' }/>
                 )
               })
             }

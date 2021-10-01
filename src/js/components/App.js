@@ -31,8 +31,9 @@ function mapDispatchToProps(dispatch) {
 
 const sectionStyle = {   
   backgroundColor: 'white', 
-  borderRadius: 4,
-  boxShadow: '0px 0px 2px #AAA',
+  borderRadius: 0,
+  border: '0.5px solid #DDD',
+  // boxShadow: '0px 0px 2px #AAA',
   marginBottom: 16, 
   padding: '16px 4px 16px 4px',
 }

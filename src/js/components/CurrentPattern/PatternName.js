@@ -35,12 +35,12 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
           <Typography variant='body2'>Name</Typography>
         </Grid>
       </Grid>
-      <Grid container item xs={6}>
+      <Grid container item xs={6} alignItems='center'>
         {
           editMode ? 
           <>
             <Grid item xs={4}>
-              <TextField defaultValue={name} size='x-large'
+              <TextField defaultValue={name} size='medium'
                 onChange = { (event) => { 
                   name = event.target.value 
                   setPatternName({ mode: 'pattern', value: event.target.value })
@@ -74,7 +74,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
                   Done
               </Button>
               <Button 
-                variant='default' 
+                variant='text' 
                 color='default' 
                 size='small' 
                 onClick={()=>{console.log('set edit mdoe click'); setEditMode({mode: 'pattern', value: false})}}>
@@ -83,12 +83,12 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
             </Grid>                   
           </> : 
           <>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <Typography variant='h6'>{patternName}</Typography>                
             </Grid>
-            <Grid container item xs={1}>
+            <Grid container item xs={2} align='center'>
               <Grid item xs={12}><Typography variant='body2'>Steps</Typography></Grid>
-              <Grid item xs={12}>{numberOfSteps}</Grid>
+              <Grid item xs={12}><Typography variant='body1'>{numberOfSteps}</Typography></Grid>
             </Grid>
             <Grid item xs={1}>
               <Button variant='outlined' color='default' size='small' onClick={()=>{console.log('set edit mdoe click'); setEditMode({mode: 'pattern', value: true})}}>Edit</Button>
@@ -106,7 +106,7 @@ function PatternName ({ editMode, numberOfChannels, numberOfSteps, patternName, 
             {
               showSave ? 
               <Grid item>
-                <Button variant='outlined' color='primary' size='medium'
+                <Button variant='outlined' color='primary' size='medium' style={{marginRight: 16}}
                   onClick={()=>{console.log('saving pattern'); savePattern({})}}
                 >Save</Button>
               </Grid> : <></>

@@ -1,10 +1,11 @@
 import {
-  INITIALIZE_DATA,
   COPY_PATTERN,
   CREATE_PATTERN,
   DELETE_PATTERN,
   DELETE_SONG,
+  INITIALIZE_DATA,
   LOAD_PATTERN,
+  MAP_PIN_TO_CHANNEL,
   PATTERN_CLEAR,
   PLAYLIST_ADD_STEP,
   PLAYLIST_CHANGE_STEP_ORDER,
@@ -34,12 +35,8 @@ import {
   SONG_DELETE_STEP,
   SONG_SET_VALUE,
   START_SEQUENCER,
-  STOP_SEQUENCER
+  STOP_SEQUENCER,
 } from '../constants/action-types'
-
-export function initializeData (payload) {
-  return { type: INITIALIZE_DATA, payload }
-}
 
 export function createPattern (payload) {
   return { type: CREATE_PATTERN, payload }
@@ -57,8 +54,16 @@ export function deleteSong (payload) {
   return { type: DELETE_SONG, payload }
 }
 
+export function initializeData (payload) {
+  return { type: INITIALIZE_DATA, payload }
+}
+
 export function loadPattern (payload) {
   return { type: LOAD_PATTERN, payload }
+}
+
+export function mapPinToChannel (payload) {
+  return { type: MAP_PIN_TO_CHANNEL, payload }
 }
 
 export function patternClear (payload) {

@@ -28,7 +28,7 @@ function Load ({ activePatternId, copyPattern, createPattern, deletePattern, loa
     <Grid container item spacing={0} alignItems='flex-start' justifyContent='center'  style={{borderLeft: '0px solid #EEE', height: '100%'}}>      
       <Grid container item xs={12} alignItems='flex-start' justifyContent='center' style={{ border: '0px solid #EEE' }} >
         <Grid xs={12} container item alignItems='flex-start' align='center' justifyContent='flex-start' 
-          style={{outline: '0px solid red', paddingTop: '3.5px', paddingBottom: '19.5px'}}>
+          style={{outline: '0px solid red', paddingTop: '4px', paddingBottom: '21.5px'}}>
           <Grid item xs={10}>
             <Button size='large' variant='outlined' color='primary'
               onClick={()=>{ createPattern({ mode: props.mode }) }}>NEW { props.mode === 'song' ? 'Song' : props.mode === 'playlist' ? 'Playlist' : 'Pattern' }</Button>
