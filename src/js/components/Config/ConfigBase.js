@@ -20,7 +20,7 @@ const sectionStyle = {
 function Config ({ }) {
   return (
     <Grid container item xs={12} justifyContent='center'>
-      <Grid item xs={12} style={{ marginBottom: 30, paddingLeft: 18 }}>
+      <Grid item xs={12} style={{ marginBottom: 30, paddingLeft: 28 }}>
         <Typography variant='h4'>Configuration</Typography>
       </Grid>
       <Grid container item xs={11} justifyContent='space-between'>

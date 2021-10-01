@@ -25,7 +25,7 @@ function Time ({ activePatternId, confirmedTimeSteps, timePattern, setTimeValue,
   return (
     <Grid container item xs={12} style={{ marginBottom: -3 }} alignItems='center'>
         <Grid container item xs={1} align='center' justifyContent='flex-end'>
-          <Grid item xs={6} style={{ height: 20, backgroundColor: '#EEE', borderTopLeftRadius: '8px' }}>
+          <Grid item xs={6} style={{ height: 20, backgroundColor: '#EEE', borderTopLeftRadius: '6px' }}>
             <Typography variant='body2' style={{ fontStyle: 'italic', fontWeight: 700, position: 'relative', top: 1 }}>ms</Typography>
           </Grid>
         </Grid>
