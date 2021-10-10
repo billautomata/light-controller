@@ -1,10 +1,11 @@
 import {
-  INITIALIZE_DATA,
   CREATE_PATTERN,
   COPY_PATTERN,
   DELETE_PATTERN,
   DELETE_SONG,
+  INITIALIZE_DATA,
   LOAD_PATTERN,
+  MAP_PIN_TO_CHANNEL,
   PATTERN_CLEAR,
   PLAYLIST_ADD_STEP,
   PLAYLIST_CHANGE_STEP_ORDER,
@@ -99,6 +100,9 @@ function rootReducer(state = initialState, action) {
     case LOAD_PATTERN:
       console.log('REDUCER - '+LOAD_PATTERN, action.payload)
       window.socket.emit('CONFIG_LOAD_PATTERN', action.payload)
+      return state
+    case MAP_PIN_TO_CHANNEL:
+      
       return state
     case PATTERN_CLEAR:
       console.log('REDUCER = '+PATTERN_CLEAR)

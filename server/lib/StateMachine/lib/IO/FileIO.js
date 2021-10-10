@@ -8,12 +8,13 @@ function loadFromDisk (fileName) {
   this.config.activePatternId = fileData.config.activePatternId
   this.config.activePlaylistId = fileData.config.activePlaylistId
   this.config.activeSongId = fileData.config.activeSongId
+  this.config.networkDevices = fileData.config.networkDevices
 
   this.patterns = fileData.patterns
   this.playlists = fileData.playlists
   this.songs = fileData.songs
   this.pins = fileData.pins
-
+  
   this.initializeSequencer()
   this.loadPattern(this.config.activePatternId)
   this.loadSong(this.config.activeSongId)

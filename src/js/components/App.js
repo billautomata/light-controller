@@ -50,14 +50,14 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
       switch(name) {
         case 'config':
           return setConfig({ value })
-        case 'set-step':
-          return setStep({ value: value.value })
-        case 'set-step-time':
-          return setStepTime({ value: value.value })
         case 'patterns':
           return setPatterns({ value })
         case 'playlists':
-            return setPlaylists({ value })  
+          return setPlaylists({ value })  
+        case 'set-step':
+          return setStep({ value: value.value })
+        case 'set-step-time':
+          return setStepTime({ value: value.value })    
         case 'songs':
           return setSongs({ value })  
         case 'state-machine':
@@ -77,6 +77,11 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
           dataLoaded ? 
           <Grid container justifyContent='center'>
             <Grid container item xs={12}>
+              <Grid item xs={12}>
+                <Paper square elevation={0} style={sectionStyle}>              
+                  <Config/>
+                </Paper>
+              </Grid>    
               <Grid item xs={12} style={{position: 'sticky', top: 0, left: 0, zIndex: 2, marginBottom: 2}}>        
                 <Paper square elevation={0} style={sectionStyle}>
                   <LayoutBase/>
@@ -97,11 +102,6 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
                   <PlaylistMode/>
                 </Paper>           
               </Grid> 
-              <Grid item xs={12}>
-                <Paper square elevation={0} style={sectionStyle}>              
-                  <Config/>
-                </Paper>
-              </Grid>    
             </Grid>
           </Grid>
           : null

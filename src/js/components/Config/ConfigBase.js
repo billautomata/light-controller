@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
 import ConfigBoot from './ConfigBoot'
 import ConfigFileIO from './ConfigFileIO'
+import ConfigOutboarding from './ConfigOutboarding'
 import ConfigPins from './ConfigPins'
 
 const mapStateToProps = (state, ownProps) => {
@@ -29,6 +30,7 @@ function Config ({ }) {
           <ConfigBoot/>
         </Grid>
         <ConfigPins/>      
+        <ConfigOutboarding/>
       </Grid>
     </Grid>
   )

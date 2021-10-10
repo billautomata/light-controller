@@ -3,10 +3,11 @@ module.exports = { onConnect, registerSockets, sendMessage }
 function onConnect (socketId) {
   this.sockets[socketId].emit('state-machine', {
     config: this.config,
+    networkDevices: this.networkDevices,
     patterns: this.patterns,
+    pins: this.pins,
     playlists: this.playlists,
     songs: this.songs,
-    pins: this.pins
   })
 }
 

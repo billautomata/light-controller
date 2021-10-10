@@ -21,4 +21,6 @@ function writePins (array) {
       array[pinIdx] === 0 ? gpio.HIGH : gpio.LOW
     )
   })
+
+  this.writeZMQ(array)
 }
