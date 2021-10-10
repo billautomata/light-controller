@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const createStateMachine = require('./lib/StateMachine/main.js')
 const socketRoutes = require('./lib/socketRoutes.js')
 

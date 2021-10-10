@@ -5,7 +5,7 @@ const zmq = require('zeromq')
 const sock = zmq.socket('push')
 
 function initZMQ () {
-  sock.bindSync('tcp://192.168.0.100:31337')
+  sock.bindSync(`tcp://${process.env.PRIMARY_IP}:31337`)
 
   setInterval(()=>{
     pulse()

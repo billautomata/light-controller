@@ -3,7 +3,7 @@ module.exports = function createNetworkDevice (mac) {
   if(index === -1) {
     this.config.networkDevices.push({
       mac,
-      mappings: [],
+      mappings: [0,0,0,0],
       name: `Network Device (${this.config.networkDevices.length})`
     })
   }

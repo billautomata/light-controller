@@ -1,3 +1,4 @@
+require('dotenv').config()
 const net = require('net')
 const http = require('http')
 const _ = require('underscore')
@@ -19,14 +20,14 @@ const reconnectLimit = 5000
 let keepAliveInterval = setInterval(()=>{
   if ((Date.now() - heartbeatLastTime) > reconnectLimit) {
     console.log('heartbeat time limit reached, trying reconnect')
-    pull.connect('tcp://192.168.0.100:31337')
+    pull.connect(`tcp://${process.env.PRIMARY_IP}:31337`)
     register()    
   }
 },1000)
 
 const zmq = require('zeromq')
 const pull = zmq.socket('pull')
-pull.connect('tcp://192.168.0.100:31337')
+pull.connect(`tcp://${process.env.PRIMARY_IP}:31337`)
 register()
 
 let parsedMsg = {}
@@ -83,7 +84,7 @@ pull.on('message', function(topic, msg){
 
 function register () {
   const options = {
-    hostname: '192.168.0.100',
+    hostname: process.env.PRIMARY_IP,
     method: 'GET',
     port: 8080,
     path: '/register/' + MAC_ADDRESS,
