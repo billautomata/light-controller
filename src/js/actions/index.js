@@ -19,6 +19,7 @@ import {
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
+  SET_NETWORK_DEVICE_PORT_MAPPING,
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
@@ -116,6 +117,10 @@ export function setCurrentStep (payload) {
 
 export function setEditMode (payload) {
   return { type: SET_EDIT_MODE, payload }
+}
+
+export function setNetworkDevicePortMapping (payload) {
+  return { type: SET_NETWORK_DEVICE_PORT_MAPPING, payload }
 }
 
 export function setNumberOfSteps (payload) {

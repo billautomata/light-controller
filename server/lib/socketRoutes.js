@@ -39,9 +39,16 @@ module.exports = function socketRoutes (socket, stateMachine) {
     stateMachine.saveToDisk()
   })
 
+  socket.on('SET_NETWORK_DEVICE_PORT_MAPPING', payload => {
+    console.log('changing device port mapping', payload)
+    stateMachine.updateNetworkDevice(payload)
+    socket.emit('config', stateMachine.getConfig())    
+  })
+
   socket.on('LOAD_FROM_DISK', payload => {
     console.log('loading from disk')
     stateMachine.loadFromDisk()
   })
 
 }
+

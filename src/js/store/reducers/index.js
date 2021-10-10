@@ -19,6 +19,7 @@ import {
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
+  SET_NETWORK_DEVICE_PORT_MAPPING,
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
@@ -202,6 +203,10 @@ function rootReducer(state = initialState, action) {
       }
       const uiState = Object.assign({}, state.uiState, { editModePattern: action.payload.value })
       return Object.assign({}, state, { uiState })
+    case SET_NETWORK_DEVICE_PORT_MAPPING:
+      console.log('REDUCER - '+SET_NETWORK_DEVICE_PORT_MAPPING, action.payload)
+      window.socket.emit('SET_NETWORK_DEVICE_PORT_MAPPING', action.payload)
+      return state
     case SET_NUMBER_OF_STEPS: 
       console.log('setting number of steps', action.payload)
       // window.socket.emit('PATTERN_SET_STEPS', action.payload)      

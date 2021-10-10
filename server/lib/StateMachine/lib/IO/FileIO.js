@@ -26,7 +26,8 @@ function saveToDisk (fileName) {
     config: { 
       activePatternId: this.config.activePatternId,
       activePlaylistId: this.config.activePlaylistId,
-      activeSongId: this.config.activeSongId
+      activeSongId: this.config.activeSongId,
+      networkDevices: this.config.networkDevices
     },
     patterns: this.patterns,
     playlists: this.playlists,

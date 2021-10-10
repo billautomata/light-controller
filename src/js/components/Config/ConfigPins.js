@@ -30,7 +30,7 @@ function ConfigPins ({ pins }) {
                       <TextField  inputProps={{ style: {textAlign:'center'} }} defaultValue={pins[n]}/>
                     </Grid>
                     <Grid item xs={4}>
-                      <Button size='small' variant='outlined' style={{width: '100%', maxWidth: '100%'}}>Test</Button>
+                      <Button size='small' variant='contained' style={{width: '100%', maxWidth: '100%'}}>Test</Button>
                     </Grid>
                   </Grid>                  
                 </Grid>

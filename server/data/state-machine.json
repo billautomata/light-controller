@@ -4,8 +4,17 @@
     "activePlaylistId": "c498bfd7-7009-43fb-99c4-ab56eacc0084",
     "activeSongId": "ee6845ee-b692-496f-ad6e-87e027db8347",
     "networkDevices": [
-      { "name": "dddddevice", "mac": "c4:91:0c:b3:6a:3e", "mappings": [15,1,3,2] }
-    ]    
+      {
+        "name": "dddddevice",
+        "mac": "c4:91:0c:b3:6a:3e",
+        "mappings": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
   },
   "patterns": [
     {
