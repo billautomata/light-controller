@@ -25,11 +25,13 @@ function Config ({ }) {
         <Typography variant='h4'>Configuration</Typography>
       </Grid>
       <Grid container item xs={11} justifyContent='space-between'>
-        <Grid container item xs={4} alignItems='flex-start'>
+        <Grid container item xs={4}>
           <ConfigFileIO/>
+        </Grid>
+        <Grid container item xs={7}>          
           <ConfigBoot/>
         </Grid>
-        <ConfigPins/>      
+        {/* <ConfigPins/>       */}
         <ConfigOutboarding/>
       </Grid>
     </Grid>

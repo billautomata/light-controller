@@ -1,12 +1,11 @@
 require('dotenv').config()
-const net = require('net')
 const http = require('http')
 const _ = require('underscore')
 const gpio = require('rpio')
 
 let channelMapping = [-1,-1,-1,-1]
 
-let pins = [7,11,13,15]
+let pins = [12,16,18,22]
 pins.forEach((pin,pinIdx)=>{
   console.log('setting up pin: ' + pinIdx + ' ' + pin)
   gpio.open(pin, gpio.OUTPUT)

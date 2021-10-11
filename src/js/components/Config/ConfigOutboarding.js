@@ -25,7 +25,7 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
     <Grid container item xs={12} style={{marginTop: 24}}>
       <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
         <ConfigSectionTitle title='Network Devices'/>
-        <Grid container item xs={12} justifyContent='space-evenly' style={{marginTop: 16}}>
+        <Grid container item xs={12} justifyContent='flex-start' style={{marginTop: 16}}>
           {
             devices.map(device => {
               return (
@@ -97,7 +97,7 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
                               <Button variant='contained' color='primary' onClick={()=>{setEditActive(Object.assign({}, editActive, { status: false } ))}}>DONE</Button>
                             </Grid>                                          
                             <Grid item xs={5}>
-                              <Button variant='text' onClick={()=>{setEditActive(Object.assign({}, editActive, { status: false } ))}}>X</Button>
+                              <Button variant='text' onClick={()=>{setEditActive(Object.assign({}, editActive, { status: false } ))}}>&#10005;</Button>
                             </Grid>
                           </> :
                           <>

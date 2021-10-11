@@ -5,6 +5,7 @@ import Channels from './Channels'
 import PatternName from './PatternName'
 import Time from './Time'
 import LoadPatterns from '../subcomponents/Load'
+import ConfigSectionTitle from '../Config/ConfigSectionTitle'
 
 const mapStateToProps = (state, ownProps) => {
   return {}
