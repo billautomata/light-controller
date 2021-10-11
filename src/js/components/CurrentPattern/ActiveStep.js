@@ -2,12 +2,11 @@ import { connect } from 'react-redux'
 import { Grid } from '@material-ui/core'
 import { setCurrentStep } from '../../actions/index'
 
-const boxSize = 50
-const patternLength = 10
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentStep: state.currentStep
+    currentStep: state.currentStep,
+    patternLength: state.config.activePattern.patternLength,
+    playingMode: state.config.playingMode
   }
 }
 
@@ -17,29 +16,28 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function ActiveStep ({ currentStep, setCurrentStep }) {
+function ActiveStep ({ currentStep, patternLength, playingMode, setCurrentStep }) {
+  const boxSize = 1000 / patternLength 
   return (
-    <Grid container item xs={12}>
-        <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-          <Grid item xs={12}>Active Step</Grid>
-        </Grid>
+    <Grid container item xs={12} alignItems='center' justifyContent='center' style={{marginTop: 24, marginBottom: -5}}>
+        <Grid item xs={1}/>
         <Grid item xs={11}>
-          <svg viewBox={`-1 0 1003 25`}
+          <svg viewBox={`-1 0 1001 15`}
                 style={{
-                  backgroundColor: '#DDD', 
-                  width: '99%', 
-                  margin: 'auto',
-                  marginTop: 10,
-                  marginBottom: 0
+                  backgroundColor: '#FFF', 
+                  width: '100%', 
+                  height: '15px',
+                  margin: 'auto'
                 }}>    
               {
                 new Array(patternLength).fill(0).map((o, index) => {
                   return (
                     <g key={`stepIndicator_${index}`} 
-                      transform={`translate(${(boxSize*index)+1} 2)`}
+                      transform={`translate(${(boxSize*index)} 0)`}
                       onClick={ ()=>{ console.log('click', index); setCurrentStep({ value: index }) } }
                     >
-                      <rect x='0' y='0' width={boxSize-2} height={21} fill={ currentStep === index ? 'steelblue' : '#EEE' }/>
+                      <rect x='1' y='0' rx='2' ry='2' width={boxSize-2} height={15} stroke='#AAA'
+                        fill={ ((playingMode === 'pattern') && (currentStep === index)) ? '#FFBF00' : '#CCC' }/>
                     </g>
                   )
                 })

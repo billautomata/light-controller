@@ -1,0 +1,8 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.transport-button:hover {
+  outline: 1px solid #CCC;
+  cursor: pointer;
+}

@@ -9,7 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.2.1",
+    "d3": "^7.0.1",
     "restify": "^8.5.1",
-    "socket.io": "^4.2.0"
+    "rpi-gpio": "^2.1.7",
+    "rpio": "^2.4.2",
+    "socket.io": "^4.2.0",
+    "tape": "^5.3.1",
+    "underscore": "^1.13.1",
+    "uuid": "^3.4.0",
+    "zeromq": "^5.2.8"
   }
 }

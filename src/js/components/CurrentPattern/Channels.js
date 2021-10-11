@@ -1,12 +1,13 @@
+import { useRef } from 'react'
 import { connect } from 'react-redux'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { setStepValue } from '../../actions/index'
-
-const boxSize = 50
+import * as d3 from 'd3'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    channels: state.patterns[0].channels
+    pattern: state.config.activePattern,
+    channels: state.config.activePattern.channels
   }
 }
 
@@ -16,45 +17,63 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function Time ({ channels, setStepValue }) {
+function registerSvgRefDrag (svgRef) {
+  console.log('handler has run')
+  const handler = d3.drag().on('drag', dragged)
+  function dragged (event) {
+    console.log('event', event)
+  }
+  handler(d3.select(svgRef.current))
+}
+
+function Channels ({ channels, pattern, setStepValue }) {
+  const boxSize = 1000 / pattern.patternLength
+  const boxHeight = Math.min(24, boxSize)
+
+  const svgRef = useRef(null)
+
+  registerSvgRefDrag(svgRef)
+
   return (
     <Grid container item xs={12}>
       {
         channels.slice(1,channels.length).map((channel,channelIdx)=>{
           return (
-            <Grid container item xs={12} style={{outline: '0px solid red'}}>
-              <Grid container item xs={1} alignItems='center' justifyContent='center' align='center'>
-                <Grid item alignItems='center' xs={12}>Channel {channelIdx}</Grid>
+            <Grid key={`patternMode_channelParent_${channelIdx}`} container item xs={12} alignItems='center' 
+              style={{ outline: '1px solid white', marginBottom: 0, }}>
+              <Grid container item xs={1} justifyContent='flex-end'>
+                <Grid item align='center' xs={6} style={{ height: 22,  backgroundColor: channelIdx % 2 ? '#EEE' : '#FFF'}}>
+                  <Typography variant='body2' 
+                    style={{ fontWeight: 700, fontSize: 12, position: 'relative', top: 3 }}>{channelIdx === 0 ? 'CH ' : null}{channelIdx}</Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={11}>
-                <svg viewBox={`0 0 1001 ${boxSize}`}
-                style={{
-                  backgroundColor: '#000', 
-                  width: '99%', 
-                  margin: 'auto',
-                }}>
-                  {
-                    channel.steps.map((step, valueIndex) => {
-                      return (
-                        <g key={`sequenceValues_${valueIndex}`} transform={`translate(${valueIndex*boxSize} 0)`}>
-                          <rect x='1' y='1' 
-                            width={boxSize-1} height={boxSize-2} 
-                            fill={ step.value === 1 ? 'steelblue' : '#DDD' }
-                            style={{
-                              cursor: 'pointer'
-                            }}
-                            onClick={()=>{             
-                              setStepValue({ channel: channelIdx+1, step: valueIndex, value: step.value === 1 ? 0 : 1 })           
-                              // sequenceValues[valueIndex] = sequenceValues[valueIndex] === 0 ? 1 : 0
-                              // console.log(sequenceValues)
-                              // return setSequenceValues(Object.assign([], sequenceValues, sequenceValues))
-                            }}
-                            />
-                        </g>
-                      )
-                    })
-                  }
-              </svg>
+              <Grid container item xs={11}>
+                <svg ref={svgRef} viewBox={`-1 0 1001 ${boxHeight}`}
+                  style={{ width: '100%', backgroundColor: channelIdx % 2 ? '#EEE' : '#FFF' }}
+                >
+                {
+                  new Array(pattern.patternLength).fill(0).map((n,idx)=>{
+                    const value = channel.steps.filter(o=>{return o.idx === idx})[0] !== undefined
+                    return (
+                      <g key={`patternMode_sequenceValues_${idx}_${channelIdx}`} transform={`translate(${idx*boxSize} 0)`}>
+                        <rect x='0' y='-1' 
+                          width={boxSize} height={boxHeight+2} 
+                          fill={ value ? '#1f77b4' : 'transparent' }
+                          stroke={channelIdx % 2 ? '#FFF' : '#EEE'}
+                          style={{
+                            cursor: 'pointer'
+                          }}
+                          onClick={()=>{             
+                            setStepValue({ channel: channelIdx+1, step: idx, value: value ? false : true })           
+                          }}
+                          />
+                      </g>
+                    )
+                  })
+                  // channel.steps.map((step, valueIndex) => {
+                  // })
+                }
+                </svg>
               </Grid>
             </Grid>
           )
@@ -64,5 +83,5 @@ function Time ({ channels, setStepValue }) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Time)
+export default connect(mapStateToProps, mapDispatchToProps)(Channels)
 

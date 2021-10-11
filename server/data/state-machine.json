@@ -1,0 +1,2126 @@
+{
+  "config": {
+    "activePatternId": "1914b1b6-94c4-4716-9c76-a660ef2aec3d",
+    "activePlaylistId": "c498bfd7-7009-43fb-99c4-ab56eacc0084",
+    "activeSongId": "ee6845ee-b692-496f-ad6e-87e027db8347",
+    "networkDevices": [
+      {
+        "mac": "c4:91:0c:b3:6a:3e",
+        "mappings": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "name": "Network Device (0)"
+      }
+    ]
+  },
+  "patterns": [
+    {
+      "name": "Verse",
+      "id": "1914b1b6-94c4-4716-9c76-a660ef2aec3d",
+      "patternLength": 16,
+      "channels": [
+        {
+          "id": "time-channel",
+          "name": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 100
+            }
+          ]
+        },
+        {
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": [
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": [
+            {
+              "idx": 4,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": [
+            {
+              "idx": 6,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": [
+            {
+              "idx": 7,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-8",
+          "name": "Channel 8",
+          "steps": [
+            {
+              "idx": 8,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 9,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-10",
+          "name": "Channel 10",
+          "steps": [
+            {
+              "idx": 10,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 11,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 12,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 13,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-14",
+          "name": "Channel 14",
+          "steps": [
+            {
+              "idx": 14,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-15",
+          "name": "Channel 15",
+          "steps": [
+            {
+              "idx": 15,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chorus",
+      "id": "92db9476-dc7d-4abb-a472-17b066333e9c",
+      "patternLength": 2,
+      "channels": [
+        {
+          "id": "time-channel",
+          "name": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 500
+            }
+          ]
+        },
+        {
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-8",
+          "name": "Channel 8",
+          "steps": [
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-10",
+          "name": "Channel 10",
+          "steps": [
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-14",
+          "name": "Channel 14",
+          "steps": [
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-15",
+          "name": "Channel 15",
+          "steps": [
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bridge",
+      "id": "16081fa2-f493-4425-8f8d-62a1ad3ac7a6",
+      "patternLength": 4,
+      "channels": [
+        {
+          "id": "time-channel",
+          "name": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 256
+            },
+            {
+              "idx": 2,
+              "value": 512
+            }
+          ]
+        },
+        {
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": [
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": [
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": [
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-8",
+          "name": "Channel 8",
+          "steps": [
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-10",
+          "name": "Channel 10",
+          "steps": [
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-14",
+          "name": "Channel 14",
+          "steps": [
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-15",
+          "name": "Channel 15",
+          "steps": [
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Intro",
+      "id": "415d71d8-bcd0-4416-8713-c5b298a878d4",
+      "patternLength": 32,
+      "channels": [
+        {
+          "id": "time-channel",
+          "name": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 100
+            }
+          ]
+        },
+        {
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 30,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 29,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 25,
+              "value": 1
+            },
+            {
+              "idx": 27,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": [
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 28,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 26,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 27,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": [
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 26,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 25,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 27,
+              "value": 1
+            },
+            {
+              "idx": 31,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": [
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 28,
+              "value": 1
+            },
+            {
+              "idx": 30,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": [
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            },
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 29,
+              "value": 1
+            },
+            {
+              "idx": 31,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-8",
+          "name": "Channel 8",
+          "steps": [
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 30,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 25,
+              "value": 1
+            },
+            {
+              "idx": 31,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-10",
+          "name": "Channel 10",
+          "steps": [
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 26,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 27,
+              "value": 1
+            },
+            {
+              "idx": 31,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 28,
+              "value": 1
+            },
+            {
+              "idx": 26,
+              "value": 1
+            },
+            {
+              "idx": 30,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            },
+            {
+              "idx": 29,
+              "value": 1
+            },
+            {
+              "idx": 25,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-14",
+          "name": "Channel 14",
+          "steps": [
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 16,
+              "value": 1
+            },
+            {
+              "idx": 24,
+              "value": 1
+            },
+            {
+              "idx": 30,
+              "value": 1
+            },
+            {
+              "idx": 28,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-15",
+          "name": "Channel 15",
+          "steps": [
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 25,
+              "value": 1
+            },
+            {
+              "idx": 31,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Attract",
+      "id": "cf1e92da-286e-4750-a23e-49e5394c042a",
+      "patternLength": 4,
+      "channels": [
+        {
+          "id": "time-channel",
+          "name": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 100
+            }
+          ]
+        },
+        {
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-8",
+          "name": "Channel 8",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-10",
+          "name": "Channel 10",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-14",
+          "name": "Channel 14",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-15",
+          "name": "Channel 15",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Spiral",
+      "id": "ccc06b18-a451-4282-873e-4c5ea3103062",
+      "patternLength": 24,
+      "channels": [
+        {
+          "id": "time-channel",
+          "name": "time-channel",
+          "steps": [
+            {
+              "idx": 5,
+              "value": 128
+            },
+            {
+              "idx": 0,
+              "value": 256
+            }
+          ]
+        },
+        {
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": [
+            {
+              "idx": 16,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": [
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": [
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": [
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": [
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": [
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 17,
+              "value": 1
+            },
+            {
+              "idx": 21,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": [
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": [
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-8",
+          "name": "Channel 8",
+          "steps": [
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 22,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 18,
+              "value": 1
+            },
+            {
+              "idx": 20,
+              "value": 1
+            },
+            {
+              "idx": 23,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-10",
+          "name": "Channel 10",
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 19,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 4,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-14",
+          "name": "Channel 14",
+          "steps": [
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-15",
+          "name": "Channel 15",
+          "steps": [
+            {
+              "idx": 11,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Outro",
+      "id": "9fe5590f-e198-47a5-b8c8-d7fc0e1be246",
+      "patternLength": 16,
+      "channels": [
+        {
+          "id": "time-channel",
+          "name": "time-channel",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 100
+            }
+          ]
+        },
+        {
+          "id": "channel-0",
+          "name": "Channel 0",
+          "steps": [
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-1",
+          "name": "Channel 1",
+          "steps": [
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-2",
+          "name": "Channel 2",
+          "steps": [
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-3",
+          "name": "Channel 3",
+          "steps": [
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-4",
+          "name": "Channel 4",
+          "steps": [
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 11,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-5",
+          "name": "Channel 5",
+          "steps": [
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-6",
+          "name": "Channel 6",
+          "steps": [
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-7",
+          "name": "Channel 7",
+          "steps": [
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-8",
+          "name": "Channel 8",
+          "steps": [
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 15,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-10",
+          "name": "Channel 10",
+          "steps": [
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 5,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 4,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-14",
+          "name": "Channel 14",
+          "steps": [
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-15",
+          "name": "Channel 15",
+          "steps": [
+            {
+              "idx": 15,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "playlists": [
+    {
+      "name": "Simple Playlist",
+      "id": "c498bfd7-7009-43fb-99c4-ab56eacc0084",
+      "steps": [
+        {
+          "id": "ee6845ee-b692-496f-ad6e-87e027db8347",
+          "speed": 1,
+          "repeat": 1
+        },
+        {
+          "id": "1eeb7bf5-5afe-477c-9789-97bfd784d063",
+          "speed": 1,
+          "repeat": 1
+        },
+        {
+          "id": "ee6845ee-b692-496f-ad6e-87e027db8347",
+          "repeat": 1,
+          "speed": 2
+        },
+        {
+          "id": "1eeb7bf5-5afe-477c-9789-97bfd784d063",
+          "repeat": 2,
+          "speed": 1.5
+        }
+      ]
+    },
+    {
+      "name": "Empty Playlist",
+      "id": "16fcf14c-8a32-462c-a95b-684278e4d609",
+      "steps": []
+    }
+  ],
+  "songs": [
+    {
+      "name": "Basic Song",
+      "id": "ee6845ee-b692-496f-ad6e-87e027db8347",
+      "steps": [
+        {
+          "id": "1914b1b6-94c4-4716-9c76-a660ef2aec3d",
+          "speed": 1,
+          "repeat": 1
+        },
+        {
+          "id": "92db9476-dc7d-4abb-a472-17b066333e9c",
+          "speed": 1,
+          "repeat": 1
+        },
+        {
+          "id": "16081fa2-f493-4425-8f8d-62a1ad3ac7a6",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "ccc06b18-a451-4282-873e-4c5ea3103062",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "cf1e92da-286e-4750-a23e-49e5394c042a",
+          "repeat": 16,
+          "speed": 1
+        }
+      ]
+    },
+    {
+      "name": "Complex Song",
+      "id": "1eeb7bf5-5afe-477c-9789-97bfd784d063",
+      "steps": [
+        {
+          "id": "415d71d8-bcd0-4416-8713-c5b298a878d4",
+          "repeat": 1,
+          "speed": 1
+        },
+        {
+          "id": "1914b1b6-94c4-4716-9c76-a660ef2aec3d",
+          "speed": 1,
+          "repeat": 4
+        },
+        {
+          "id": "16081fa2-f493-4425-8f8d-62a1ad3ac7a6",
+          "speed": 1,
+          "repeat": 1
+        },
+        {
+          "id": "92db9476-dc7d-4abb-a472-17b066333e9c",
+          "speed": 1,
+          "repeat": 2
+        },
+        {
+          "id": "1914b1b6-94c4-4716-9c76-a660ef2aec3d",
+          "speed": 1,
+          "repeat": 4
+        },
+        {
+          "id": "92db9476-dc7d-4abb-a472-17b066333e9c",
+          "speed": 1,
+          "repeat": 2
+        },
+        {
+          "id": "16081fa2-f493-4425-8f8d-62a1ad3ac7a6",
+          "repeat": 1,
+          "speed": 0.5
+        },
+        {
+          "id": "92db9476-dc7d-4abb-a472-17b066333e9c",
+          "speed": 0.5,
+          "repeat": 1
+        }
+      ]
+    }
+  ],
+  "pins": [
+    26,
+    32,
+    36,
+    38,
+    29,
+    31,
+    33,
+    35,
+    7,
+    11,
+    13,
+    15,
+    12,
+    40,
+    18,
+    22
+  ]
+}

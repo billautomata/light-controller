@@ -1,6 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 /server/node_modules
+/server/file.dat
+/server/.env
+file.dat
 
 # dependencies
 /node_modules
