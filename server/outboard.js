@@ -1,7 +1,8 @@
 require('dotenv').config()
+const gpio = require('rpio')
 const http = require('http')
 const _ = require('underscore')
-const gpio = require('rpio')
+const zmq = require('zeromq')
 
 let channelMapping = [-1,-1,-1,-1]
 
@@ -19,19 +20,25 @@ const reconnectLimit = 5000
 let keepAliveInterval = setInterval(()=>{
   if ((Date.now() - heartbeatLastTime) > reconnectLimit) {
     console.log('heartbeat time limit reached, trying reconnect')
-    pull.connect(`tcp://${process.env.PRIMARY_IP}:31337`)
+    clearInterval(heartbeatInterval)
+    heartbeatInterval = null
     register()    
+    pull.connect(`tcp://${process.env.PRIMARY_IP}:31337`)    
   }
 },1000)
 
-const zmq = require('zeromq')
+let heartbeatInterval = null 
+
 const pull = zmq.socket('pull')
-pull.connect(`tcp://${process.env.PRIMARY_IP}:31337`)
 register()
+pull.connect(`tcp://${process.env.PRIMARY_IP}:31337`)
 
 let parsedMsg = {}
 
 pull.on('message', function(topic, msg){
+  if (heartbeatInterval === null) {
+    heartbeatInterval = setInterval(heartbeat, 1000)
+  }
   console.log(Math.floor(Date.now()/1000), 'got message', topic.toString(), msg.toString())
   try {
     parsedMsg = JSON.parse(msg.toString())
@@ -67,32 +74,28 @@ pull.on('message', function(topic, msg){
     default:
       break;
   }
-
-  // if(parsedMsg.mappings === undefined) {
-  //   return
-  // }
-
-  // if(parsedMsg.mappings[MAC_ADDRESS] === undefined) {
-  //   // send registration
-  //   console.log('mac not found in mapping -- sending registration')
-
-  // }
-
-  // console.log(Math.floor(Date.now()/1000), topic.toString(), msg.toString())
 })
 
+function heartbeat () {
+  httpRequest(`/heartbeat/${MAC_ADDRESS}`)
+}
+
 function register () {
+  httpRequest(`/register/${MAC_ADDRESS}`)
+}
+
+function httpRequest (path) {
   const options = {
     hostname: process.env.PRIMARY_IP,
     method: 'GET',
     port: 8080,
-    path: '/register/' + MAC_ADDRESS,
+    path
   }
 
   const req = http.request(options, response => {})
 
   req.on('error', error => {
-    console.log('error on registration')
+    console.log('http error on ',path)
     console.log(error)
   })
 

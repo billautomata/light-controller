@@ -30,6 +30,7 @@ export default function createTheme () {
       MuiButton: {
         root: {
           borderRadius: '1px',
+          boxShadow: 'none'
         },
         label: {
           fontWeight: '700',
@@ -41,7 +42,11 @@ export default function createTheme () {
     },
     props: {
       MuiButtonBase: {
-        disableRipple: true
+        disableRipple: true,
+        
+      },
+      MuiButton: {
+        disableElevation: true
       }
     }
   })

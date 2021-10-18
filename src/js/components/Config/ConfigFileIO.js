@@ -24,6 +24,14 @@ function ConfigFileIO ({ }) {
             <Button variant='outlined'
               onClick={()=>{window.socket.emit('LOAD_FROM_DISK')}}>Load From Disk</Button>
           </Grid>
+          <Grid item style={{margin: 12}}>
+            <Button disabled variant='contained' color='primary'
+              onClick={()=>{window.socket.emit('LOAD_FROM_DISK')}}>Download Configuration</Button>
+          </Grid>
+          <Grid item>
+            <Button disabled variant='outlined'
+              onClick={()=>{window.socket.emit('LOAD_FROM_DISK')}}>Upload Configuration</Button>
+          </Grid>
         </Grid>
       </Paper>
     </Grid>

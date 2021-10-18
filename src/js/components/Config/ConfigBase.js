@@ -24,11 +24,11 @@ function Config ({ }) {
       <Grid item xs={12} style={{ marginBottom: 30, paddingLeft: 28 }}>
         <Typography variant='h4'>Configuration</Typography>
       </Grid>
-      <Grid container item xs={11} justifyContent='space-between'>
+      <Grid container item xs={11} justifyContent='flex-start' spacing={2}>
         <Grid container item xs={4}>
           <ConfigFileIO/>
         </Grid>
-        <Grid container item xs={7}>          
+        <Grid container item xs={4}>          
           <ConfigBoot/>
         </Grid>
         {/* <ConfigPins/>       */}

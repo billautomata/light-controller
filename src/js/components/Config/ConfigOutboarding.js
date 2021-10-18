@@ -25,20 +25,22 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
     <Grid container item xs={12} style={{marginTop: 24}}>
       <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
         <ConfigSectionTitle title='Network Devices'/>
-        <Grid container item xs={12} justifyContent='flex-start' style={{marginTop: 16}}>
+        <Grid container item xs={12} justifyContent='space-between' spacing={2} style={{marginTop: 16}}>
           {
             devices.map(device => {
               return (
-                <Grid item xs={3}>
-                  <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
-                    {/* <ConfigSectionTitle title={`${device.name}`} /> */}
+                <Grid item xs={4}>
+                  <Paper elevation={0} style={{
+                      width: '100%', 
+                      padding: '24px 0px', 
+                      border: '1px solid #CCC'
+                    }}>
                     <Grid container item xs={12}>
                       {
                         [
                           { name: 'name', value: device.name },
                           { name: 'mac address', value: device.mac.toUpperCase() },
-                          // { key: 'last seen', value: ((Date.now() - device.lastSeen) / 1000).toFixed(1) + ' seconds ago' },
-                          // { key: 'status', value: device.active ? 'Active' : 'Inactive' }
+                          { name: 'last seen', value: ((Date.now() - device.lastSeen) / 1000).toFixed(0) + 's ago' }
                         ].map(o=>{
                           return (
                             <KeyValuePair {...o}/>
@@ -49,16 +51,16 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
                     <Grid container item xs={12} justify='center' style={{marginTop: 12}}>
                       <Grid container item xs={12} align='center' spacing={2} justify='center' alignItems='center'>
                         <Grid item xs={4}>
-                          <Typography variant='body1' style={{fontWeight:700}}>Port</Typography>
+                          <Typography variant='body1' style={{fontWeight:700}}>PORT</Typography>
                         </Grid>
                         <Grid item xs={4}>
-                          <Typography variant='body1' style={{fontWeight:700}}>Channel</Typography>
+                          <Typography variant='body1' style={{fontWeight:700}}>CH</Typography>
                         </Grid>
                       </Grid>                      
                       {
                         device.mappings.map((ch,idx)=>{
                           return (
-                            <Grid container item xs={12} align='center' spacing={2} justify='center' alignItems='center'
+                            <Grid container item xs={12} align='center' spacing={0} justify='center' alignItems='center'
                               style={{ marginTop: 2 }}>
                               <Grid item xs={4}>
                                 <Typography variant='body1'>{idx}</Typography>
@@ -66,7 +68,7 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
                               <Grid item xs={4}>
                                 {
                                   editActive.status === false ? 
-                                    <Typography variant='body1' >{ch}</Typography>
+                                    <Typography variant='body1'>{ch}</Typography>
                                     :
                                     <TextField defaultValue={ch} 
                                       onChange={(event)=>{
@@ -89,26 +91,25 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
                         })
                       }
                     </Grid>
-                    <Grid container item xs={12} justify='center' align='center' style={{marginTop: 16}}>
+                    <Grid container item xs={12} justify='center' align='center' style={{marginTop: 18}}>
                       {
                         editActive.status === true ? 
                           <>
-                            <Grid item xs={5}>
+                            <Grid item xs={4}>
                               <Button variant='contained' color='primary' onClick={()=>{setEditActive(Object.assign({}, editActive, { status: false } ))}}>DONE</Button>
                             </Grid>                                          
-                            <Grid item xs={5}>
+                            <Grid item xs={4}>
                               <Button variant='text' onClick={()=>{setEditActive(Object.assign({}, editActive, { status: false } ))}}>&#10005;</Button>
                             </Grid>
                           </> :
                           <>
-                            <Grid item xs={5}>
-                              <Button variant='contained'>TEST</Button>
+                            <Grid item xs={4}>
+                              <Button disabled variant='text'>TEST</Button>
                             </Grid>                                          
-                            <Grid item xs={5}>
+                            <Grid item xs={4}>
                               <Button variant='outlined' onClick={()=>{setEditActive(Object.assign({}, editActive, { status: true } ))}}>EDIT</Button>
                             </Grid>
                           </>
-
                       }
                     </Grid>
                   </Paper>      

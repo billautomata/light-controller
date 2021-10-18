@@ -16,14 +16,17 @@ import {
   SAVE_PATTERN,
   SAVE_PLAYLIST,
   SAVE_SONG,
+  SET_BOOT_PLAYLIST,
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
   SET_NETWORK_DEVICE_PORT_MAPPING,
+  SET_NETWORK_DEVICE_STATS,  
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
   SET_PLAYLISTS,
+  SET_START_ON_BOOT,
   SET_SONGS,
   SET_STEP,
   SET_STEP_TIME,
@@ -160,6 +163,9 @@ function rootReducer(state = initialState, action) {
       console.log('emitting a save song')
       window.socket.emit('SONG_SAVE', { value: true })
       return state
+    case SET_BOOT_PLAYLIST:
+      window.socket.emit('SET_BOOT_PLAYLIST', action.payload)
+      return state      
     case SET_CONFIG: 
       console.log('setting config in state', action.payload)
       state.uiState = Object.assign(
@@ -207,6 +213,11 @@ function rootReducer(state = initialState, action) {
       console.log('REDUCER - '+SET_NETWORK_DEVICE_PORT_MAPPING, action.payload)
       window.socket.emit('SET_NETWORK_DEVICE_PORT_MAPPING', action.payload)
       return state
+    case SET_NETWORK_DEVICE_STATS:
+      // console.log('REDUCER - '+SET_NETWORK_DEVICE_STATS)
+      state.config.networkDevices = Object.assign([], state.config.networkDevices, action.payload.value)
+      state.config = Object.assign({}, state.config, state.config)
+      return Object.assign({}, state, { config: state.config })
     case SET_NUMBER_OF_STEPS: 
       console.log('setting number of steps', action.payload)
       // window.socket.emit('PATTERN_SET_STEPS', action.payload)      
@@ -235,6 +246,9 @@ function rootReducer(state = initialState, action) {
     case SET_PLAYLISTS:
       console.log('REDUCER - '+SET_PLAYLISTS, action.payload)
       return Object.assign({}, state, { playlists: action.payload.value })  
+    case SET_START_ON_BOOT:
+      window.socket.emit('SET_START_ON_BOOT', action.payload)
+      return state
     case SET_SONGS:
       console.log('REDUCER - '+SET_SONGS, action.payload)
       return Object.assign({}, state, { songs: action.payload.value })

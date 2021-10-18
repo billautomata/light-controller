@@ -15,6 +15,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function Visualized ({ currentStepTime, doIndicator, songPattern }) {
+  const colors = d3.scaleOrdinal(d3.schemeCategory10)
   const sum = d3.sum(songPattern, d=>d.msLength)
   const w = 960
   const scaleX_ms = d3.scaleLinear().domain([0,sum]).range([0,w])
@@ -27,11 +28,6 @@ function Visualized ({ currentStepTime, doIndicator, songPattern }) {
     }
   })
   listOfPatterns = listOfPatterns.sort()
-
-  const colors = d3.scaleOrdinal(d3.schemeCategory10)
-
-  console.log('current step time', currentStepTime, scaleX_percent(currentStepTime))
-
   return (
     <Grid container item xs={12}>
       <svg width='90%' height='45px' viewBox={`0 0 ${w} 45`} style={{ margin: 'auto', backgroundColor: 'white', opacity: songPattern.length === 0 ? 0 : null }}>
@@ -50,11 +46,9 @@ function Visualized ({ currentStepTime, doIndicator, songPattern }) {
             <polygon points='0 0 5 10 -5 10' fill='black'/>
           </g>          
         </g>
-        
       </svg>
     </Grid>
   )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Visualized)
-
