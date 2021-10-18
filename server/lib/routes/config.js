@@ -10,4 +10,8 @@ module.exports = function setupPattern (socket, stateMachine) {
     stateMachine.bootConfig({ type: 'SET_START_ON_BOOT', value: payload })
     socket.emit('config', stateMachine.config)
   })
+
+  socket.on('TEST_NETWORK_DEVICE', payload => {
+    stateMachine.testNetworkDevice(payload)
+  })
 }

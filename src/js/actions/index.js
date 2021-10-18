@@ -40,6 +40,7 @@ import {
   SONG_SET_VALUE,
   START_SEQUENCER,
   STOP_SEQUENCER,
+  TEST_NETWORK_DEVICE
 } from '../constants/action-types'
 
 export function createPattern (payload) {
@@ -204,4 +205,8 @@ export function startSequencer (payload) {
 
 export function stopSequencer (payload) {
   return { type: STOP_SEQUENCER, payload }
+}
+
+export function testNetworkDevice (payload) {
+  return { type: TEST_NETWORK_DEVICE, payload }
 }

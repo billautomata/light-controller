@@ -62,7 +62,7 @@ pull.on('message', function(topic, msg){
       }
       break;
     case 'mappings':
-      console.log('mappings', parsedMsg)  
+      // console.log('mappings', parsedMsg)  
       heartbeatLastTime = Date.now()
       const index = parsedMsg.findIndex(o=>o.mac === MAC_ADDRESS)
       if (index === -1) { 
@@ -70,6 +70,15 @@ pull.on('message', function(topic, msg){
       } else {
         channelMapping = parsedMsg[index].mappings
       }   
+      break;
+    case 'test':
+      console.log(parsedMsg)
+      if (parsedMsg.mac === MAC_ADDRESS) {
+        console.log('testing channels', parsedMsg)
+        pins.forEach((pin)=>{
+          gpio.write(pin, parsedMsg.value === true ? gpio.LOW : gpio.HIGH)
+        })  
+      }
       break;
     default:
       break;

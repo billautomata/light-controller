@@ -39,7 +39,8 @@ import {
   SONG_DELETE_STEP,
   SONG_SET_VALUE,
   START_SEQUENCER,
-  STOP_SEQUENCER
+  STOP_SEQUENCER,
+  TEST_NETWORK_DEVICE
 } from '../../constants/action-types'
 
 const initialState = {  
@@ -302,6 +303,10 @@ function rootReducer(state = initialState, action) {
     case STOP_SEQUENCER:
       console.log('REDUCER - '+STOP_SEQUENCER) 
       window.socket.emit('STOP_SEQUENCER', action.paylaod)
+      return state
+    case TEST_NETWORK_DEVICE:
+      console.log('REDUCER - '+TEST_NETWORK_DEVICE)
+      window.socket.emit('TEST_NETWORK_DEVICE', action.payload)
       return state
     default:      
       return state

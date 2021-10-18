@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core'
 import ConfigSectionTitle from './ConfigSectionTitle'
-import { setNetworkDevicePortMapping } from '../../actions/index'
+import { setNetworkDevicePortMapping, testNetworkDevice } from '../../actions/index'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -12,14 +12,13 @@ const mapStateToProps = (state, ownProps) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setNetworkDevicePortMapping: payload => { dispatch(setNetworkDevicePortMapping(payload)) }
+    setNetworkDevicePortMapping: payload => { dispatch(setNetworkDevicePortMapping(payload)) },
+    testNetworkDevice: payload => { dispatch(testNetworkDevice(payload)) }
   }
 }
 
-function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
-
+function ConfigOutboarding ({ devices, setNetworkDevicePortMapping, testNetworkDevice }) {
   const [ editActive, setEditActive ] = useState({ status: false })
-  const [ channelInputTemp, setChannelInputTemp ] = useState([-1,-1,-1,-1])
 
   return (
     <Grid container item xs={12} style={{marginTop: 24}}>
@@ -104,7 +103,7 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping }) {
                           </> :
                           <>
                             <Grid item xs={4}>
-                              <Button disabled variant='text'>TEST</Button>
+                              <Button variant='text' onClick={()=>{ testNetworkDevice({ mac: device.mac }) }}>TEST</Button>
                             </Grid>                                          
                             <Grid item xs={4}>
                               <Button variant='outlined' onClick={()=>{setEditActive(Object.assign({}, editActive, { status: true } ))}}>EDIT</Button>
