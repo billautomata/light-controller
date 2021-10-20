@@ -16,14 +16,17 @@ import {
   SAVE_PATTERN,
   SAVE_PLAYLIST,
   SAVE_SONG,
+  SET_BOOT_PLAYLIST,
   SET_CONFIG,
   SET_CURRENT_STEP,
   SET_EDIT_MODE,
   SET_NETWORK_DEVICE_PORT_MAPPING,
+  SET_NETWORK_DEVICE_STATS,
   SET_NUMBER_OF_STEPS,
   SET_PATTERNS,
   SET_PATTERN_NAME,
   SET_PLAYLISTS,
+  SET_START_ON_BOOT,
   SET_STEP,
   SET_STEP_TIME,
   SET_STEP_VALUE,  
@@ -37,6 +40,7 @@ import {
   SONG_SET_VALUE,
   START_SEQUENCER,
   STOP_SEQUENCER,
+  TEST_NETWORK_DEVICE
 } from '../constants/action-types'
 
 export function createPattern (payload) {
@@ -107,6 +111,10 @@ export function saveSong (payload) {
   return { type: SAVE_SONG, payload }
 }
 
+export function setBootPlaylist (payload) {
+  return { type: SET_BOOT_PLAYLIST, payload }
+}
+
 export function setConfig (payload) {
   return { type: SET_CONFIG, payload }
 }
@@ -121,6 +129,10 @@ export function setEditMode (payload) {
 
 export function setNetworkDevicePortMapping (payload) {
   return { type: SET_NETWORK_DEVICE_PORT_MAPPING, payload }
+}
+
+export function setNetworkDeviceStats (payload) {
+  return { type: SET_NETWORK_DEVICE_STATS, payload }
 }
 
 export function setNumberOfSteps (payload) {
@@ -145,6 +157,10 @@ export function setPatternName (payload) {
 
 export function setPlaylists (payload) {
   return { type: SET_PLAYLISTS, payload }
+}
+
+export function setStartOnBoot (payload) {
+  return { type: SET_START_ON_BOOT, payload }
 }
 
 export function setSongs (payload) {
@@ -189,4 +205,8 @@ export function startSequencer (payload) {
 
 export function stopSequencer (payload) {
   return { type: STOP_SEQUENCER, payload }
+}
+
+export function testNetworkDevice (payload) {
+  return { type: TEST_NETWORK_DEVICE, payload }
 }

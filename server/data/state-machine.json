@@ -3,6 +3,10 @@
     "activePatternId": "1914b1b6-94c4-4716-9c76-a660ef2aec3d",
     "activePlaylistId": "c498bfd7-7009-43fb-99c4-ab56eacc0084",
     "activeSongId": "ee6845ee-b692-496f-ad6e-87e027db8347",
+    "bootBehavior": {
+      "startOnBoot": false,
+      "bootPlaylistId": "c498bfd7-7009-43fb-99c4-ab56eacc0084"
+    },
     "networkDevices": [
       {
         "mac": "c4:91:0c:b3:6a:3e",
@@ -12,7 +16,8 @@
           2,
           3
         ],
-        "name": "Network Device (0)"
+        "name": "Network Device (0)",
+        "lastSeen": 1634587089588
       }
     ]
   },
@@ -1727,6 +1732,10 @@
               "value": 1
             },
             {
+              "idx": 14,
+              "value": 1
+            },
+            {
               "idx": 15,
               "value": 1
             }
@@ -1738,6 +1747,14 @@
           "steps": [
             {
               "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 13,
               "value": 1
             },
             {
@@ -1755,6 +1772,14 @@
               "value": 1
             },
             {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
               "idx": 13,
               "value": 1
             }
@@ -1766,6 +1791,14 @@
           "steps": [
             {
               "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 11,
               "value": 1
             },
             {
@@ -1783,6 +1816,14 @@
               "value": 1
             },
             {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
               "idx": 11,
               "value": 1
             }
@@ -1797,11 +1838,15 @@
               "value": 1
             },
             {
-              "idx": 10,
+              "idx": 4,
               "value": 1
             },
             {
-              "idx": 14,
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 10,
               "value": 1
             }
           ]
@@ -1815,15 +1860,23 @@
               "value": 1
             },
             {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
               "idx": 9,
               "value": 1
             },
             {
-              "idx": 4,
+              "idx": 0,
               "value": 1
             },
             {
-              "idx": 12,
+              "idx": 2,
               "value": 1
             }
           ]
@@ -1837,95 +1890,23 @@
               "value": 1
             },
             {
-              "idx": 8,
+              "idx": 6,
               "value": 1
             },
-            {
-              "idx": 0,
-              "value": 1
-            },
-            {
-              "idx": 2,
-              "value": 1
-            },
-            {
-              "idx": 10,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "id": "channel-8",
-          "name": "Channel 8",
-          "steps": [
             {
               "idx": 8,
-              "value": 1
-            },
-            {
-              "idx": 7,
-              "value": 1
-            },
-            {
-              "idx": 1,
-              "value": 1
-            },
-            {
-              "idx": 3,
-              "value": 1
-            },
-            {
-              "idx": 5,
               "value": 1
             },
             {
               "idx": 11,
-              "value": 1
-            },
-            {
-              "idx": 15,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "id": "channel-9",
-          "name": "Channel 9",
-          "steps": [
-            {
-              "idx": 9,
-              "value": 1
-            },
-            {
-              "idx": 6,
               "value": 1
             },
             {
               "idx": 13,
               "value": 1
-            }
-          ]
-        },
-        {
-          "id": "channel-10",
-          "name": "Channel 10",
-          "steps": [
-            {
-              "idx": 10,
-              "value": 1
             },
             {
-              "idx": 5,
-              "value": 1
-            }
-          ]
-        },
-        {
-          "id": "channel-11",
-          "name": "Channel 11",
-          "steps": [
-            {
-              "idx": 11,
+              "idx": 15,
               "value": 1
             },
             {
@@ -1935,11 +1916,57 @@
           ]
         },
         {
-          "id": "channel-12",
-          "name": "Channel 12",
+          "id": "channel-8",
+          "name": "Channel 8",
           "steps": [
             {
+              "idx": 7,
+              "value": 1
+            },
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
               "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-9",
+          "name": "Channel 9",
+          "steps": [
+            {
+              "idx": 6,
+              "value": 1
+            },
+            {
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 8,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 1,
               "value": 1
             },
             {
@@ -1949,15 +1976,89 @@
           ]
         },
         {
-          "id": "channel-13",
-          "name": "Channel 13",
+          "id": "channel-10",
+          "name": "Channel 10",
           "steps": [
             {
-              "idx": 13,
+              "idx": 5,
+              "value": 1
+            },
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 9,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-11",
+          "name": "Channel 11",
+          "steps": [
+            {
+              "idx": 4,
+              "value": 1
+            },
+            {
+              "idx": 3,
+              "value": 1
+            },
+            {
+              "idx": 10,
+              "value": 1
+            },
+            {
+              "idx": 11,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-12",
+          "name": "Channel 12",
+          "steps": [
+            {
+              "idx": 3,
               "value": 1
             },
             {
               "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 11,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "channel-13",
+          "name": "Channel 13",
+          "steps": [
+            {
+              "idx": 2,
+              "value": 1
+            },
+            {
+              "idx": 1,
+              "value": 1
+            },
+            {
+              "idx": 12,
+              "value": 1
+            },
+            {
+              "idx": 13,
               "value": 1
             }
           ]
@@ -1967,11 +2068,19 @@
           "name": "Channel 14",
           "steps": [
             {
-              "idx": 14,
+              "idx": 1,
               "value": 1
             },
             {
-              "idx": 1,
+              "idx": 0,
+              "value": 1
+            },
+            {
+              "idx": 13,
+              "value": 1
+            },
+            {
+              "idx": 14,
               "value": 1
             }
           ]
@@ -1981,11 +2090,15 @@
           "name": "Channel 15",
           "steps": [
             {
-              "idx": 15,
+              "idx": 0,
               "value": 1
             },
             {
-              "idx": 0,
+              "idx": 14,
+              "value": 1
+            },
+            {
+              "idx": 15,
               "value": 1
             }
           ]

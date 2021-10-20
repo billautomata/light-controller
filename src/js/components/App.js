@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@material-ui/core'
-import { initializeData, setConfig, setStep, setStepTime, setSongs, setPatterns, setPlaylists } from '../actions/index'
+import { initializeData, setConfig, setNetworkDeviceStats, setStep, setStepTime, setSongs, setPatterns, setPlaylists } from '../actions/index'
 import { connect } from "react-redux"
 import { Grid, Paper } from '@material-ui/core'
 import CurrentPattern from './CurrentPattern/CurrentPatternBase'
@@ -21,6 +21,7 @@ function mapDispatchToProps(dispatch) {
   return {
     initializeData: payload => dispatch(initializeData(payload)),
     setConfig: payload => dispatch(setConfig(payload)),
+    setNetworkDeviceStats: payload => dispatch(setNetworkDeviceStats(payload)),
     setPatterns: payload => dispatch(setPatterns(payload)),
     setPlaylists: payload => dispatch(setPlaylists(payload)),
     setSongs: payload => dispatch(setSongs(payload)),
@@ -38,7 +39,7 @@ const sectionStyle = {
   padding: '16px 4px 16px 4px',
 }
 
-const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setSongs, setPlaylists, setStep, setStepTime }) {
+const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setNetworkDeviceStats, setSongs, setPlaylists, setStep, setStepTime }) {
 
   if(window.socket === undefined) {
     window.socket = io.connect("/")
@@ -50,6 +51,8 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
       switch(name) {
         case 'config':
           return setConfig({ value })
+        case 'network-device-stats':
+          return setNetworkDeviceStats({ value })
         case 'patterns':
           return setPatterns({ value })
         case 'playlists':
@@ -67,6 +70,11 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
       }
     })
     console.log(window.socket)
+
+    setInterval(()=>{
+      window.socket.emit('heartbeat')
+    },500)
+
     // console.log = ()=>{}
   }
 

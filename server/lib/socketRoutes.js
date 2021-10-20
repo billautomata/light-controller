@@ -3,6 +3,7 @@ module.exports = function socketRoutes (socket, stateMachine) {
   require('./routes/pattern.js')(socket, stateMachine)
   require('./routes/playlist.js')(socket, stateMachine)
   require('./routes/song.js')(socket, stateMachine)
+  require('./routes/config.js')(socket, stateMachine)
 
   socket.on('CONFIG_LOAD_PATTERN', payload => {
     console.log('payload', payload)
@@ -21,6 +22,10 @@ module.exports = function socketRoutes (socket, stateMachine) {
     }
     socket.emit('config', stateMachine.getConfig())
     return
+  })
+
+  socket.on('heartbeat', payload => {
+    socket.emit('network-device-stats', stateMachine.getConfig().networkDevices)
   })
 
   socket.on('START_SEQUENCER', payload => {

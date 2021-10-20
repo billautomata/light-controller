@@ -1,45 +1,15 @@
 # crosstown-trees
 
-To start the application you need to run two commands
+## installation
+In the base directory run `npm install` to install the dependencies for the front end.  When that completes enter the `/server` directory and run `npm install` again to install the dependencies for the back end.
 
-`npm start` in the root of the folder
+## running the project
 
-`node app.js` in the `/server` folder
+### front end
+In the base directory of the project run `npm start`.  That will open the interface on port 3000.
 
-```
-# in one terminal
-cd server
-node app.js
+### back end
+In the `/server` directory run `node app.js` to run the back-end.
 
-# in another terminal
-npm start
-```
-
-Then go to `http://ip.of.device:3000/`
-
-
-## data structures
-
-### step
-* value,integer - index
-* value,boolean - active
-* value,integer - time (ms)
-
-### channel
-* value,integer - number of steps (nSteps)
-* array,step - step[nSteps]
-
-### pattern
-* value,string - name
-* value,string - uuid
-* value,integer - nChannels, number of channels
-* value,integer - nSteps, number of steps 
-* array,channel - channels[nChannels][nSteps]
-
-### song
-* value,string - name
-* value,string - uuid
-* array,pattern - patterns[nPatterns]
-
-### device profile
-###
+### networked device
+In the `/server` directory run `node outboard.js` to run in networked device mode.

@@ -12,6 +12,7 @@ const sockets = {}
 
 const stateMachine = createStateMachine()
 stateMachine.registerSockets(sockets)
+stateMachine.checkStart()
 
 const server = restify.createServer({
   name: 'crosstown-trees',
@@ -23,8 +24,15 @@ server.use(restify.plugins.queryParser())
 server.use(restify.plugins.bodyParser())
 
 server.get('/register/:mac', function (req, res, next) {
-  console.log(req.params)
+  console.log('register', req.params)
   stateMachine.createNetworkDevice(req.params.mac)
+  res.send(req.params)
+  return next()
+})
+
+server.get('/heartbeat/:mac', function (req, res, next) {
+  console.log('heartbeat', req.params)
+  stateMachine.heartbeatNetworkDevice(req.params.mac)
   res.send(req.params)
   return next()
 })

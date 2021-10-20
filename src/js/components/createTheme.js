@@ -30,18 +30,22 @@ export default function createTheme () {
       MuiButton: {
         root: {
           borderRadius: '1px',
+          boxShadow: 'none'
         },
         label: {
           fontWeight: '700',
-          // letterSpacing: '.5px',
           position: 'relative',
-          top: '1px'
+          top: '.5px'
         }
       }
     },
     props: {
       MuiButtonBase: {
-        disableRipple: true
+        disableRipple: true,
+        
+      },
+      MuiButton: {
+        disableElevation: true
       }
     }
   })

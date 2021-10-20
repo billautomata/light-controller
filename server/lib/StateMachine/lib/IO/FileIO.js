@@ -8,8 +8,9 @@ function loadFromDisk (fileName) {
   this.config.activePatternId = fileData.config.activePatternId
   this.config.activePlaylistId = fileData.config.activePlaylistId
   this.config.activeSongId = fileData.config.activeSongId
+  this.config.bootBehavior = fileData.config.bootBehavior
   this.config.networkDevices = fileData.config.networkDevices
-
+  
   this.patterns = fileData.patterns
   this.playlists = fileData.playlists
   this.songs = fileData.songs
@@ -27,6 +28,7 @@ function saveToDisk (fileName) {
       activePatternId: this.config.activePatternId,
       activePlaylistId: this.config.activePlaylistId,
       activeSongId: this.config.activeSongId,
+      bootBehavior: this.config.bootBehavior,
       networkDevices: this.config.networkDevices
     },
     patterns: this.patterns,

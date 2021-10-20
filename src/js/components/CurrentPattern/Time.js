@@ -3,7 +3,6 @@ import { Grid, Typography } from '@material-ui/core'
 import { setTimeValue, setTimeValueTemporary } from '../../actions/index'
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('confirmed time steps', state.uiState.confirmedTimeSteps)
   return {
     patternLength: state.config.activePattern.patternLength,
     timePattern: state.config.activePattern.channels[0],
