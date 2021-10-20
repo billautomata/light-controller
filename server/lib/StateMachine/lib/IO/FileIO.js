@@ -11,7 +11,6 @@ function loadFromDisk (fileName) {
   this.config.bootBehavior = fileData.config.bootBehavior
   this.config.networkDevices = fileData.config.networkDevices
   
-
   this.patterns = fileData.patterns
   this.playlists = fileData.playlists
   this.songs = fileData.songs

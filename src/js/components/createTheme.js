@@ -34,9 +34,8 @@ export default function createTheme () {
         },
         label: {
           fontWeight: '700',
-          // letterSpacing: '.5px',
           position: 'relative',
-          top: '1px'
+          top: '.5px'
         }
       }
     },
