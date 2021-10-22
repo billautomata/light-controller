@@ -42,7 +42,7 @@ const sectionStyle = {
 const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setConfig, setNetworkDeviceStats, setSongs, setPlaylists, setStep, setStepTime }) {
 
   if(window.socket === undefined) {
-    window.socket = io.connect("/")
+    window.socket = io.connect()
     window.socket.on('connect', () => {
       console.log('connect')
     })
