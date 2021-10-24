@@ -1,5 +1,5 @@
 const zmq = require('zeromq')
-const sock = zmq.socket('push')
+const sock = zmq.socket('pub')
 
 function emitZMQ (topic, message) {
   console.log('emitZMQ', topic, message)

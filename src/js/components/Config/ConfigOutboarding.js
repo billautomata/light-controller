@@ -24,11 +24,11 @@ function ConfigOutboarding ({ devices, setNetworkDevicePortMapping, testNetworkD
     <Grid container item xs={12} style={{marginTop: 24}}>
       <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
         <ConfigSectionTitle title='Network Devices'/>
-        <Grid container item xs={12} justifyContent='space-between' spacing={2} style={{marginTop: 16}}>
+        <Grid container item xs={12} justifyContent='flex-start' spacing={2} style={{marginTop: 16}}>
           {
             devices.map(device => {
               return (
-                <Grid item xs={4}>
+                <Grid item xs={4} key={`device_${device.mac}`}>
                   <Paper elevation={0} style={{
                       width: '100%', 
                       padding: '24px 0px', 

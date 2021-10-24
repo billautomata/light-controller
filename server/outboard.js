@@ -29,9 +29,13 @@ let keepAliveInterval = setInterval(()=>{
 
 let heartbeatInterval = null 
 
-const pull = zmq.socket('pull')
+const pull = zmq.socket('sub')
+
 register()
 pull.connect(`tcp://${process.env.PRIMARY_IP}:31337`)
+pull.subscribe('pins')
+pull.subscribe('mappings')
+pull.subscribe('test')
 
 let parsedMsg = {}
 

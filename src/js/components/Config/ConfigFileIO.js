@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { Button, Grid, Paper, Typography } from '@material-ui/core'
+import ConfigImportElements from './ConfigImportElements'
 import ConfigSectionTitle from './ConfigSectionTitle'
 import saveStateToFile from '../../lib/saveStateToFile.js'
 import validateConfigurationFile from '../../lib/validateConfigurationFile.js'
@@ -17,6 +18,7 @@ function mapDispatchToProps(dispatch) {
 function ConfigFileIO ({ state }) {
   return (
     <Grid container item xs={12} alignItems='flex-start'>
+      <ConfigImportElements/>
       <Paper elevation={0} style={{width: '100%', padding: 24, border: '1px solid #CCC'}}>
         <ConfigSectionTitle title='Backup & Restore'/>
         <Grid container item xs={12} justifyContent='space-evenly' >

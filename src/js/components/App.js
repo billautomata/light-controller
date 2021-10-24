@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@material-ui/core'
+import { ThemeProvider, Typography } from '@material-ui/core'
 import { initializeData, setConfig, setNetworkDeviceStats, setStep, setStepTime, setSongs, setPatterns, setPlaylists } from '../actions/index'
 import { connect } from "react-redux"
 import { Grid, Paper } from '@material-ui/core'
@@ -8,6 +8,7 @@ import PlaylistMode from './PlaylistMode/PlaylistModeBase.js'
 import createTheme from './createTheme.js'
 import LayoutBase from './Layout/LayoutBase.js'
 import Config from './Config/ConfigBase.js'
+import Modal from './subcomponents/Modal.js'
 
 import { io } from "socket.io-client"
 
@@ -112,7 +113,13 @@ const ConnectedApp = function ({ dataLoaded, initializeData, setPatterns, setCon
               </Grid> 
             </Grid>
           </Grid>
-          : null
+          : 
+          <Grid container>
+            <Grid item align='center' xs='12'>
+              <Typography variant='h2' align='center'>Making a connection to the server.</Typography>
+              <Typography variant='h6' align='center'>If you are seeing this for more than a few seconds then something is wrong with the application.</Typography>
+            </Grid>
+          </Grid>
         }      
       </div>
     </ThemeProvider>
